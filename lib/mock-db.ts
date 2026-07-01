@@ -6,7 +6,7 @@ type User = {
 };
 
 const mockUsers: { [key: string]: { email: string; password: string } } = {
-  'enam.egyir@gmail.com': { email: 'enam.egyir@gmail.com', password: 'Courage22' },
+  'enam.egyir@gmail.com': { email: 'enam.egyir@gmail.com', password: 'demo123' },
 };
 
 const generateId = () => Math.random().toString(36).substring(7);
