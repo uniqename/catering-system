@@ -25,9 +25,9 @@ export default function OrdersList({
 
   const statusConfig = {
     inquiry: { color: 'bg-yellow-500', lightBg: 'bg-yellow-50', text: 'text-yellow-900', emoji: '❓' },
-    quoted: { color: 'bg-blue-500', lightBg: 'bg-blue-50', text: 'text-blue-900', emoji: '📄' },
-    confirmed: { color: 'bg-green-500', lightBg: 'bg-green-50', text: 'text-green-900', emoji: '✅' },
-    delivered: { color: 'bg-purple-500', lightBg: 'bg-purple-50', text: 'text-purple-900', emoji: '🎉' },
+    quoted: { color: 'bg-teal-500', lightBg: 'bg-teal-50', text: 'text-teal-900', emoji: '📄' },
+    confirmed: { color: 'bg-teal-600', lightBg: 'bg-teal-50', text: 'text-teal-900', emoji: '✅' },
+    delivered: { color: 'bg-yellow-400', lightBg: 'bg-yellow-50', text: 'text-yellow-900', emoji: '🎉' },
   };
 
   if (orders.length === 0) {
@@ -47,7 +47,7 @@ export default function OrdersList({
         return (
           <div
             key={order.id}
-            className="border-2 border-gray-200 rounded-2xl p-6 hover:shadow-xl hover:border-amber-400 transition-all duration-200 bg-gradient-to-br from-white to-gray-50"
+            className="border-2 border-teal-200 rounded-2xl p-6 hover:shadow-xl hover:border-yellow-400 transition-all duration-200 bg-gradient-to-br from-white to-teal-50"
           >
             <div className="flex items-start justify-between mb-5">
               <div className="flex-1">
@@ -75,7 +75,7 @@ export default function OrdersList({
                 aria-label="Update order status"
                 value={order.status}
                 onChange={(e) => updateStatus(order.id, e.target.value as Order['status'])}
-                className="px-4 py-2 border-2 border-gray-200 rounded-lg text-sm font-bold focus:ring-2 focus:ring-amber-500 focus:border-transparent transition bg-white"
+                className="px-4 py-2 border-2 border-teal-300 rounded-lg text-sm font-bold focus:ring-2 focus:ring-teal-500 focus:border-transparent transition bg-white"
               >
                 <option value="inquiry">❓ Inquiry</option>
                 <option value="quoted">📄 Quoted</option>
