@@ -20,6 +20,62 @@ export default function CateringDashboard() {
     const saved = localStorage.getItem('catering_orders');
     if (saved) {
       setOrders(JSON.parse(saved));
+    } else {
+      // Load demo data on first visit
+      const demoOrders = [
+        {
+          id: '1',
+          clientName: 'Sarah Johnson',
+          eventDate: '2026-07-25',
+          guestCount: 120,
+          eventType: 'wedding',
+          notes: 'Vegetarian options needed, gluten-free for 2 guests',
+          status: 'confirmed',
+          createdAt: '2026-07-01',
+        },
+        {
+          id: '2',
+          clientName: 'Michael Brown',
+          eventDate: '2026-08-10',
+          guestCount: 75,
+          eventType: 'corporate',
+          notes: 'Business lunch, professional presentation needed',
+          status: 'quoted',
+          createdAt: '2026-06-28',
+        },
+        {
+          id: '3',
+          clientName: 'Emma Davis',
+          eventDate: '2026-07-15',
+          guestCount: 150,
+          eventType: 'birthday',
+          notes: 'Kids party, fun colorful presentation please',
+          status: 'inquiry',
+          createdAt: '2026-06-29',
+        },
+        {
+          id: '4',
+          clientName: 'James Wilson',
+          eventDate: '2026-07-08',
+          guestCount: 200,
+          eventType: 'wedding',
+          notes: 'Elegant affair, want jollof rice and fried rice combo',
+          status: 'delivered',
+          createdAt: '2026-06-15',
+        },
+        {
+          id: '5',
+          clientName: 'Lisa Martinez',
+          eventDate: '2026-07-20',
+          guestCount: 50,
+          eventType: 'graduation',
+          notes: 'Small intimate gathering, budget conscious',
+          status: 'confirmed',
+          createdAt: '2026-06-25',
+        },
+      ];
+      setOrders(demoOrders);
+      localStorage.setItem('catering_orders', JSON.stringify(demoOrders));
     }
   }, []);
 
