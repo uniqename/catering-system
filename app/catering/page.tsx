@@ -8,8 +8,9 @@ import QuickOrderForm from '@/components/quick-order-form';
 import ClientProfiles from '@/components/client-profiles';
 import ProfitDashboard from '@/components/profit-dashboard';
 import PDFInvoiceGenerator from '@/components/pdf-invoice-generator';
+import WhatsAppIntegrator from '@/components/whatsapp-integrator';
 
-type Tab = 'orders' | 'invoice' | 'voice' | 'new-order' | 'clients' | 'profits' | 'pdf-invoice';
+type Tab = 'orders' | 'invoice' | 'voice' | 'new-order' | 'clients' | 'profits' | 'pdf-invoice' | 'whatsapp';
 
 export default function CateringDashboard() {
   const [activeTab, setActiveTab] = useState<Tab>('orders');
@@ -50,6 +51,7 @@ export default function CateringDashboard() {
     { id: 'clients', label: 'Clients', icon: '👥' },
     { id: 'pdf-invoice', label: 'Professional Invoice', icon: '📄' },
     { id: 'profits', label: 'Profit Analysis', icon: '📊' },
+    { id: 'whatsapp', label: 'WhatsApp Msgs', icon: '💬' },
     { id: 'invoice', label: 'Quick Invoice', icon: '🧾' },
     { id: 'voice', label: 'Voice Notes', icon: '🎤' },
   ];
@@ -128,6 +130,7 @@ export default function CateringDashboard() {
           )}
           {activeTab === 'profits' && <ProfitDashboard orders={orders} />}
           {activeTab === 'pdf-invoice' && <PDFInvoiceGenerator orders={orders} />}
+          {activeTab === 'whatsapp' && <WhatsAppIntegrator orders={orders} />}
           {activeTab === 'invoice' && <InvoiceGenerator orders={orders} />}
           {activeTab === 'voice' && <VoiceNotes />}
         </div>
