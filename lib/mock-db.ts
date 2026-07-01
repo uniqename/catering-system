@@ -8,10 +8,28 @@ type User = {
 const mockUsers: { [key: string]: { email: string; password: string } } = {
   'enam.egyir@gmail.com': { email: 'enam.egyir@gmail.com', password: 'Courage22' },
 };
-let currentUser: User | null = null;
 
 const generateId = () => Math.random().toString(36).substring(7);
 const getStorageKey = (table: string, userId: string) => `db_${userId}_${table}`;
+
+let currentUser: User | null = null;
+
+const getCurrentUserFromStorage = (): User | null => {
+  if (typeof localStorage === 'undefined') return null;
+  const stored = localStorage.getItem('auth_user');
+  return stored ? JSON.parse(stored) : null;
+};
+
+const saveCurrentUserToStorage = (user: User | null) => {
+  if (typeof localStorage === 'undefined') return;
+  if (user) {
+    localStorage.setItem('auth_user', JSON.stringify(user));
+  } else {
+    localStorage.removeItem('auth_user');
+  }
+};
+
+currentUser = getCurrentUserFromStorage();
 
 export const mockDb = {
   auth: {
@@ -22,6 +40,7 @@ export const mockDb = {
       const id = generateId();
       mockUsers[email] = { email, password };
       currentUser = { id, email };
+      saveCurrentUserToStorage(currentUser);
       return { error: null, data: { user: currentUser } };
     },
 
@@ -31,15 +50,18 @@ export const mockDb = {
         return { error: new Error('Invalid email or password') };
       }
       currentUser = { id: generateId(), email };
+      saveCurrentUserToStorage(currentUser);
       return { error: null, data: { session: { user: currentUser } } };
     },
 
     signOut: async () => {
       currentUser = null;
+      saveCurrentUserToStorage(null);
       return { error: null };
     },
 
     getSession: async () => {
+      currentUser = getCurrentUserFromStorage();
       return { data: { session: currentUser ? { user: currentUser } : null } };
     },
 
