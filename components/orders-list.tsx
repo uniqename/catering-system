@@ -23,78 +23,81 @@ export default function OrdersList({
     onUpdate(updated);
   };
 
-  const statusColors = {
-    inquiry: 'bg-yellow-100 text-yellow-800',
-    quoted: 'bg-blue-100 text-blue-800',
-    confirmed: 'bg-green-100 text-green-800',
-    delivered: 'bg-gray-100 text-gray-800',
-  };
-
-  const statusEmojis = {
-    inquiry: '❓',
-    quoted: '📄',
-    confirmed: '✅',
-    delivered: '🎉',
+  const statusConfig = {
+    inquiry: { color: 'bg-yellow-500', lightBg: 'bg-yellow-50', text: 'text-yellow-900', emoji: '❓' },
+    quoted: { color: 'bg-blue-500', lightBg: 'bg-blue-50', text: 'text-blue-900', emoji: '📄' },
+    confirmed: { color: 'bg-green-500', lightBg: 'bg-green-50', text: 'text-green-900', emoji: '✅' },
+    delivered: { color: 'bg-purple-500', lightBg: 'bg-purple-50', text: 'text-purple-900', emoji: '🎉' },
   };
 
   if (orders.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-3xl mb-4">📭</p>
-        <p className="text-gray-500 text-lg">No orders yet. Create your first inquiry!</p>
+      <div className="text-center py-16">
+        <p className="text-6xl mb-6">📭</p>
+        <p className="text-gray-600 text-xl font-semibold mb-2">No orders yet</p>
+        <p className="text-gray-500">Start by creating your first inquiry!</p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-4">
-      {orders.map((order) => (
-        <div
-          key={order.id}
-          className="border-2 border-gray-200 rounded-lg p-6 hover:shadow-lg transition"
-        >
-          <div className="flex items-start justify-between mb-4">
-            <div>
-              <h3 className="text-xl font-bold text-gray-900">{order.clientName}</h3>
-              <p className="text-sm text-gray-500">
-                📅 {order.eventDate} • 👥 {order.guestCount} guests • {order.eventType}
-              </p>
+    <div className="space-y-5">
+      {orders.map((order) => {
+        const status = statusConfig[order.status];
+        return (
+          <div
+            key={order.id}
+            className="border-2 border-gray-200 rounded-2xl p-6 hover:shadow-xl hover:border-amber-400 transition-all duration-200 bg-gradient-to-br from-white to-gray-50"
+          >
+            <div className="flex items-start justify-between mb-5">
+              <div className="flex-1">
+                <h3 className="text-2xl font-black text-gray-900">{order.clientName}</h3>
+                <div className="flex flex-wrap gap-4 mt-3 text-sm">
+                  <span className="text-gray-600">📅 {order.eventDate}</span>
+                  <span className="text-gray-600">👥 {order.guestCount} guests</span>
+                  <span className="text-gray-600 capitalize">{order.eventType}</span>
+                </div>
+              </div>
+              <span className={`${status.color} text-white px-4 py-2 rounded-full font-bold text-sm whitespace-nowrap ml-4`}>
+                {status.emoji} {order.status.toUpperCase()}
+              </span>
             </div>
-            <span className={`px-4 py-2 rounded-full font-bold ${statusColors[order.status]}`}>
-              {statusEmojis[order.status]} {order.status.toUpperCase()}
-            </span>
+
+            {order.notes && (
+              <div className={`${status.lightBg} ${status.text} rounded-xl p-4 mb-5 border border-opacity-20 border-gray-300`}>
+                <p className="font-semibold mb-1">💬 Client Notes:</p>
+                <p>{order.notes}</p>
+              </div>
+            )}
+
+            <div className="flex gap-3 flex-wrap">
+              <select
+                aria-label="Update order status"
+                value={order.status}
+                onChange={(e) => updateStatus(order.id, e.target.value as Order['status'])}
+                className="px-4 py-2 border-2 border-gray-200 rounded-lg text-sm font-bold focus:ring-2 focus:ring-amber-500 focus:border-transparent transition bg-white"
+              >
+                <option value="inquiry">❓ Inquiry</option>
+                <option value="quoted">📄 Quoted</option>
+                <option value="confirmed">✅ Confirmed</option>
+                <option value="delivered">🎉 Delivered</option>
+              </select>
+
+              <button type="button" className="px-5 py-2 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-lg hover:shadow-lg font-bold text-sm transition">
+                📝 Edit
+              </button>
+              <button type="button" className="px-5 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:shadow-lg font-bold text-sm transition">
+                🧾 Invoice
+              </button>
+              <button type="button" className="px-5 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:shadow-lg font-bold text-sm transition">
+                💬 Notes
+              </button>
+            </div>
+
+            <p className="text-xs text-gray-400 mt-4">📆 Created: {order.createdAt}</p>
           </div>
-
-          {order.notes && (
-            <p className="text-gray-700 mb-4 bg-gray-50 p-3 rounded">💬 {order.notes}</p>
-          )}
-
-          <div className="flex gap-2 flex-wrap">
-            <select
-              value={order.status}
-              onChange={(e) => updateStatus(order.id, e.target.value as Order['status'])}
-              className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium focus:ring-2 focus:ring-indigo-500"
-            >
-              <option value="inquiry">❓ Inquiry</option>
-              <option value="quoted">📄 Quoted</option>
-              <option value="confirmed">✅ Confirmed</option>
-              <option value="delivered">🎉 Delivered</option>
-            </select>
-
-            <button className="px-4 py-2 bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 font-medium text-sm">
-              📝 Edit
-            </button>
-            <button className="px-4 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 font-medium text-sm">
-              🧾 Invoice
-            </button>
-            <button className="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 font-medium text-sm">
-              💬 Notes
-            </button>
-          </div>
-
-          <p className="text-xs text-gray-400 mt-3">Created: {order.createdAt}</p>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
