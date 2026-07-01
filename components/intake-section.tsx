@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import QRCode from 'qrcode.react';
+import { QRCodeSVG } from 'qrcode.react';
 
 export default function IntakeSection() {
   const [showQR, setShowQR] = useState(false);
@@ -43,6 +43,7 @@ export default function IntakeSection() {
               {intakeUrl}
             </code>
             <button
+              type="button"
               onClick={copyLink}
               className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded whitespace-nowrap"
             >
@@ -52,6 +53,7 @@ export default function IntakeSection() {
         </div>
 
         <button
+          type="button"
           onClick={() => setShowQR(!showQR)}
           className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 rounded-lg transition w-full mb-4"
         >
@@ -61,7 +63,7 @@ export default function IntakeSection() {
         {showQR && (
           <div className="flex flex-col items-center gap-4 p-6 bg-gray-50 rounded-lg">
             <div ref={qrRef} className="bg-white p-4 rounded-lg">
-              <QRCode
+              <QRCodeSVG
                 value={intakeUrl}
                 size={256}
                 bgColor="#ffffff"
@@ -70,6 +72,7 @@ export default function IntakeSection() {
               />
             </div>
             <button
+              type="button"
               onClick={downloadQRCode}
               className="bg-gray-800 hover:bg-gray-900 text-white font-medium py-2 px-4 rounded"
             >
