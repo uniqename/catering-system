@@ -6,6 +6,7 @@ type User = {
 };
 
 const mockUsers: { [key: string]: { email: string; password: string } } = {
+  'test@test.com': { email: 'test@test.com', password: 'test' },
   'enam.egyir@gmail.com': { email: 'enam.egyir@gmail.com', password: 'demo123' },
 };
 
@@ -46,11 +47,13 @@ export const mockDb = {
 
     signInWithPassword: async (email: string, password: string) => {
       const user = mockUsers[email];
+      console.log('SignIn attempt:', { email, passwordMatch: user?.password === password, userExists: !!user });
       if (!user || user.password !== password) {
         return { error: new Error('Invalid email or password') };
       }
       currentUser = { id: generateId(), email };
       saveCurrentUserToStorage(currentUser);
+      console.log('SignIn success:', currentUser);
       return { error: null, data: { session: { user: currentUser } } };
     },
 
