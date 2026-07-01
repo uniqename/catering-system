@@ -5,8 +5,11 @@ import OrdersList from '@/components/orders-list';
 import InvoiceGenerator from '@/components/invoice-generator';
 import VoiceNotes from '@/components/voice-notes';
 import QuickOrderForm from '@/components/quick-order-form';
+import ClientProfiles from '@/components/client-profiles';
+import ProfitDashboard from '@/components/profit-dashboard';
+import PDFInvoiceGenerator from '@/components/pdf-invoice-generator';
 
-type Tab = 'orders' | 'invoice' | 'voice' | 'new-order';
+type Tab = 'orders' | 'invoice' | 'voice' | 'new-order' | 'clients' | 'profits' | 'pdf-invoice';
 
 export default function CateringDashboard() {
   const [activeTab, setActiveTab] = useState<Tab>('orders');
@@ -44,7 +47,10 @@ export default function CateringDashboard() {
   const navItems = [
     { id: 'orders', label: 'Orders', icon: '📋', badge: orders.length },
     { id: 'new-order', label: 'New Inquiry', icon: '➕' },
-    { id: 'invoice', label: 'Invoice', icon: '🧾' },
+    { id: 'clients', label: 'Clients', icon: '👥' },
+    { id: 'pdf-invoice', label: 'Professional Invoice', icon: '📄' },
+    { id: 'profits', label: 'Profit Analysis', icon: '📊' },
+    { id: 'invoice', label: 'Quick Invoice', icon: '🧾' },
     { id: 'voice', label: 'Voice Notes', icon: '🎤' },
   ];
 
@@ -111,6 +117,17 @@ export default function CateringDashboard() {
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           {activeTab === 'orders' && <OrdersList orders={orders} onUpdate={saveOrders} />}
           {activeTab === 'new-order' && <QuickOrderForm onAdd={addOrder} />}
+          {activeTab === 'clients' && (
+            <ClientProfiles
+              orders={orders}
+              onSelectClient={(clientName) => {
+                // Prefill form with client name
+                setActiveTab('new-order');
+              }}
+            />
+          )}
+          {activeTab === 'profits' && <ProfitDashboard orders={orders} />}
+          {activeTab === 'pdf-invoice' && <PDFInvoiceGenerator orders={orders} />}
           {activeTab === 'invoice' && <InvoiceGenerator orders={orders} />}
           {activeTab === 'voice' && <VoiceNotes />}
         </div>
