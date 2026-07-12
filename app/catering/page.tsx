@@ -113,18 +113,18 @@ export default function CateringDashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-teal-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-white via-emerald-50 to-white">
       {/* Header */}
-      <div className="bg-gradient-to-r from-teal-700 via-teal-600 to-teal-800 shadow-2xl">
+      <div className="bg-gradient-to-r from-teal-900 via-emerald-900 to-teal-900 shadow-2xl">
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-4xl font-black text-white">🍽️ Catering Orders</h1>
-              <p className="text-teal-100 mt-2 text-lg">Manage your catering business with ease</p>
+              <p className="text-emerald-100 mt-2 text-lg">Manage your catering business with ease</p>
             </div>
-            <div className="text-white text-right bg-yellow-500 bg-opacity-20 px-6 py-4 rounded-xl">
-              <p className="text-3xl font-black text-yellow-300">{stats.total}</p>
-              <p className="text-teal-100">Total Orders</p>
+            <div className="text-white text-right bg-amber-500 bg-opacity-20 px-6 py-4 rounded-xl">
+              <p className="text-3xl font-black text-amber-500">{stats.total}</p>
+              <p className="text-emerald-100">Total Orders</p>
             </div>
           </div>
         </div>
@@ -133,16 +133,16 @@ export default function CateringDashboard() {
       {/* Stats */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="bg-white rounded-xl p-6 border-2 border-teal-200 hover:border-yellow-400 hover:shadow-lg transition">
-            <p className="text-teal-700 text-sm font-semibold uppercase tracking-wide">New Inquiries</p>
+          <div className="bg-white rounded-xl p-6 border-2 border-teal-900 hover:border-amber-500 hover:shadow-lg transition">
+            <p className="text-teal-900 text-sm font-semibold uppercase tracking-wide">New Inquiries</p>
             <p className="text-4xl font-black text-teal-900 mt-2">{stats.pending}</p>
           </div>
-          <div className="bg-white rounded-xl p-6 border-2 border-teal-200 hover:border-yellow-400 hover:shadow-lg transition">
-            <p className="text-teal-700 text-sm font-semibold uppercase tracking-wide">Confirmed</p>
+          <div className="bg-white rounded-xl p-6 border-2 border-teal-900 hover:border-amber-500 hover:shadow-lg transition">
+            <p className="text-teal-900 text-sm font-semibold uppercase tracking-wide">Confirmed</p>
             <p className="text-4xl font-black text-teal-900 mt-2">{stats.confirmed}</p>
           </div>
-          <div className="bg-white rounded-xl p-6 border-2 border-teal-200 hover:border-yellow-400 hover:shadow-lg transition">
-            <p className="text-teal-700 text-sm font-semibold uppercase tracking-wide">This Month</p>
+          <div className="bg-white rounded-xl p-6 border-2 border-teal-900 hover:border-amber-500 hover:shadow-lg transition">
+            <p className="text-teal-900 text-sm font-semibold uppercase tracking-wide">This Month</p>
             <p className="text-4xl font-black text-teal-900 mt-2">{stats.total}</p>
           </div>
         </div>
@@ -156,8 +156,8 @@ export default function CateringDashboard() {
               onClick={() => setActiveTab(item.id as Tab)}
               className={`px-6 py-3 rounded-lg font-bold transition whitespace-nowrap flex items-center gap-2 ${
                 activeTab === item.id
-                  ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-teal-900 shadow-xl scale-105'
-                  : 'bg-white text-teal-700 hover:bg-teal-50 border-2 border-teal-200 hover:border-yellow-400'
+                  ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-teal-900 shadow-xl scale-105'
+                  : 'bg-white text-teal-900 hover:bg-emerald-50 border-2 border-teal-900 hover:border-amber-500'
               }`}
             >
               <span className="text-xl">{item.icon}</span>

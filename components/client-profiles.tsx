@@ -77,12 +77,12 @@ export default function ClientProfiles({
                 onClick={() => setSelectedClient(client.name)}
                 className={`w-full text-left p-4 rounded-xl transition border-2 ${
                   selectedClient === client.name
-                    ? 'bg-amber-500 text-white border-amber-600 shadow-lg'
-                    : 'bg-white border-gray-200 hover:border-amber-400 hover:shadow-md'
+                    ? 'bg-gradient-to-r from-amber-600 to-amber-700 text-white border-amber-800 shadow-lg'
+                    : 'bg-white border-teal-900 hover:border-amber-500 hover:shadow-md'
                 }`}
               >
                 <p className="font-bold text-sm">{client.name}</p>
-                <p className={`text-xs ${selectedClient === client.name ? 'text-amber-100' : 'text-gray-500'}`}>
+                <p className={`text-xs ${selectedClient === client.name ? 'text-amber-50' : 'text-gray-500'}`}>
                   {stats.total} order{stats.total !== 1 ? 's' : ''} • {stats.delivered} delivered
                 </p>
               </button>
@@ -102,19 +102,19 @@ export default function ClientProfiles({
             return (
               <>
                 {/* Client Header */}
-                <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-6 border-2 border-amber-200">
+                <div className="bg-gradient-to-r from-amber-50 to-amber-100 rounded-2xl p-6 border-2 border-amber-600">
                   <h2 className="text-3xl font-black text-gray-900">{client?.name}</h2>
                   <div className="grid grid-cols-3 gap-4 mt-4">
                     <div>
-                      <p className="text-amber-600 text-sm font-bold uppercase">Total Orders</p>
+                      <p className="text-amber-900 text-sm font-bold uppercase">Total Orders</p>
                       <p className="text-3xl font-black text-gray-900">{stats.total}</p>
                     </div>
                     <div>
-                      <p className="text-green-600 text-sm font-bold uppercase">Confirmed</p>
+                      <p className="text-emerald-900 text-sm font-bold uppercase">Confirmed</p>
                       <p className="text-3xl font-black text-gray-900">{stats.confirmed}</p>
                     </div>
                     <div>
-                      <p className="text-purple-600 text-sm font-bold uppercase">Delivered</p>
+                      <p className="text-teal-900 text-sm font-bold uppercase">Delivered</p>
                       <p className="text-3xl font-black text-gray-900">{stats.delivered}</p>
                     </div>
                   </div>
@@ -127,14 +127,14 @@ export default function ClientProfiles({
                     {clientOrders.map((order) => (
                       <div
                         key={order.id}
-                        className="bg-white rounded-xl p-4 border-2 border-gray-200 hover:border-blue-400 transition"
+                        className="bg-white rounded-xl p-4 border-2 border-teal-900 hover:border-amber-500 transition"
                       >
                         <div className="flex justify-between items-start mb-2">
                           <div>
                             <p className="font-bold text-gray-900">{order.eventType}</p>
                             <p className="text-sm text-gray-600">📅 {order.eventDate} • 👥 {order.guestCount} guests</p>
                           </div>
-                          <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-bold">
+                          <span className="px-2 py-1 bg-teal-100 text-teal-900 rounded text-xs font-bold">
                             {order.status}
                           </span>
                         </div>
@@ -144,7 +144,7 @@ export default function ClientProfiles({
                         <button
                           type="button"
                           onClick={() => onSelectClient(selectedClient)}
-                          className="mt-3 px-3 py-1 bg-green-100 text-green-700 rounded hover:bg-green-200 text-xs font-bold transition"
+                          className="mt-3 px-3 py-1 bg-emerald-100 text-emerald-900 rounded hover:bg-emerald-200 text-xs font-bold transition"
                         >
                           🔄 Reorder
                         </button>
@@ -155,9 +155,9 @@ export default function ClientProfiles({
 
                 {/* Quick Notes */}
                 {client?.preferences && (
-                  <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
-                    <p className="text-sm text-blue-900 font-bold mb-2">💡 Client Preferences:</p>
-                    <p className="text-sm text-blue-800">{client.preferences}</p>
+                  <div className="bg-teal-50 border-l-4 border-teal-900 p-4 rounded">
+                    <p className="text-sm text-teal-900 font-bold mb-2">💡 Client Preferences:</p>
+                    <p className="text-sm text-teal-800">{client.preferences}</p>
                   </div>
                 )}
               </>

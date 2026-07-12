@@ -87,34 +87,34 @@ export default function ProfitDashboard({ orders }: { orders: any[] }) {
     <div className="space-y-8">
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border-2 border-green-300">
-          <p className="text-green-700 text-sm font-bold uppercase tracking-wide">Total Revenue</p>
-          <p className="text-4xl font-black text-green-900 mt-2">${totalRevenue.toFixed(2)}</p>
+        <div className="bg-gradient-to-br from-teal-50 to-emerald-50 rounded-2xl p-6 border-2 border-teal-900">
+          <p className="text-teal-900 text-sm font-bold uppercase tracking-wide">Total Revenue</p>
+          <p className="text-4xl font-black text-teal-900 mt-2">${totalRevenue.toFixed(2)}</p>
         </div>
 
-        <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-2xl p-6 border-2 border-red-300">
-          <p className="text-red-700 text-sm font-bold uppercase tracking-wide">Total Cost</p>
-          <p className="text-4xl font-black text-red-900 mt-2">${totalCost.toFixed(2)}</p>
+        <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border-2 border-amber-600">
+          <p className="text-amber-900 text-sm font-bold uppercase tracking-wide">Total Cost</p>
+          <p className="text-4xl font-black text-amber-900 mt-2">${totalCost.toFixed(2)}</p>
         </div>
 
-        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border-2 border-blue-300">
-          <p className="text-blue-700 text-sm font-bold uppercase tracking-wide">Total Profit</p>
-          <p className="text-4xl font-black text-blue-900 mt-2">${totalMargin.toFixed(2)}</p>
+        <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl p-6 border-2 border-emerald-700">
+          <p className="text-emerald-900 text-sm font-bold uppercase tracking-wide">Total Profit</p>
+          <p className="text-4xl font-black text-emerald-900 mt-2">${totalMargin.toFixed(2)}</p>
         </div>
 
-        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border-2 border-purple-300">
-          <p className="text-purple-700 text-sm font-bold uppercase tracking-wide">Avg Margin</p>
-          <p className="text-4xl font-black text-purple-900 mt-2">{avgMarginPercent.toFixed(0)}%</p>
+        <div className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-2xl p-6 border-2 border-amber-600">
+          <p className="text-amber-900 text-sm font-bold uppercase tracking-wide">Avg Margin</p>
+          <p className="text-4xl font-black text-amber-900 mt-2">{avgMarginPercent.toFixed(0)}%</p>
         </div>
       </div>
 
       {/* Top Performing Items */}
-      <div className="bg-white rounded-2xl border-2 border-gray-200 p-8">
+      <div className="bg-white rounded-2xl border-2 border-teal-900 p-8">
         <h2 className="text-2xl font-black text-gray-900 mb-6">⭐ Top Profit Makers</h2>
         <div className="space-y-4">
           {topItems.map((item, index) => (
             <div key={item.name} className="flex items-center gap-4">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black flex items-center justify-center text-sm">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-amber-600 to-amber-700 text-white font-black flex items-center justify-center text-sm">
                 {index + 1}
               </div>
               <div className="flex-1">
@@ -125,7 +125,7 @@ export default function ProfitDashboard({ orders }: { orders: any[] }) {
                 <div className="flex items-center gap-2">
                   <div className="flex-1 bg-gray-200 rounded-full h-2">
                     <div
-                      className="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full"
+                      className="bg-gradient-to-r from-teal-900 to-emerald-700 h-2 rounded-full"
                       style={{ width: `${Math.min(item.marginPercent, 100)}%` }}
                     />
                   </div>
@@ -141,12 +141,12 @@ export default function ProfitDashboard({ orders }: { orders: any[] }) {
       </div>
 
       {/* All Items */}
-      <div className="bg-white rounded-2xl border-2 border-gray-200 p-8">
+      <div className="bg-white rounded-2xl border-2 border-teal-900 p-8">
         <h2 className="text-2xl font-black text-gray-900 mb-6">📊 All Items Performance</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b-2 border-gray-200">
+              <tr className="border-b-2 border-teal-900">
                 <th className="text-left py-3 font-bold text-gray-900">Item</th>
                 <th className="text-center py-3 font-bold text-gray-900">Sold</th>
                 <th className="text-right py-3 font-bold text-gray-900">Revenue</th>
@@ -162,9 +162,9 @@ export default function ProfitDashboard({ orders }: { orders: any[] }) {
                   <td className="text-center text-gray-600">{item.qty}</td>
                   <td className="text-right text-gray-600">${item.revenue.toFixed(2)}</td>
                   <td className="text-right text-gray-600">${item.cost.toFixed(2)}</td>
-                  <td className="text-right font-bold text-green-700">${item.margin.toFixed(2)}</td>
+                  <td className="text-right font-bold text-emerald-700">${item.margin.toFixed(2)}</td>
                   <td className="text-right">
-                    <span className="font-bold px-3 py-1 rounded-full bg-purple-100 text-purple-700">
+                    <span className="font-bold px-3 py-1 rounded-full bg-amber-100 text-amber-900">
                       {item.marginPercent.toFixed(0)}%
                     </span>
                   </td>
@@ -176,9 +176,9 @@ export default function ProfitDashboard({ orders }: { orders: any[] }) {
       </div>
 
       {/* Pro Tips */}
-      <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-amber-500 p-6 rounded-xl">
+      <div className="bg-gradient-to-r from-amber-50 to-amber-100 border-l-4 border-amber-600 p-6 rounded-xl">
         <p className="text-sm text-amber-900 font-bold mb-2">💡 Smart Pricing Tips:</p>
-        <ul className="text-sm text-amber-800 space-y-1">
+        <ul className="text-sm text-amber-900 space-y-1">
           <li>✅ Your highest-margin items: {topItems[0]?.name} ({topItems[0]?.marginPercent.toFixed(0)}%)</li>
           <li>📈 Focus on high-margin items to boost overall profits</li>
           <li>🎯 Consider bundling low-margin items with high-margin ones</li>

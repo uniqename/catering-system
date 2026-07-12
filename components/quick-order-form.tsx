@@ -42,7 +42,7 @@ export default function QuickOrderForm({ onAdd }: { onAdd: (order: any) => void 
   return (
     <form onSubmit={handleSubmit} className="max-w-3xl space-y-8">
       {error && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded text-red-700 font-semibold">
+        <div className="bg-red-50 border-l-4 border-red-600 p-4 rounded text-red-700 font-semibold">
           ⚠️ {error}
         </div>
       )}
@@ -57,7 +57,7 @@ export default function QuickOrderForm({ onAdd }: { onAdd: (order: any) => void 
             value={form.clientName}
             onChange={(e) => setForm({ ...form, clientName: e.target.value })}
             placeholder="e.g., Sarah Johnson"
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200 transition text-lg"
+            className="w-full px-4 py-3 border-2 border-teal-900 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200 transition text-lg"
           />
         </div>
 
@@ -69,7 +69,7 @@ export default function QuickOrderForm({ onAdd }: { onAdd: (order: any) => void 
             type="date"
             value={form.eventDate}
             onChange={(e) => setForm({ ...form, eventDate: e.target.value })}
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200 transition text-lg"
+            className="w-full px-4 py-3 border-2 border-teal-900 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200 transition text-lg"
           />
         </div>
 
@@ -82,7 +82,7 @@ export default function QuickOrderForm({ onAdd }: { onAdd: (order: any) => void 
             value={form.guestCount}
             onChange={(e) => setForm({ ...form, guestCount: e.target.value })}
             placeholder="e.g., 150"
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200 transition text-lg"
+            className="w-full px-4 py-3 border-2 border-teal-900 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200 transition text-lg"
           />
         </div>
 
@@ -95,7 +95,7 @@ export default function QuickOrderForm({ onAdd }: { onAdd: (order: any) => void 
             aria-label="Select event type"
             value={form.eventType}
             onChange={(e) => setForm({ ...form, eventType: e.target.value })}
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200 transition text-lg font-semibold"
+            className="w-full px-4 py-3 border-2 border-teal-900 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200 transition text-lg font-semibold"
           >
             {eventTypes.map((type) => (
               <option key={type.value} value={type.value}>
@@ -115,13 +115,13 @@ export default function QuickOrderForm({ onAdd }: { onAdd: (order: any) => void 
           onChange={(e) => setForm({ ...form, notes: e.target.value })}
           placeholder="Any dietary restrictions, allergies, preferences, menu requests, or special instructions..."
           rows={5}
-          className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200 transition text-lg"
+          className="w-full px-4 py-3 border-2 border-teal-900 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200 transition text-lg"
         />
       </div>
 
       <button
         type="submit"
-        className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-black py-4 rounded-xl transition shadow-lg hover:shadow-2xl text-lg uppercase tracking-wide"
+        className="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-black py-4 rounded-xl transition shadow-lg hover:shadow-2xl text-lg uppercase tracking-wide"
       >
         ➕ Create New Inquiry
       </button>

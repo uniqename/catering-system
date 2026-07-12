@@ -89,7 +89,7 @@ export default function WhatsAppIntegrator({ orders }: { orders: Order[] }) {
 
   return (
     <div className="space-y-8">
-      <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-8 border-3 border-green-400">
+      <div className="bg-gradient-to-r from-teal-50 to-emerald-50 rounded-2xl p-8 border-3 border-teal-900">
         <h2 className="text-3xl font-black text-gray-900 mb-2">💬 WhatsApp Integration</h2>
         <p className="text-gray-600">Send quotes, confirmations & reminders directly to WhatsApp</p>
       </div>
@@ -104,7 +104,7 @@ export default function WhatsAppIntegrator({ orders }: { orders: Order[] }) {
               title="Select an order"
               value={selectedOrder || ''}
               onChange={(e) => setSelectedOrder(e.target.value)}
-              className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl font-semibold focus:border-green-500 focus:outline-none text-lg"
+              className="w-full px-4 py-3 border-2 border-teal-900 rounded-xl font-semibold focus:border-amber-500 focus:outline-none text-lg"
             >
               <option value="">Choose order...</option>
               {orders.map((order) => (
@@ -123,7 +123,7 @@ export default function WhatsAppIntegrator({ orders }: { orders: Order[] }) {
               placeholder="+1 (555) 123-4567 or country code + number"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
-              className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-green-500 focus:outline-none text-lg"
+              className="w-full px-4 py-3 border-2 border-teal-900 rounded-xl focus:border-amber-500 focus:outline-none text-lg"
             />
             <p className="text-xs text-gray-500 mt-2">
               💡 Include country code (e.g., +1 for USA, +44 for UK)
@@ -141,12 +141,12 @@ export default function WhatsAppIntegrator({ orders }: { orders: Order[] }) {
                   onClick={() => setMessageType(template.id as any)}
                   className={`p-4 rounded-xl border-2 transition text-left ${
                     messageType === template.id
-                      ? 'bg-green-500 text-white border-green-600'
-                      : 'bg-white border-gray-200 hover:border-green-400'
+                      ? 'bg-teal-900 text-white border-teal-900'
+                      : 'bg-white border-teal-900 hover:border-amber-500'
                   }`}
                 >
                   <div className="font-bold text-lg">{template.icon} {template.label}</div>
-                  <div className={`text-sm ${messageType === template.id ? 'text-green-100' : 'text-gray-600'}`}>
+                  <div className={`text-sm ${messageType === template.id ? 'text-teal-100' : 'text-gray-600'}`}>
                     {template.description}
                   </div>
                 </button>
@@ -162,7 +162,7 @@ export default function WhatsAppIntegrator({ orders }: { orders: Order[] }) {
               value={customMessage}
               onChange={(e) => setCustomMessage(e.target.value)}
               rows={4}
-              className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-green-500 focus:outline-none text-lg"
+              className="w-full px-4 py-3 border-2 border-teal-900 rounded-xl focus:border-amber-500 focus:outline-none text-lg"
             />
           </div>
 
@@ -171,14 +171,14 @@ export default function WhatsAppIntegrator({ orders }: { orders: Order[] }) {
             <button
               type="button"
               onClick={sendViaWhatsApp}
-              className="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-black py-4 rounded-xl transition shadow-lg hover:shadow-2xl text-lg uppercase tracking-wide"
+              className="flex-1 bg-gradient-to-r from-teal-900 to-emerald-800 hover:from-teal-950 hover:to-emerald-900 text-white font-black py-4 rounded-xl transition shadow-lg hover:shadow-2xl text-lg uppercase tracking-wide"
             >
               💬 Send via WhatsApp
             </button>
             <button
               type="button"
               onClick={copyMessage}
-              className="px-6 bg-gray-200 hover:bg-gray-300 text-gray-900 font-black py-4 rounded-xl transition"
+              className="px-6 bg-amber-500 hover:bg-amber-600 text-white font-black py-4 rounded-xl transition"
             >
               📋 Copy
             </button>
@@ -188,10 +188,10 @@ export default function WhatsAppIntegrator({ orders }: { orders: Order[] }) {
         {/* Right: Preview */}
         <div>
           <label className="block text-lg font-bold text-gray-900 mb-3">📱 Message Preview</label>
-          <div className="bg-white rounded-2xl border-2 border-gray-200 p-6 h-96 overflow-y-auto">
+          <div className="bg-white rounded-2xl border-2 border-teal-900 p-6 h-96 overflow-y-auto">
             {generateMessage() ? (
               <div className="space-y-4">
-                <div className="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
+                <div className="bg-emerald-50 rounded-lg p-4 border-l-4 border-teal-900">
                   <p className="text-gray-900 font-semibold text-sm whitespace-pre-wrap leading-relaxed">
                     {generateMessage()}
                   </p>
@@ -211,9 +211,9 @@ export default function WhatsAppIntegrator({ orders }: { orders: Order[] }) {
       </div>
 
       {/* Template Guide */}
-      <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-xl">
-        <p className="text-sm text-blue-900 font-bold mb-3">📚 Template Guide:</p>
-        <ul className="text-sm text-blue-800 space-y-2">
+      <div className="bg-teal-50 border-l-4 border-teal-900 p-6 rounded-xl">
+        <p className="text-sm text-teal-900 font-bold mb-3">📚 Template Guide:</p>
+        <ul className="text-sm text-teal-800 space-y-2">
           <li>
             <strong>Quote:</strong> Use when you've calculated a price and want to send it to the client for approval
           </li>
@@ -229,9 +229,9 @@ export default function WhatsAppIntegrator({ orders }: { orders: Order[] }) {
       </div>
 
       {/* Pro Tips */}
-      <div className="bg-amber-50 border-l-4 border-amber-500 p-6 rounded-xl">
+      <div className="bg-amber-50 border-l-4 border-amber-600 p-6 rounded-xl">
         <p className="text-sm text-amber-900 font-bold mb-3">⚡ Pro Tips:</p>
-        <ul className="text-sm text-amber-800 space-y-1">
+        <ul className="text-sm text-amber-900 space-y-1">
           <li>✅ Keep messages short and friendly - WhatsApp is personal!</li>
           <li>✅ Always include your phone number so they can call back</li>
           <li>✅ Use this to save 30+ minutes/week on back-and-forth communication</li>

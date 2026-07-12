@@ -24,10 +24,10 @@ export default function OrdersList({
   };
 
   const statusConfig = {
-    inquiry: { color: 'bg-yellow-500', lightBg: 'bg-yellow-50', text: 'text-yellow-900', emoji: '❓' },
-    quoted: { color: 'bg-teal-500', lightBg: 'bg-teal-50', text: 'text-teal-900', emoji: '📄' },
-    confirmed: { color: 'bg-teal-600', lightBg: 'bg-teal-50', text: 'text-teal-900', emoji: '✅' },
-    delivered: { color: 'bg-yellow-400', lightBg: 'bg-yellow-50', text: 'text-yellow-900', emoji: '🎉' },
+    inquiry: { color: 'bg-amber-500', lightBg: 'bg-amber-50', text: 'text-amber-900', emoji: '❓' },
+    quoted: { color: 'bg-teal-900', lightBg: 'bg-teal-50', text: 'text-teal-900', emoji: '📄' },
+    confirmed: { color: 'bg-emerald-700', lightBg: 'bg-emerald-50', text: 'text-emerald-900', emoji: '✅' },
+    delivered: { color: 'bg-amber-500', lightBg: 'bg-amber-50', text: 'text-amber-900', emoji: '🎉' },
   };
 
   if (orders.length === 0) {
@@ -47,7 +47,7 @@ export default function OrdersList({
         return (
           <div
             key={order.id}
-            className="border-2 border-teal-200 rounded-2xl p-6 hover:shadow-xl hover:border-yellow-400 transition-all duration-200 bg-gradient-to-br from-white to-teal-50"
+            className="border-2 border-teal-900 rounded-2xl p-6 hover:shadow-xl hover:border-amber-500 transition-all duration-200 bg-gradient-to-br from-white to-emerald-50"
           >
             <div className="flex items-start justify-between mb-5">
               <div className="flex-1">
@@ -75,7 +75,7 @@ export default function OrdersList({
                 aria-label="Update order status"
                 value={order.status}
                 onChange={(e) => updateStatus(order.id, e.target.value as Order['status'])}
-                className="px-4 py-2 border-2 border-teal-300 rounded-lg text-sm font-bold focus:ring-2 focus:ring-teal-500 focus:border-transparent transition bg-white"
+                className="px-4 py-2 border-2 border-teal-900 rounded-lg text-sm font-bold focus:ring-2 focus:ring-teal-900 focus:border-transparent transition bg-white"
               >
                 <option value="inquiry">❓ Inquiry</option>
                 <option value="quoted">📄 Quoted</option>
@@ -83,13 +83,13 @@ export default function OrdersList({
                 <option value="delivered">🎉 Delivered</option>
               </select>
 
-              <button type="button" className="px-5 py-2 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-lg hover:shadow-lg font-bold text-sm transition">
+              <button type="button" className="px-5 py-2 bg-gradient-to-r from-teal-800 to-teal-900 text-white rounded-lg hover:shadow-lg font-bold text-sm transition">
                 📝 Edit
               </button>
-              <button type="button" className="px-5 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:shadow-lg font-bold text-sm transition">
+              <button type="button" className="px-5 py-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-lg hover:shadow-lg font-bold text-sm transition">
                 🧾 Invoice
               </button>
-              <button type="button" className="px-5 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:shadow-lg font-bold text-sm transition">
+              <button type="button" className="px-5 py-2 bg-gradient-to-r from-emerald-700 to-emerald-800 text-white rounded-lg hover:shadow-lg font-bold text-sm transition">
                 💬 Notes
               </button>
             </div>

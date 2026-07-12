@@ -77,7 +77,7 @@ export default function VoiceNotes() {
   return (
     <div className="space-y-8">
       {/* Recording Button Section */}
-      <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-2xl p-8 border-3 border-red-400">
+      <div className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-2xl p-8 border-3 border-amber-600">
         <div className="text-center">
           <h2 className="text-3xl font-black text-gray-900 mb-2">🎤 Voice Recorder</h2>
           <p className="text-gray-600 mb-8">Record client conversations for easy reference</p>
@@ -87,20 +87,20 @@ export default function VoiceNotes() {
               <button
                 type="button"
                 onClick={startRecording}
-                className="bg-red-500 hover:bg-red-600 text-white font-black py-6 px-12 rounded-2xl text-2xl transition shadow-xl hover:shadow-2xl hover:scale-105 transform"
+                className="bg-amber-600 hover:bg-amber-700 text-white font-black py-6 px-12 rounded-2xl text-2xl transition shadow-xl hover:shadow-2xl hover:scale-105 transform"
               >
                 🔴 Start Recording
               </button>
             ) : (
               <div className="space-y-4 w-full">
                 <div className="text-center">
-                  <p className="text-6xl font-black text-red-600 font-mono mb-4">{formatTime(recordingTime)}</p>
-                  <p className="text-lg font-bold text-red-600 animate-pulse">● Recording in progress...</p>
+                  <p className="text-6xl font-black text-amber-700 font-mono mb-4">{formatTime(recordingTime)}</p>
+                  <p className="text-lg font-bold text-amber-700 animate-pulse">● Recording in progress...</p>
                 </div>
                 <button
                   type="button"
                   onClick={stopRecording}
-                  className="w-full bg-gray-800 hover:bg-gray-900 text-white font-black py-6 rounded-2xl text-xl transition shadow-lg"
+                  className="w-full bg-teal-900 hover:bg-teal-950 text-white font-black py-6 rounded-2xl text-xl transition shadow-lg"
                 >
                   ⏹ Stop Recording
                 </button>
@@ -123,7 +123,7 @@ export default function VoiceNotes() {
           {recordings.map((recording) => (
             <div
               key={recording.id}
-              className="border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:border-red-400 transition-all duration-200 bg-gradient-to-br from-white to-gray-50"
+              className="border-2 border-teal-900 rounded-2xl p-6 hover:shadow-lg hover:border-amber-500 transition-all duration-200 bg-gradient-to-br from-white to-emerald-50"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
@@ -133,7 +133,7 @@ export default function VoiceNotes() {
                 <button
                   type="button"
                   onClick={() => deleteRecording(recording.id)}
-                  className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 font-bold text-sm transition"
+                  className="px-4 py-2 bg-amber-100 text-amber-900 rounded-lg hover:bg-amber-200 font-bold text-sm transition"
                 >
                   Delete
                 </button>
@@ -154,7 +154,7 @@ export default function VoiceNotes() {
                   onChange={(e) => updateNotes(recording.id, e.target.value)}
                   placeholder="Dietary restrictions • Menu preferences • Client requests • Delivery notes • Payment terms..."
                   rows={5}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-200 transition text-lg"
+                  className="w-full px-4 py-3 border-2 border-teal-900 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200 transition text-lg"
                 />
               </div>
             </div>
@@ -163,9 +163,9 @@ export default function VoiceNotes() {
       )}
 
       {/* Tips Section */}
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-500 p-6 rounded-xl">
-        <p className="text-sm text-blue-900 font-semibold mb-2">💡 Pro Tips:</p>
-        <ul className="text-sm text-blue-800 space-y-1">
+      <div className="bg-gradient-to-r from-teal-50 to-emerald-50 border-l-4 border-teal-900 p-6 rounded-xl">
+        <p className="text-sm text-teal-900 font-semibold mb-2">💡 Pro Tips:</p>
+        <ul className="text-sm text-teal-800 space-y-1">
           <li>• Save dietary restrictions and allergies for quick reference</li>
           <li>• Note preferred menu items and special requests</li>
           <li>• Record payment terms and delivery instructions</li>

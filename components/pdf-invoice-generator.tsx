@@ -143,7 +143,7 @@ export default function PDFInvoiceGenerator({ orders }: { orders: any[] }) {
           title="Select an order"
           value={selectedOrder || ''}
           onChange={(e) => setSelectedOrder(e.target.value)}
-          className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl font-semibold focus:border-blue-500 focus:outline-none text-lg"
+          className="w-full px-4 py-3 border-2 border-teal-900 rounded-xl font-semibold focus:border-amber-500 focus:outline-none text-lg"
         >
           <option value="">Select an order to create invoice...</option>
           {orders.map((order) => (
@@ -157,13 +157,13 @@ export default function PDFInvoiceGenerator({ orders }: { orders: any[] }) {
       {selectedOrder && (
         <>
           {/* Invoice Items */}
-          <div className="bg-gray-50 rounded-2xl p-8 border-2 border-gray-200">
+          <div className="bg-emerald-50 rounded-2xl p-8 border-2 border-teal-900">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">📋 Invoice Items</h3>
             <div className="space-y-3">
               {invoiceItems.map((item, index) => (
                 <div
                   key={index}
-                  className="flex gap-3 items-end bg-white rounded-lg p-4 border-2 border-gray-200"
+                  className="flex gap-3 items-end bg-white rounded-lg p-4 border-2 border-teal-900"
                 >
                   <input
                     type="text"
@@ -209,7 +209,7 @@ export default function PDFInvoiceGenerator({ orders }: { orders: any[] }) {
             <button
               type="button"
               onClick={() => setInvoiceItems([...invoiceItems, { name: '', qty: 1, price: 0 }])}
-              className="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg font-bold hover:bg-green-600"
+              className="mt-4 px-4 py-2 bg-emerald-700 text-white rounded-lg font-bold hover:bg-emerald-800"
             >
               + Add Item
             </button>
@@ -217,20 +217,20 @@ export default function PDFInvoiceGenerator({ orders }: { orders: any[] }) {
 
           {/* Labor & Shipping */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-blue-50 rounded-2xl p-6 border-2 border-blue-200">
-              <label className="block text-sm font-bold text-blue-900 mb-3">Labor Hours</label>
+            <div className="bg-teal-50 rounded-2xl p-6 border-2 border-teal-900">
+              <label className="block text-sm font-bold text-teal-900 mb-3">Labor Hours</label>
               <input
                 type="number"
                 min="0"
                 placeholder="4"
                 value={laborHours}
                 onChange={(e) => setLaborHours(parseInt(e.target.value) || 0)}
-                className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg font-bold text-xl text-center"
+                className="w-full px-4 py-3 border-2 border-teal-900 rounded-lg font-bold text-xl text-center"
               />
             </div>
 
-            <div className="bg-purple-50 rounded-2xl p-6 border-2 border-purple-200">
-              <label className="block text-sm font-bold text-purple-900 mb-3">Hourly Rate</label>
+            <div className="bg-emerald-50 rounded-2xl p-6 border-2 border-teal-900">
+              <label className="block text-sm font-bold text-emerald-900 mb-3">Hourly Rate</label>
               <div className="relative">
                 <span className="absolute left-4 top-3 text-xl font-bold">$</span>
                 <input
@@ -239,13 +239,13 @@ export default function PDFInvoiceGenerator({ orders }: { orders: any[] }) {
                   placeholder="25"
                   value={laborRate}
                   onChange={(e) => setLaborRate(parseFloat(e.target.value) || 0)}
-                  className="w-full px-4 py-3 pl-8 border-2 border-purple-300 rounded-lg font-bold text-xl text-center"
+                  className="w-full px-4 py-3 pl-8 border-2 border-teal-900 rounded-lg font-bold text-xl text-center"
                 />
               </div>
             </div>
 
-            <div className="bg-green-50 rounded-2xl p-6 border-2 border-green-200">
-              <label className="block text-sm font-bold text-green-900 mb-3">Shipping Cost</label>
+            <div className="bg-amber-50 rounded-2xl p-6 border-2 border-amber-600">
+              <label className="block text-sm font-bold text-amber-900 mb-3">Shipping Cost</label>
               <div className="relative">
                 <span className="absolute left-4 top-3 text-xl font-bold">$</span>
                 <input
@@ -254,14 +254,14 @@ export default function PDFInvoiceGenerator({ orders }: { orders: any[] }) {
                   placeholder="0"
                   value={shippingCost}
                   onChange={(e) => setShippingCost(parseFloat(e.target.value) || 0)}
-                  className="w-full px-4 py-3 pl-8 border-2 border-green-300 rounded-lg font-bold text-xl text-center"
+                  className="w-full px-4 py-3 pl-8 border-2 border-amber-600 rounded-lg font-bold text-xl text-center"
                 />
               </div>
             </div>
           </div>
 
           {/* Total & Download */}
-          <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 border-3 border-amber-400">
+          <div className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-2xl p-8 border-3 border-amber-600">
             <div className="space-y-4 mb-6">
               <div className="flex justify-between text-lg">
                 <span>Food Items:</span>
@@ -276,7 +276,7 @@ export default function PDFInvoiceGenerator({ orders }: { orders: any[] }) {
                 <span>Labor:</span>
                 <span className="font-bold">${(laborHours * laborRate).toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-lg border-t-2 border-amber-200 pt-4">
+              <div className="flex justify-between text-lg border-t-2 border-amber-600 pt-4">
                 <span className="text-2xl font-black">TOTAL:</span>
                 <span className="text-4xl font-black text-amber-600">
                   $
@@ -292,11 +292,11 @@ export default function PDFInvoiceGenerator({ orders }: { orders: any[] }) {
             <button
               type="button"
               onClick={generatePDF}
-              className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-black py-4 rounded-xl text-lg uppercase tracking-wide shadow-lg hover:shadow-2xl"
+              className="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-black py-4 rounded-xl text-lg uppercase tracking-wide shadow-lg hover:shadow-2xl"
             >
               📥 Download Professional Invoice
             </button>
-            <p className="text-sm text-amber-700 mt-3 text-center">
+            <p className="text-sm text-amber-900 mt-3 text-center">
               💡 Tip: Open the downloaded file in your browser and print to PDF for a professional look
             </p>
           </div>
