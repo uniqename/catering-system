@@ -87,7 +87,7 @@ export default function CateringPage() {
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':
-        return <DashboardRedesign orders={orders} />;
+        return <DashboardRedesign orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
       case 'orders':
         return <OrdersList orders={orders} onUpdate={saveOrders} />;
       case 'inquiries':
