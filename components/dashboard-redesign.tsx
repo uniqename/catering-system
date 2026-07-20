@@ -23,7 +23,26 @@ interface DashboardMetrics {
   clientsChange: number;
 }
 
-export default function DashboardRedesign({ orders = [] }: { orders?: Order[] }) {
+interface DashboardRedesignProps {
+  orders?: Order[];
+  activeTab?: string;
+  onTabChange?: (tab: string) => void;
+  renderContent?: (tab: string) => React.ReactNode;
+}
+
+export default function DashboardRedesign({
+  orders = [],
+  activeTab = 'dashboard',
+  onTabChange = () => {},
+  renderContent
+}: DashboardRedesignProps) {
+  const [localTab, setLocalTab] = useState(activeTab);
+
+  const handleTabChange = (tab: string) => {
+    setLocalTab(tab);
+    onTabChange(tab);
+  };
+
   const [metrics, setMetrics] = useState<DashboardMetrics>({
     newInquiries: 3,
     confirmedOrders: 7,
@@ -123,21 +142,24 @@ export default function DashboardRedesign({ orders = [] }: { orders?: Order[] })
         {/* Navigation */}
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
           {[
-            { icon: '🏠', label: 'Dashboard', active: true },
-            { icon: '💬', label: 'Inquiries', badge: 3 },
-            { icon: '📋', label: 'Orders' },
-            { icon: '📅', label: 'Calendar' },
-            { icon: '👥', label: 'Clients' },
-            { icon: '🍽️', label: 'Menu & Packages' },
-            { icon: '📄', label: 'Invoices' },
-            { icon: '💳', label: 'Payments' },
-            { icon: '📊', label: 'Reports' },
-            { icon: '⚙️', label: 'Settings' },
+            { id: 'dashboard', icon: '🏠', label: 'Dashboard' },
+            { id: 'inquiries', icon: '💬', label: 'Inquiries', badge: 3 },
+            { id: 'orders', icon: '📋', label: 'Orders' },
+            { id: 'calendar', icon: '📅', label: 'Calendar' },
+            { id: 'clients', icon: '👥', label: 'Clients' },
+            { id: 'menu', icon: '🍽️', label: 'Menu & Packages' },
+            { id: 'invoices', icon: '📄', label: 'Invoices' },
+            { id: 'costs', icon: '💸', label: 'Costs & Margins' },
+            { id: 'rentals', icon: '🪑', label: 'Rental Pricing' },
+            { id: 'shipping', icon: '📦', label: 'Shipping Log' },
+            { id: 'reports', icon: '📊', label: 'Reports' },
           ].map((item) => (
             <button
-              key={item.label}
+              key={item.id}
+              type="button"
+              onClick={() => handleTabChange(item.id)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition ${
-                item.active
+                localTab === item.id
                   ? 'bg-amber-500 text-teal-900 font-semibold'
                   : 'text-teal-100 hover:bg-teal-700'
               }`}
