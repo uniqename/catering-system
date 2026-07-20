@@ -9,8 +9,15 @@ import ClientProfiles from '@/components/client-profiles';
 import ProfitDashboard from '@/components/profit-dashboard';
 import PDFInvoiceGenerator from '@/components/pdf-invoice-generator';
 import WhatsAppIntegrator from '@/components/whatsapp-integrator';
+import RealCostIntake from '@/components/real-cost-intake';
+import RentalPricing from '@/components/rental-pricing';
+import TaxReminders from '@/components/tax-reminders';
+import ShippingLog from '@/components/shipping-log';
+import VoiceToOrder from '@/components/voice-to-order';
+import QRIntake from '@/components/qr-intake';
+import ProfessionalInvoice from '@/components/professional-invoice';
 
-type Tab = 'orders' | 'invoice' | 'voice' | 'new-order' | 'clients' | 'profits' | 'pdf-invoice' | 'whatsapp';
+type Tab = 'orders' | 'invoice' | 'voice' | 'new-order' | 'clients' | 'profits' | 'costs' | 'rentals' | 'tax' | 'shipping' | 'voice-intake' | 'qr-intake' | 'pro-invoice' | 'whatsapp';
 
 export default function CateringDashboard() {
   const [activeTab, setActiveTab] = useState<Tab>('orders');
@@ -104,12 +111,17 @@ export default function CateringDashboard() {
   const navItems = [
     { id: 'orders', label: 'Orders', icon: '📋', badge: orders.length },
     { id: 'new-order', label: 'New Inquiry', icon: '➕' },
+    { id: 'voice-intake', label: 'Voice Intake', icon: '🎤' },
+    { id: 'qr-intake', label: 'QR Intake', icon: '📱' },
     { id: 'clients', label: 'Clients', icon: '👥' },
-    { id: 'pdf-invoice', label: 'Professional Invoice', icon: '📄' },
+    { id: 'costs', label: 'Cost Tracking', icon: '💸' },
+    { id: 'rentals', label: 'Rental Pricing', icon: '🪑' },
+    { id: 'tax', label: 'Tax Reminders', icon: '📅' },
+    { id: 'shipping', label: 'Shipping Log', icon: '📦' },
     { id: 'profits', label: 'Profit Analysis', icon: '📊' },
+    { id: 'pro-invoice', label: 'Pro Invoicing', icon: '💼' },
     { id: 'whatsapp', label: 'WhatsApp Msgs', icon: '💬' },
-    { id: 'invoice', label: 'Quick Invoice', icon: '🧾' },
-    { id: 'voice', label: 'Voice Notes', icon: '🎤' },
+    { id: 'voice', label: 'Voice Notes', icon: '📙' },
   ];
 
   return (
@@ -175,6 +187,8 @@ export default function CateringDashboard() {
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           {activeTab === 'orders' && <OrdersList orders={orders} onUpdate={saveOrders} />}
           {activeTab === 'new-order' && <QuickOrderForm onAdd={addOrder} />}
+          {activeTab === 'voice-intake' && <VoiceToOrder onCreateOrder={addOrder} />}
+          {activeTab === 'qr-intake' && <QRIntake onCreateOrder={addOrder} />}
           {activeTab === 'clients' && (
             <ClientProfiles
               orders={orders}
@@ -184,10 +198,13 @@ export default function CateringDashboard() {
               }}
             />
           )}
+          {activeTab === 'costs' && <RealCostIntake />}
+          {activeTab === 'rentals' && <RentalPricing />}
+          {activeTab === 'tax' && <TaxReminders />}
+          {activeTab === 'shipping' && <ShippingLog />}
           {activeTab === 'profits' && <ProfitDashboard orders={orders} />}
-          {activeTab === 'pdf-invoice' && <PDFInvoiceGenerator orders={orders} />}
+          {activeTab === 'pro-invoice' && <ProfessionalInvoice />}
           {activeTab === 'whatsapp' && <WhatsAppIntegrator orders={orders} />}
-          {activeTab === 'invoice' && <InvoiceGenerator orders={orders} />}
           {activeTab === 'voice' && <VoiceNotes />}
         </div>
       </div>
