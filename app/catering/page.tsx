@@ -13,7 +13,8 @@ import ShippingLog from '@/components/shipping-log';
 import VoiceToOrder from '@/components/voice-to-order';
 import QRIntake from '@/components/qr-intake';
 import ProfessionalInvoice from '@/components/professional-invoice';
-import DashboardRedesign from '@/components/dashboard-redesign';
+import DashboardComplete from '@/components/dashboard-complete';
+import ClientManager from '@/components/client-manager';
 import VoiceNotes from '@/components/voice-notes';
 
 type Tab = 'dashboard' | 'orders' | 'inquiries' | 'clients' | 'invoices' | 'costs' | 'rentals' | 'shipping' | 'reports' | 'menu' | 'calendar';
@@ -87,13 +88,13 @@ export default function CateringPage() {
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':
-        return <DashboardRedesign orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
+        return <DashboardComplete orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
       case 'orders':
         return <OrdersList orders={orders} onUpdate={saveOrders} />;
       case 'inquiries':
         return <QuickOrderForm onAdd={addOrder} />;
       case 'clients':
-        return <ClientProfiles orders={orders} onSelectClient={() => setActiveTab('inquiries')} />;
+        return <ClientManager orders={orders} />;
       case 'invoices':
         return <ProfessionalInvoice />;
       case 'costs':
@@ -105,7 +106,7 @@ export default function CateringPage() {
       case 'reports':
         return <ProfitDashboard orders={orders} />;
       default:
-        return <DashboardRedesign orders={orders} />;
+        return <DashboardComplete orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
     }
   };
 
