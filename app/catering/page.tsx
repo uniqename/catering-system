@@ -16,7 +16,7 @@ import ProfessionalInvoice from '@/components/professional-invoice';
 import DashboardComplete from '@/components/dashboard-complete';
 import ClientManager from '@/components/client-manager';
 import VoiceNotes from '@/components/voice-notes';
-import DashboardGarageToTable from '@/components/dashboard-garage-to-table';
+import DashboardRedesignFinal from '@/components/dashboard-redesign-final';
 
 type Tab = 'dashboard' | 'inquiries' | 'orders' | 'calendar' | 'clients' | 'menu' | 'invoices' | 'payments' | 'reports' | 'settings';
 
@@ -90,7 +90,7 @@ export default function CateringPage() {
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':
-        return <DashboardGarageToTable orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
+        return <DashboardRedesignFinal orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
       case 'inquiries':
         return <InquiriesForm onAdd={addOrder} />;
       case 'orders':
@@ -110,7 +110,7 @@ export default function CateringPage() {
       case 'settings':
         return <div style={{ color: '#D4A64A' }} className="p-8">Settings coming soon</div>;
       default:
-        return <DashboardGarageToTable orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
+        return <DashboardRedesignFinal orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
     }
   };
 
