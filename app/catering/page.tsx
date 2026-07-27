@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Bell, Search } from 'lucide-react';
 import OrdersList from '@/components/orders-list';
-import QuickOrderForm from '@/components/quick-order-form';
+import InquiriesForm from '@/components/inquiries-form';
 import ClientProfiles from '@/components/client-profiles';
 import ProfitDashboard from '@/components/profit-dashboard';
 import RealCostIntake from '@/components/real-cost-intake';
@@ -92,7 +92,7 @@ export default function CateringPage() {
       case 'dashboard':
         return <DashboardProfessional orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
       case 'inquiries':
-        return <QuickOrderForm onAdd={addOrder} />;
+        return <InquiriesForm onAdd={addOrder} />;
       case 'orders':
         return <OrdersList orders={orders} onUpdate={saveOrders} />;
       case 'calendar':
