@@ -16,7 +16,7 @@ import ProfessionalInvoice from '@/components/professional-invoice';
 import DashboardComplete from '@/components/dashboard-complete';
 import ClientManager from '@/components/client-manager';
 import VoiceNotes from '@/components/voice-notes';
-import DashboardLuxuryFixed from '@/components/dashboard-luxury-fixed';
+import DashboardGarageToTable from '@/components/dashboard-garage-to-table';
 
 type Tab = 'dashboard' | 'inquiries' | 'orders' | 'calendar' | 'clients' | 'menu' | 'invoices' | 'payments' | 'reports' | 'settings';
 
@@ -90,7 +90,7 @@ export default function CateringPage() {
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':
-        return <DashboardLuxuryFixed orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
+        return <DashboardGarageToTable orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
       case 'inquiries':
         return <InquiriesForm onAdd={addOrder} />;
       case 'orders':
@@ -108,48 +108,47 @@ export default function CateringPage() {
       case 'reports':
         return <ProfitDashboard orders={orders} />;
       case 'settings':
-        return <div className="p-8 text-amber-950">Settings coming soon</div>;
+        return <div style={{ color: '#D4A64A' }} className="p-8">Settings coming soon</div>;
       default:
-        return <DashboardLuxuryFixed orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
+        return <DashboardGarageToTable orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
     }
   };
 
   if (!isMounted) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-amber-50">
+    <div style={{ backgroundColor: '#0B3D36', minHeight: '100vh' }}>
       {/* Sidebar */}
-      <div className="fixed left-0 top-0 w-64 h-screen bg-gradient-to-b from-[#0B3D36] to-[#0a3530] border-r border-[#0B3D36] text-white shadow-2xl flex flex-col z-40">
-        {/* Logo */}
-        <div className="p-6 border-b border-[#0d4540]">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-lg bg-[#D4A64A] flex items-center justify-center text-[#0B3D36] font-bold text-xl font-serif">
-              G
+      <div style={{ backgroundColor: '#0B3D36', borderRightColor: '#1a5f54' }} className="fixed left-0 top-0 w-64 h-screen border-r text-white shadow-2xl flex flex-col z-40">
+        {/* Logo - Elegant GT */}
+        <div style={{ borderBottomColor: '#1a5f54' }} className="p-6 border-b">
+          <div className="flex flex-col items-center text-center">
+            <div style={{ color: '#D4A64A' }} className="text-4xl font-serif font-bold mb-1">
+              G T
             </div>
-            <div>
-              <p className="font-serif text-sm font-bold text-white">Garage to Table</p>
-              <p className="text-xs text-[#D4A64A]">Catering</p>
-            </div>
+            <p className="font-serif text-sm font-bold text-white">GARAGE to TABLE</p>
+            <p style={{ color: '#D4A64A' }} className="text-xs mt-1">CATERING</p>
+            <p style={{ color: '#D4A64A' }} className="text-xs italic mt-2">Curated meals, flavored with love</p>
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+        <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
           {navItems.map((item) => (
             <button
               key={item.id}
               type="button"
               onClick={() => setActiveTab(item.id)}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition relative ${
-                activeTab === item.id
-                  ? 'bg-[#0d4540] text-[#D4A64A] font-semibold border-2 border-[#D4A64A]'
-                  : 'text-green-100 hover:bg-[#0d4540] hover:text-white'
-              }`}
+              style={{
+                backgroundColor: activeTab === item.id ? '#1a5f54' : 'transparent',
+                color: activeTab === item.id ? '#D4A64A' : '#a8d5ca',
+              }}
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition relative"
             >
               <span className="text-lg">{item.icon}</span>
               <span className="flex-1 text-left text-sm font-medium">{item.label}</span>
               {item.badge ? (
-                <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                <span style={{ backgroundColor: '#ef4444' }} className="text-white text-xs font-bold px-2 py-1 rounded-full">
                   {item.badge}
                 </span>
               ) : null}
@@ -158,25 +157,23 @@ export default function CateringPage() {
         </nav>
 
         {/* CTA */}
-        <div className="p-4 border-t border-[#0d4540]">
-          <div className="bg-[#0d4540] rounded-lg p-4 border-2 border-[#D4A64A]">
-            <p className="font-semibold text-sm text-white mb-2">Grow your business</p>
-            <p className="text-xs text-[#D4A64A] mb-3">Setup inquiry form</p>
-            <button className="w-full bg-[#D4A64A] hover:bg-[#e6c98a] text-[#0B3D36] text-xs font-bold py-2 rounded-lg transition font-semibold">
+        <div style={{ borderTopColor: '#1a5f54' }} className="p-4 border-t">
+          <div style={{ backgroundColor: '#1a5f54', borderColor: '#D4A64A' }} className="rounded-lg p-4 border-2">
+            <p style={{ color: '#D4A64A' }} className="font-semibold text-sm mb-2">Grow your business</p>
+            <p className="text-xs text-white mb-3">Setup inquiry form</p>
+            <button style={{ backgroundColor: '#D4A64A', color: '#0B3D36' }} className="w-full text-xs font-bold py-2 rounded-lg transition font-semibold hover:opacity-90">
               Get Started →
             </button>
           </div>
         </div>
 
         {/* Profile */}
-        <div className="p-4 border-t border-[#0d4540]">
+        <div style={{ borderTopColor: '#1a5f54' }} className="p-4 border-t">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#D4A64A] flex items-center justify-center text-[#0B3D36] font-bold text-sm">
-              E
-            </div>
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23D4A64A'/%3E%3Ctext x='50' y='60' font-size='60' font-weight='bold' text-anchor='middle' fill='%230B3D36'%3EE%3C/text%3E%3C/svg%3E" alt="E" className="w-10 h-10 rounded-full" />
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold text-white truncate">Enam Egyir</p>
-              <p className="text-xs text-[#D4A64A] truncate">Business Owner</p>
+              <p style={{ color: '#D4A64A' }} className="text-xs truncate">Business Owner</p>
             </div>
           </div>
         </div>
@@ -189,17 +186,17 @@ export default function CateringPage() {
         ) : (
           <>
             {/* Header */}
-            <div className="border-b border-amber-200 sticky top-0 z-30 bg-white/95 backdrop-blur">
+            <div style={{ backgroundColor: '#0B3D36', borderBottomColor: '#D4A64A' }} className="border-b-2 sticky top-0 z-30">
               <div className="px-8 py-4 flex items-center justify-between">
-                <h1 className="text-2xl font-bold text-amber-950">
+                <h1 style={{ color: '#D4A64A' }} className="text-2xl font-bold">
                   {navItems.find(item => item.id === activeTab)?.label}
                 </h1>
               </div>
             </div>
 
             {/* Content */}
-            <div className="px-8 py-8 min-h-[calc(100vh-73px)] bg-gradient-to-br from-amber-50 to-amber-50">
-              <div className="bg-white rounded-2xl border-2 border-amber-200 p-8 shadow-sm min-h-96">
+            <div style={{ backgroundColor: '#0B3D36' }} className="px-8 py-8 min-h-[calc(100vh-73px)]">
+              <div style={{ backgroundColor: '#1a5f54', borderColor: '#2a8f7f' }} className="rounded-2xl border-2 p-8 shadow-sm min-h-96">
                 {renderContent()}
               </div>
             </div>
