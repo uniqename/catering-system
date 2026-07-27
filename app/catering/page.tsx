@@ -16,7 +16,7 @@ import ProfessionalInvoice from '@/components/professional-invoice';
 import DashboardComplete from '@/components/dashboard-complete';
 import ClientManager from '@/components/client-manager';
 import VoiceNotes from '@/components/voice-notes';
-import DashboardLuxury from '@/components/dashboard-luxury';
+import DashboardLuxuryFixed from '@/components/dashboard-luxury-fixed';
 
 type Tab = 'dashboard' | 'inquiries' | 'orders' | 'calendar' | 'clients' | 'menu' | 'invoices' | 'payments' | 'reports' | 'settings';
 
@@ -90,7 +90,7 @@ export default function CateringPage() {
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':
-        return <DashboardLuxury orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
+        return <DashboardLuxuryFixed orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
       case 'inquiries':
         return <InquiriesForm onAdd={addOrder} />;
       case 'orders':
@@ -110,7 +110,7 @@ export default function CateringPage() {
       case 'settings':
         return <div className="p-8 text-amber-950">Settings coming soon</div>;
       default:
-        return <DashboardLuxury orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
+        return <DashboardLuxuryFixed orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
     }
   };
 
@@ -119,16 +119,16 @@ export default function CateringPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-amber-50">
       {/* Sidebar */}
-      <div className="fixed left-0 top-0 w-64 h-screen bg-gradient-to-b from-amber-950 to-amber-900 border-r border-amber-800 text-white shadow-2xl flex flex-col z-40">
+      <div className="fixed left-0 top-0 w-64 h-screen bg-gradient-to-b from-[#0B3D36] to-[#0a3530] border-r border-[#0B3D36] text-white shadow-2xl flex flex-col z-40">
         {/* Logo */}
-        <div className="p-6 border-b border-amber-800">
+        <div className="p-6 border-b border-[#0d4540]">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-300 to-amber-400 flex items-center justify-center text-amber-950 font-bold text-xl font-serif">
+            <div className="w-12 h-12 rounded-lg bg-[#D4A64A] flex items-center justify-center text-[#0B3D36] font-bold text-xl font-serif">
               G
             </div>
             <div>
               <p className="font-serif text-sm font-bold text-white">Garage to Table</p>
-              <p className="text-xs text-amber-300">Catering</p>
+              <p className="text-xs text-[#D4A64A]">Catering</p>
             </div>
           </div>
         </div>
@@ -142,8 +142,8 @@ export default function CateringPage() {
               onClick={() => setActiveTab(item.id)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition relative ${
                 activeTab === item.id
-                  ? 'bg-amber-800 text-amber-200 font-semibold border-2 border-amber-600'
-                  : 'text-amber-100 hover:bg-amber-800/50 hover:text-amber-50'
+                  ? 'bg-[#0d4540] text-[#D4A64A] font-semibold border-2 border-[#D4A64A]'
+                  : 'text-green-100 hover:bg-[#0d4540] hover:text-white'
               }`}
             >
               <span className="text-lg">{item.icon}</span>
@@ -158,25 +158,25 @@ export default function CateringPage() {
         </nav>
 
         {/* CTA */}
-        <div className="p-4 border-t border-amber-800">
-          <div className="bg-gradient-to-br from-amber-800 to-amber-700 rounded-lg p-4 border-2 border-amber-600">
+        <div className="p-4 border-t border-[#0d4540]">
+          <div className="bg-[#0d4540] rounded-lg p-4 border-2 border-[#D4A64A]">
             <p className="font-semibold text-sm text-white mb-2">Grow your business</p>
-            <p className="text-xs text-amber-200 mb-3">Setup inquiry form</p>
-            <button className="w-full bg-amber-300 hover:bg-amber-200 text-amber-950 text-xs font-bold py-2 rounded-lg transition font-semibold">
+            <p className="text-xs text-[#D4A64A] mb-3">Setup inquiry form</p>
+            <button className="w-full bg-[#D4A64A] hover:bg-[#e6c98a] text-[#0B3D36] text-xs font-bold py-2 rounded-lg transition font-semibold">
               Get Started →
             </button>
           </div>
         </div>
 
         {/* Profile */}
-        <div className="p-4 border-t border-amber-800">
+        <div className="p-4 border-t border-[#0d4540]">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-300 to-amber-400 flex items-center justify-center text-amber-950 font-bold text-sm">
+            <div className="w-10 h-10 rounded-full bg-[#D4A64A] flex items-center justify-center text-[#0B3D36] font-bold text-sm">
               E
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold text-white truncate">Enam Egyir</p>
-              <p className="text-xs text-amber-300 truncate">Business Owner</p>
+              <p className="text-xs text-[#D4A64A] truncate">Business Owner</p>
             </div>
           </div>
         </div>

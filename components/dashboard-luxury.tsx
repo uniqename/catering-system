@@ -66,26 +66,26 @@ export default function DashboardLuxury({ orders = [], onNavigate = () => {} }: 
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-amber-50">
+    <div className="min-h-screen bg-[#FAF8F2]">
       {/* Header */}
-      <div className="border-b border-amber-200 sticky top-0 z-10 bg-white/95 backdrop-blur">
+      <div className="border-b border-[#D4A64A] sticky top-0 z-10 bg-white/95 backdrop-blur">
         <div className="px-8 py-6 flex items-center justify-between">
           <div>
-            <h1 className="text-4xl font-bold text-amber-900">Good morning, Enam! 👋</h1>
-            <p className="text-amber-700 text-sm mt-1">Here's what's happening with your catering business today.</p>
+            <h1 className="text-4xl font-bold text-[#0B3D36]">Good morning, Enam! 👋</h1>
+            <p className="text-[#D4A64A] text-sm mt-1">Here's what's happening with your catering business today.</p>
           </div>
 
           <div className="flex items-center gap-4">
             <button title="Search" className="p-2 hover:bg-amber-50 rounded-lg transition">
-              <Search className="w-5 h-5 text-amber-900" />
+              <Search className="w-5 h-5 text-[#0B3D36]" />
             </button>
             <button title="Notifications" className="relative p-2 hover:bg-amber-50 rounded-lg transition">
-              <Bell className="w-5 h-5 text-amber-900" />
+              <Bell className="w-5 h-5 text-[#0B3D36]" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
             </button>
             <button
               onClick={() => onNavigate('inquiries')}
-              className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-lg transition"
+              className="px-4 py-2 bg-[#D4A64A] hover:bg-[#e6c98a] text-[#0B3D36] font-semibold rounded-lg transition"
             >
               + New Inquiry
             </button>
