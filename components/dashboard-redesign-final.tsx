@@ -131,7 +131,7 @@ export default function DashboardRedesignFinal({
       <div style={{ backgroundColor: '#0B3D36' }} className="sticky top-0 z-10">
         <div className="px-8 py-6 flex items-center justify-between">
           <div>
-            <h1 style={{ color: '#D4A64A' }} className="text-4xl font-bold">Good morning, Enam! 👋</h1>
+            <h1 style={{ color: '#D4A64A' }} className="text-4xl font-bold">Good morning, Alexandra! 👋</h1>
             <p style={{ color: '#a8d5ca' }} className="text-sm mt-1">Here's what's happening with your catering business today.</p>
           </div>
 

@@ -170,9 +170,9 @@ export default function CateringPage() {
         {/* Profile */}
         <div style={{ borderTopColor: '#1a5f54' }} className="p-4 border-t">
           <div className="flex items-center gap-3">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23D4A64A'/%3E%3Ctext x='50' y='60' font-size='60' font-weight='bold' text-anchor='middle' fill='%230B3D36'%3EE%3C/text%3E%3C/svg%3E" alt="E" className="w-10 h-10 rounded-full" />
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23D4A64A'/%3E%3Ctext x='50' y='60' font-size='60' font-weight='bold' text-anchor='middle' fill='%230B3D36'%3EA%3C/text%3E%3C/svg%3E" alt="A" className="w-10 h-10 rounded-full" />
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-white truncate">Enam Egyir</p>
+              <p className="text-sm font-semibold text-white truncate">Alexandra</p>
               <p style={{ color: '#D4A64A' }} className="text-xs truncate">Business Owner</p>
             </div>
           </div>
