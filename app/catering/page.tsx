@@ -4,19 +4,13 @@ import { useState, useEffect } from 'react';
 import { Bell, Search } from 'lucide-react';
 import OrdersList from '@/components/orders-list';
 import InquiriesForm from '@/components/inquiries-form';
-import ClientProfiles from '@/components/client-profiles';
-import ProfitDashboard from '@/components/profit-dashboard';
-import RealCostIntake from '@/components/real-cost-intake';
-import RentalPricing from '@/components/rental-pricing';
-import TaxReminders from '@/components/tax-reminders';
-import ShippingLog from '@/components/shipping-log';
-import VoiceToOrder from '@/components/voice-to-order';
-import QRIntake from '@/components/qr-intake';
-import ProfessionalInvoice from '@/components/professional-invoice';
-import DashboardComplete from '@/components/dashboard-complete';
 import ClientManager from '@/components/client-manager';
-import VoiceNotes from '@/components/voice-notes';
+import ProfitDashboard from '@/components/profit-dashboard';
 import DashboardRedesignFinal from '@/components/dashboard-redesign-final';
+import CalendarView from '@/components/calendar-view';
+import MenuPackages from '@/components/menu-packages';
+import DynamicInvoiceSystem from '@/components/dynamic-invoice-system';
+import PaymentsTracker from '@/components/payments-tracker';
 
 type Tab = 'dashboard' | 'inquiries' | 'orders' | 'calendar' | 'clients' | 'menu' | 'invoices' | 'payments' | 'reports' | 'settings';
 
@@ -96,15 +90,15 @@ export default function CateringPage() {
       case 'orders':
         return <OrdersList orders={orders} onUpdate={saveOrders} />;
       case 'calendar':
-        return <div className="p-8 text-white">Calendar view coming soon</div>;
+        return <CalendarView orders={orders} />;
       case 'clients':
         return <ClientManager orders={orders} />;
       case 'menu':
-        return <div className="p-8 text-white">Menu & Packages coming soon</div>;
+        return <MenuPackages />;
       case 'invoices':
-        return <ProfessionalInvoice />;
+        return <DynamicInvoiceSystem orders={orders} />;
       case 'payments':
-        return <div className="p-8 text-white">Payments coming soon</div>;
+        return <PaymentsTracker orders={orders} />;
       case 'reports':
         return <ProfitDashboard orders={orders} />;
       case 'settings':
