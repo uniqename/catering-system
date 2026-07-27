@@ -43,11 +43,11 @@ const StatCard = ({
   bgColor: string;
   iconColor: string;
 }) => (
-  <div style={{ backgroundColor: '#1a5f54' }} className="rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
+  <div style={{ backgroundColor: '#102418' }} className="rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
     <div className="flex items-start justify-between">
       <div>
         <p style={{ color: '#a8d5ca' }} className="text-xs font-semibold uppercase tracking-wide">{label}</p>
-        <p style={{ color: '#D4A64A' }} className="text-3xl font-black mt-2">{value}</p>
+        <p style={{ color: '#d7a859' }} className="text-3xl font-black mt-2">{value}</p>
       </div>
       <div style={{ backgroundColor: bgColor }} className="w-14 h-14 rounded-full flex items-center justify-center shadow-md">
         <div style={{ color: iconColor }}>
@@ -126,26 +126,26 @@ export default function DashboardRedesignFinal({
   };
 
   return (
-    <div style={{ backgroundColor: '#0B3D36' }} className="min-h-screen">
+    <div style={{ backgroundColor: '#0a1911' }} className="min-h-screen">
       {/* Header */}
-      <div style={{ backgroundColor: '#0B3D36' }} className="sticky top-0 z-10">
+      <div style={{ backgroundColor: '#0a1911' }} className="sticky top-0 z-10">
         <div className="px-8 py-6 flex items-center justify-between">
           <div>
-            <h1 style={{ color: '#D4A64A' }} className="text-4xl font-bold">Good morning, Alexandra! 👋</h1>
+            <h1 style={{ color: '#d7a859' }} className="text-4xl font-bold">Good morning, Alexandra! 👋</h1>
             <p style={{ color: '#a8d5ca' }} className="text-sm mt-1">Here's what's happening with your catering business today.</p>
           </div>
 
           <div className="flex items-center gap-4">
-            <button title="Search" style={{ color: '#D4A64A' }} className="p-2 hover:bg-[#1a5f54] rounded-lg transition">
+            <button title="Search" style={{ color: '#d7a859' }} className="p-2 hover:bg-[#102418] rounded-lg transition">
               <Search className="w-5 h-5" />
             </button>
-            <button title="Notifications" style={{ color: '#D4A64A' }} className="relative p-2 hover:bg-[#1a5f54] rounded-lg transition">
+            <button title="Notifications" style={{ color: '#d7a859' }} className="relative p-2 hover:bg-[#102418] rounded-lg transition">
               <Bell className="w-5 h-5" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
             </button>
             <button
               onClick={() => onNavigate('inquiries')}
-              style={{ backgroundColor: '#D4A64A', color: '#0B3D36' }}
+              style={{ backgroundColor: '#d7a859', color: '#0B3D36' }}
               className="px-4 py-2 font-bold rounded-lg transition hover:opacity-90 shadow-md"
             >
               + New Inquiry
@@ -163,7 +163,7 @@ export default function DashboardRedesignFinal({
             value={newInquiries}
             icon={<MessageSquare className="w-6 h-6" />}
             change="+2 from yesterday"
-            bgColor="#0B3D36"
+            bgColor="#021711"
             iconColor="white"
           />
           <StatCard
@@ -171,7 +171,7 @@ export default function DashboardRedesignFinal({
             value={confirmedOrders}
             icon={<ClipboardList className="w-6 h-6" />}
             change="+3 this week"
-            bgColor="#374151"
+            bgColor="#021711"
             iconColor="white"
           />
           <StatCard
@@ -179,26 +179,26 @@ export default function DashboardRedesignFinal({
             value={`$${monthlyRevenue.toLocaleString()}`}
             icon={<DollarSign className="w-6 h-6" />}
             change="+18% from last month"
-            bgColor="#D4A64A"
-            iconColor="#0B3D36"
+            bgColor="#909986"
+            iconColor="white"
           />
           <StatCard
             label="TOTAL CLIENTS"
             value={totalClients}
             icon={<Users className="w-6 h-6" />}
             change="+5 new this month"
-            bgColor="#374151"
-            iconColor="white"
+            bgColor="#fbf5e6"
+            iconColor="#0a1911"
           />
         </div>
 
         {/* Charts & Menu */}
         <div className="grid grid-cols-3 gap-6">
           {/* Revenue Chart */}
-          <div style={{ backgroundColor: '#1a5f54' }} className="col-span-2 rounded-2xl p-6 shadow-lg">
+          <div style={{ backgroundColor: '#102418' }} className="col-span-2 rounded-2xl p-6 shadow-lg">
             <div className="flex items-center justify-between mb-6">
-              <h3 style={{ color: '#D4A64A' }} className="text-lg font-bold">Revenue Overview</h3>
-              <select style={{ backgroundColor: '#0B3D36', color: '#D4A64A', borderColor: '#D4A64A' }} className="text-sm border rounded-lg px-3 py-2">
+              <h3 style={{ color: '#d7a859' }} className="text-lg font-bold">Revenue Overview</h3>
+              <select style={{ backgroundColor: '#0B3D36', color: '#d7a859', borderColor: '#d7a859' }} className="text-sm border rounded-lg px-3 py-2">
                 <option>This Month</option>
                 <option>Last Month</option>
                 <option>Year to Date</option>
@@ -210,8 +210,8 @@ export default function DashboardRedesignFinal({
               <svg className="absolute inset-0 w-full h-full opacity-30" style={{ pointerEvents: 'none' }} preserveAspectRatio="none">
                 <defs>
                   <linearGradient id="gradientFill" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: '#D4A64A', stopOpacity: 0.5 }} />
-                    <stop offset="100%" style={{ stopColor: '#D4A64A', stopOpacity: 0 }} />
+                    <stop offset="0%" style={{ stopColor: '#d7a859', stopOpacity: 0.5 }} />
+                    <stop offset="100%" style={{ stopColor: '#d7a859', stopOpacity: 0 }} />
                   </linearGradient>
                 </defs>
                 <polyline points="0,160 40,135 80,150 120,75 160,55 200,85 240,20" fill="url(#gradientFill)" stroke="none" />
@@ -222,36 +222,36 @@ export default function DashboardRedesignFinal({
                   <div
                     style={{
                       height: `${val * 50}px`,
-                      borderTop: '3px solid #D4A64A'
+                      borderTop: '3px solid #d7a859'
                     }}
                     className="w-full rounded-t-md shadow-md hover:shadow-lg transition relative group"
                   >
                     {/* Tooltip */}
                     <div style={{ backgroundColor: '#0B3D36' }} className="absolute -top-10 left-1/2 transform -translate-x-1/2 px-3 py-1 rounded text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition pointer-events-none">
-                      <p style={{ color: '#D4A64A' }} className="font-bold">May {i === 0 ? '1' : i * 4 + 1}</p>
-                      <p style={{ color: '#D4A64A' }}>$3,450</p>
+                      <p style={{ color: '#d7a859' }} className="font-bold">May {i === 0 ? '1' : i * 4 + 1}</p>
+                      <p style={{ color: '#d7a859' }}>$3,450</p>
                     </div>
                   </div>
-                  <p style={{ color: '#D4A64A' }} className="text-xs mt-2 font-semibold">May {i === 0 ? '1' : i * 4 + 1}</p>
+                  <p style={{ color: '#d7a859' }} className="text-xs mt-2 font-semibold">May {i === 0 ? '1' : i * 4 + 1}</p>
                 </div>
               ))}
             </div>
 
             <div style={{ borderTopColor: '#2a8f7f' }} className="border-t pt-4 text-center">
               <p style={{ color: '#a8d5ca' }} className="text-xs">May 21</p>
-              <p style={{ color: '#D4A64A' }} className="text-2xl font-black">$3,450</p>
+              <p style={{ color: '#d7a859' }} className="text-2xl font-black">$3,450</p>
             </div>
           </div>
 
           {/* Top Menu Items - Donut Chart */}
-          <div style={{ backgroundColor: '#1a5f54' }} className="rounded-2xl p-6 shadow-lg">
-            <h3 style={{ color: '#D4A64A' }} className="text-lg font-bold mb-6">Top Menu Items</h3>
+          <div style={{ backgroundColor: '#102418' }} className="rounded-2xl p-6 shadow-lg">
+            <h3 style={{ color: '#d7a859' }} className="text-lg font-bold mb-6">Top Menu Items</h3>
 
             {/* Multi-color donut chart */}
             <div className="flex items-center gap-6 mb-4">
               <div className="relative w-24 h-24">
                 <svg viewBox="0 0 100 100" className="transform -rotate-90">
-                  <circle cx="50" cy="50" r="40" fill="none" stroke="#D4A64A" strokeWidth="8" strokeDasharray="87.96 251.33" />
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="#d7a859" strokeWidth="8" strokeDasharray="87.96 251.33" />
                   <circle cx="50" cy="50" r="40" fill="none" stroke="#0B3D36" strokeWidth="8" strokeDasharray="62.83 251.33" strokeDashoffset="-87.96" />
                   <circle cx="50" cy="50" r="40" fill="none" stroke="#7a9e7e" strokeWidth="8" strokeDasharray="50.27 251.33" strokeDashoffset="-150.79" />
                   <circle cx="50" cy="50" r="40" fill="none" stroke="#b8945e" strokeWidth="8" strokeDasharray="37.7 251.33" strokeDashoffset="-201.06" />
@@ -262,14 +262,14 @@ export default function DashboardRedesignFinal({
 
               <div className="space-y-3">
                 {[
-                  { name: 'Jollof Rice', pct: 35, color: '#D4A64A' },
+                  { name: 'Jollof Rice', pct: 35, color: '#d7a859' },
                   { name: 'Grilled Chicken', pct: 25, color: '#0B3D36' },
                   { name: 'Beef Stew', pct: 20, color: '#7a9e7e' },
                   { name: 'Fried Rice', pct: 10, color: '#b8945e' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2">
                     <div style={{ backgroundColor: item.color }} className="w-2 h-2 rounded-full"></div>
-                    <p style={{ color: '#D4A64A' }} className="text-xs">● {item.name}</p>
+                    <p style={{ color: '#d7a859' }} className="text-xs">● {item.name}</p>
                     <p style={{ color: '#a8d5ca' }} className="text-xs ml-auto font-semibold">{item.pct}%</p>
                   </div>
                 ))}
@@ -281,10 +281,10 @@ export default function DashboardRedesignFinal({
         {/* Tables & Widgets */}
         <div className="grid grid-cols-2 gap-6">
           {/* Recent Inquiries Table */}
-          <div style={{ backgroundColor: '#1a5f54' }} className="rounded-2xl shadow-lg overflow-hidden">
+          <div style={{ backgroundColor: '#102418' }} className="rounded-2xl shadow-lg overflow-hidden">
             <div style={{ borderBottomColor: '#2a8f7f' }} className="p-6 border-b flex items-center justify-between">
-              <h3 style={{ color: '#D4A64A' }} className="text-lg font-bold">Recent Inquiries</h3>
-              <button onClick={() => onNavigate('inquiries')} style={{ color: '#D4A64A' }} className="text-sm font-semibold hover:opacity-80">
+              <h3 style={{ color: '#d7a859' }} className="text-lg font-bold">Recent Inquiries</h3>
+              <button onClick={() => onNavigate('inquiries')} style={{ color: '#d7a859' }} className="text-sm font-semibold hover:opacity-80">
                 View All
               </button>
             </div>
@@ -293,11 +293,11 @@ export default function DashboardRedesignFinal({
               <table className="w-full text-sm">
                 <thead style={{ backgroundColor: '#0B3D36' }}>
                   <tr>
-                    <th style={{ color: '#D4A64A' }} className="px-6 py-3 text-left font-semibold">Client</th>
-                    <th style={{ color: '#D4A64A' }} className="px-6 py-3 text-left font-semibold">Event Type</th>
-                    <th style={{ color: '#D4A64A' }} className="px-6 py-3 text-left font-semibold">Date</th>
-                    <th style={{ color: '#D4A64A' }} className="px-6 py-3 text-left font-semibold">Guests</th>
-                    <th style={{ color: '#D4A64A' }} className="px-6 py-3 text-left font-semibold">Status</th>
+                    <th style={{ color: '#d7a859' }} className="px-6 py-3 text-left font-semibold">Client</th>
+                    <th style={{ color: '#d7a859' }} className="px-6 py-3 text-left font-semibold">Event Type</th>
+                    <th style={{ color: '#d7a859' }} className="px-6 py-3 text-left font-semibold">Date</th>
+                    <th style={{ color: '#d7a859' }} className="px-6 py-3 text-left font-semibold">Guests</th>
+                    <th style={{ color: '#d7a859' }} className="px-6 py-3 text-left font-semibold">Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -305,7 +305,7 @@ export default function DashboardRedesignFinal({
                     const colors = getStatusColor(order.status);
                     return (
                       <tr key={order.id} style={{ borderBottomColor: '#2a8f7f' }} className="border-b hover:bg-[#0B3D36] transition">
-                        <td style={{ color: '#D4A64A' }} className="px-6 py-4 font-medium">{order.clientName}</td>
+                        <td style={{ color: '#d7a859' }} className="px-6 py-4 font-medium">{order.clientName}</td>
                         <td style={{ color: '#a8d5ca' }} className="px-6 py-4 capitalize">{order.eventType}</td>
                         <td style={{ color: '#a8d5ca' }} className="px-6 py-4">{order.eventDate}</td>
                         <td style={{ color: '#a8d5ca' }} className="px-6 py-4">{order.guestCount}</td>
@@ -325,8 +325,8 @@ export default function DashboardRedesignFinal({
           {/* Right Column - Tasks & Events */}
           <div className="space-y-6">
             {/* Today's Tasks */}
-            <div style={{ backgroundColor: '#1a5f54' }} className="rounded-2xl p-6 shadow-lg">
-              <h3 style={{ color: '#D4A64A' }} className="text-lg font-bold mb-4">Today's Tasks</h3>
+            <div style={{ backgroundColor: '#102418' }} className="rounded-2xl p-6 shadow-lg">
+              <h3 style={{ color: '#d7a859' }} className="text-lg font-bold mb-4">Today's Tasks</h3>
               <div className="space-y-3">
                 {tasks.map((task) => (
                   <button
@@ -337,10 +337,10 @@ export default function DashboardRedesignFinal({
                     {task.completed ? (
                       <CheckCircle2 style={{ color: '#10B981' }} className="w-5 h-5 flex-shrink-0 mt-0.5" />
                     ) : (
-                      <Circle style={{ color: '#D4A64A' }} className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                      <Circle style={{ color: '#d7a859' }} className="w-5 h-5 flex-shrink-0 mt-0.5" />
                     )}
                     <div className="flex-1">
-                      <p style={{ color: task.completed ? '#a8d5ca' : '#D4A64A' }} className={`font-semibold ${task.completed ? 'line-through' : ''}`}>
+                      <p style={{ color: task.completed ? '#a8d5ca' : '#d7a859' }} className={`font-semibold ${task.completed ? 'line-through' : ''}`}>
                         {task.text}
                       </p>
                       <p style={{ color: '#a8d5ca' }} className="text-xs">{task.subtitle}</p>
@@ -351,10 +351,10 @@ export default function DashboardRedesignFinal({
             </div>
 
             {/* Upcoming Events */}
-            <div style={{ backgroundColor: '#1a5f54' }} className="rounded-2xl p-6 shadow-lg">
+            <div style={{ backgroundColor: '#102418' }} className="rounded-2xl p-6 shadow-lg">
               <div className="flex items-center justify-between mb-4">
-                <h3 style={{ color: '#D4A64A' }} className="text-lg font-bold">Upcoming Events</h3>
-                <button onClick={() => onNavigate('calendar')} style={{ color: '#D4A64A' }} className="text-sm font-semibold hover:opacity-80">
+                <h3 style={{ color: '#d7a859' }} className="text-lg font-bold">Upcoming Events</h3>
+                <button onClick={() => onNavigate('calendar')} style={{ color: '#d7a859' }} className="text-sm font-semibold hover:opacity-80">
                   View Calendar
                 </button>
               </div>
@@ -363,14 +363,14 @@ export default function DashboardRedesignFinal({
                 {upcomingEvents.map((event, idx) => (
                   <div key={idx} style={{ backgroundColor: '#0B3D36' }} className="flex gap-4 p-4 rounded-lg">
                     <div className="text-center min-w-fit">
-                      <p style={{ color: '#D4A64A' }} className="text-xs font-bold">{event.month}</p>
-                      <p style={{ color: '#D4A64A' }} className="text-2xl font-black">{event.day}</p>
+                      <p style={{ color: '#d7a859' }} className="text-xs font-bold">{event.month}</p>
+                      <p style={{ color: '#d7a859' }} className="text-2xl font-black">{event.day}</p>
                     </div>
                     <div className="flex-1">
-                      <p style={{ color: '#D4A64A' }} className="font-semibold capitalize">{event.eventType}</p>
+                      <p style={{ color: '#d7a859' }} className="font-semibold capitalize">{event.eventType}</p>
                       <p style={{ color: '#a8d5ca' }} className="text-xs">{event.time} • {event.guestCount} Guests</p>
                     </div>
-                    <span style={{ backgroundColor: '#1a5f54', color: '#D4A64A', borderColor: '#D4A64A' }} className="text-xs font-bold border px-2 py-1 rounded-full self-start flex-shrink-0">
+                    <span style={{ backgroundColor: '#102418', color: '#d7a859', borderColor: '#d7a859' }} className="text-xs font-bold border px-2 py-1 rounded-full self-start flex-shrink-0">
                       Upcoming
                     </span>
                   </div>
@@ -381,8 +381,8 @@ export default function DashboardRedesignFinal({
         </div>
 
         {/* Quick Actions */}
-        <div style={{ backgroundColor: '#1a5f54' }} className="rounded-2xl p-6 shadow-lg">
-          <h3 style={{ color: '#D4A64A' }} className="text-lg font-bold mb-6">Quick Actions</h3>
+        <div style={{ backgroundColor: '#102418' }} className="rounded-2xl p-6 shadow-lg">
+          <h3 style={{ color: '#d7a859' }} className="text-lg font-bold mb-6">Quick Actions</h3>
           <div className="grid grid-cols-6 gap-4">
             {[
               { id: 'inquiries', icon: '💬', label: 'New Inquiry' },
@@ -399,7 +399,7 @@ export default function DashboardRedesignFinal({
                 className="flex flex-col items-center gap-2 p-4 rounded-xl hover:shadow-lg transition"
               >
                 <span className="text-3xl">{action.icon}</span>
-                <p style={{ color: '#D4A64A' }} className="text-xs font-semibold text-center">{action.label}</p>
+                <p style={{ color: '#d7a859' }} className="text-xs font-semibold text-center">{action.label}</p>
               </button>
             ))}
           </div>
