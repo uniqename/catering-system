@@ -58,30 +58,30 @@ export default function InquiriesForm({ onAdd }: { onAdd: (order: any) => void }
   return (
     <div className="max-w-4xl">
       <div className="mb-8">
-        <h2 className="text-3xl font-bold text-white mb-2">New Inquiry Form</h2>
-        <p className="text-emerald-300">Capture a new client inquiry and move it through your sales pipeline</p>
+        <h2 className="text-3xl font-bold text-amber-950 mb-2">New Inquiry Form</h2>
+        <p className="text-amber-700">Capture a new client inquiry and move it through your sales pipeline</p>
       </div>
 
       {error && (
-        <div className="mb-6 bg-red-900/30 border-l-4 border-red-500 p-4 rounded text-red-300 font-semibold">
+        <div className="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded text-red-700 font-semibold">
           ⚠️ {error}
         </div>
       )}
 
       {success && (
-        <div className="mb-6 bg-emerald-900/30 border-l-4 border-emerald-500 p-4 rounded text-emerald-300 font-semibold">
+        <div className="mb-6 bg-green-50 border-l-4 border-green-500 p-4 rounded text-green-700 font-semibold">
           ✓ Inquiry created successfully!
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Client Information */}
-        <div className="bg-slate-900/50 border border-emerald-900/30 rounded-xl p-6">
-          <h3 className="text-lg font-bold text-white mb-6">Client Information</h3>
+        <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-6">
+          <h3 className="text-lg font-bold text-amber-950 mb-6">Client Information</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-bold text-emerald-300 mb-2 uppercase tracking-wider">
+              <label className="block text-sm font-bold text-amber-900 mb-2 uppercase tracking-wider">
                 Name *
               </label>
               <input
@@ -89,7 +89,7 @@ export default function InquiriesForm({ onAdd }: { onAdd: (order: any) => void }
                 value={form.clientName}
                 onChange={(e) => setForm({ ...form, clientName: e.target.value })}
                 placeholder="e.g., Sarah Johnson"
-                className="w-full px-4 py-3 bg-slate-800 border-2 border-emerald-700/30 rounded-lg text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
+                className="w-full px-4 py-3 bg-white border-2 border-amber-300 rounded-lg text-amber-950 placeholder-amber-400 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
               />
             </div>
 
@@ -102,12 +102,12 @@ export default function InquiriesForm({ onAdd }: { onAdd: (order: any) => void }
                 value={form.phone}
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
                 placeholder="e.g., (555) 123-4567"
-                className="w-full px-4 py-3 bg-slate-800 border-2 border-emerald-700/30 rounded-lg text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
+                className="w-full px-4 py-3 bg-white border-2 border-amber-300 rounded-lg text-amber-950 placeholder-amber-400 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-emerald-300 mb-2 uppercase tracking-wider">
+              <label className="block text-sm font-bold text-amber-900 mb-2 uppercase tracking-wider">
                 Email *
               </label>
               <input
@@ -115,25 +115,25 @@ export default function InquiriesForm({ onAdd }: { onAdd: (order: any) => void }
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 placeholder="e.g., sarah@example.com"
-                className="w-full px-4 py-3 bg-slate-800 border-2 border-emerald-700/30 rounded-lg text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
+                className="w-full px-4 py-3 bg-white border-2 border-amber-300 rounded-lg text-amber-950 placeholder-amber-400 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
               />
             </div>
           </div>
         </div>
 
         {/* Event Details */}
-        <div className="bg-slate-900/50 border border-emerald-900/30 rounded-xl p-6">
-          <h3 className="text-lg font-bold text-white mb-6">Event Details</h3>
+        <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-6">
+          <h3 className="text-lg font-bold text-amber-950 mb-6">Event Details</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-bold text-emerald-300 mb-2 uppercase tracking-wider">
+              <label className="block text-sm font-bold text-amber-900 mb-2 uppercase tracking-wider">
                 Event Type *
               </label>
               <select
                 value={form.eventType}
                 onChange={(e) => setForm({ ...form, eventType: e.target.value })}
-                className="w-full px-4 py-3 bg-slate-800 border-2 border-emerald-700/30 rounded-lg text-white focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
+                className="w-full px-4 py-3 bg-white border-2 border-amber-300 rounded-lg text-amber-950 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
               >
                 {eventTypes.map((type) => (
                   <option key={type.value} value={type.value}>
@@ -144,19 +144,19 @@ export default function InquiriesForm({ onAdd }: { onAdd: (order: any) => void }
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-emerald-300 mb-2 uppercase tracking-wider">
+              <label className="block text-sm font-bold text-amber-900 mb-2 uppercase tracking-wider">
                 Event Date *
               </label>
               <input
                 type="date"
                 value={form.eventDate}
                 onChange={(e) => setForm({ ...form, eventDate: e.target.value })}
-                className="w-full px-4 py-3 bg-slate-800 border-2 border-emerald-700/30 rounded-lg text-white focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
+                className="w-full px-4 py-3 bg-white border-2 border-amber-300 rounded-lg text-amber-950 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-emerald-300 mb-2 uppercase tracking-wider">
+              <label className="block text-sm font-bold text-amber-900 mb-2 uppercase tracking-wider">
                 Guest Count *
               </label>
               <input
@@ -164,12 +164,12 @@ export default function InquiriesForm({ onAdd }: { onAdd: (order: any) => void }
                 value={form.guestCount}
                 onChange={(e) => setForm({ ...form, guestCount: e.target.value })}
                 placeholder="e.g., 150"
-                className="w-full px-4 py-3 bg-slate-800 border-2 border-emerald-700/30 rounded-lg text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
+                className="w-full px-4 py-3 bg-white border-2 border-amber-300 rounded-lg text-amber-950 placeholder-amber-400 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-emerald-300 mb-2 uppercase tracking-wider">
+              <label className="block text-sm font-bold text-amber-900 mb-2 uppercase tracking-wider">
                 Budget Range
               </label>
               <input
@@ -177,13 +177,13 @@ export default function InquiriesForm({ onAdd }: { onAdd: (order: any) => void }
                 value={form.budget}
                 onChange={(e) => setForm({ ...form, budget: e.target.value })}
                 placeholder="e.g., $3,000 - $5,000"
-                className="w-full px-4 py-3 bg-slate-800 border-2 border-emerald-700/30 rounded-lg text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
+                className="w-full px-4 py-3 bg-white border-2 border-amber-300 rounded-lg text-amber-950 placeholder-amber-400 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
               />
             </div>
           </div>
 
           <div className="mt-6">
-            <label className="block text-sm font-bold text-emerald-300 mb-2 uppercase tracking-wider">
+            <label className="block text-sm font-bold text-amber-900 mb-2 uppercase tracking-wider">
               Venue
             </label>
             <input
@@ -191,14 +191,14 @@ export default function InquiriesForm({ onAdd }: { onAdd: (order: any) => void }
               value={form.venue}
               onChange={(e) => setForm({ ...form, venue: e.target.value })}
               placeholder="e.g., Marriott Ballroom, Downtown"
-              className="w-full px-4 py-3 bg-slate-800 border-2 border-emerald-700/30 rounded-lg text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
+              className="w-full px-4 py-3 bg-white border-2 border-amber-300 rounded-lg text-amber-950 placeholder-amber-400 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
             />
           </div>
         </div>
 
         {/* Notes */}
-        <div className="bg-slate-900/50 border border-emerald-900/30 rounded-xl p-6">
-          <label className="block text-sm font-bold text-emerald-300 mb-2 uppercase tracking-wider">
+        <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-6">
+          <label className="block text-sm font-bold text-amber-900 mb-2 uppercase tracking-wider">
             Special Requests & Notes
           </label>
           <textarea
@@ -206,7 +206,7 @@ export default function InquiriesForm({ onAdd }: { onAdd: (order: any) => void }
             onChange={(e) => setForm({ ...form, notes: e.target.value })}
             placeholder="Dietary restrictions, allergies, menu preferences, special instructions, or how they found you..."
             rows={5}
-            className="w-full px-4 py-3 bg-slate-800 border-2 border-emerald-700/30 rounded-lg text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
+            className="w-full px-4 py-3 bg-white border-2 border-amber-300 rounded-lg text-amber-950 placeholder-amber-400 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500/30 transition"
           />
         </div>
 

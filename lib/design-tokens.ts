@@ -1,41 +1,53 @@
-// Garage to Table Design System
+// Garage to Table Design System - Luxury Hospitality Brand
 export const colors = {
-  // Primary dark background
+  // Primary backgrounds
   bg: {
-    primary: '#0a0e0a',      // Deep dark green-black
-    secondary: '#111812',    // Slightly lighter
-    tertiary: '#1a1f1a',     // Card background
-    hover: '#242b24',        // Hover state
+    primary: '#0B3D36',      // Deep Forest Green
+    secondary: '#FAF8F2',    // Ivory (light background)
+    tertiary: '#FFFFFF',     // Soft White (cards)
+    hover: '#0D4A40',        // Slightly lighter forest green
+    light: '#E8E3D8',        // Very light neutral
   },
 
-  // Gold/Amber accents
+  // Luxury Gold accents
   gold: {
-    primary: '#b8860b',      // Dark goldenrod
-    light: '#d4af37',        // Bright gold
-    lighter: '#f0e68c',      // Light gold
-    border: '#8b6914',       // Dark gold for borders
+    primary: '#D4A64A',      // Luxury Gold
+    light: '#E6C98A',        // Warm Champagne
+    lighter: '#F4E5C3',      // Very light champagne
+    dark: '#B8860B',         // Darker gold
   },
 
   // Text colors
   text: {
-    primary: '#f5f5f5',      // Off-white
-    secondary: '#b0b0b0',    // Gray
-    muted: '#707070',        // Darker gray
+    primary: '#1F2937',      // Rich Charcoal
+    secondary: '#6B7280',    // Slate Gray
+    light: '#FFFFFF',        // White (on dark backgrounds)
+    muted: '#9CA3AF',        // Light Gray
   },
 
   // Status colors
   status: {
-    new: '#10b981',          // Green for new
-    pending: '#f59e0b',      // Amber for pending
-    confirmed: '#06b6d4',    // Cyan for confirmed
-    completed: '#8b5cf6',    // Purple for completed
-    cancelled: '#ef4444',    // Red for cancelled
+    new: '#3B82F6',          // Blue for new inquiry
+    proposal: '#F59E0B',     // Amber for proposal sent
+    confirmed: '#10B981',    // Green for confirmed booking
+    event: '#8B5CF6',        // Purple for event today
+    due: '#EF4444',          // Red for payment due
+  },
+
+  // Chart colors
+  chart: {
+    weddings: '#D4A64A',     // Gold
+    corporate: '#0B3D36',    // Forest Green
+    private: '#7A9E7E',      // Sage Green
+    church: '#B56E28',       // Bronze
+    other: '#C8C8C8',        // Gray
   },
 
   // Borders
   border: {
-    primary: '#2d3d2d',      // Dark green border
-    light: '#3d4d3d',        // Lighter border
+    primary: '#D4A64A',      // Gold border
+    light: '#E6C98A',        // Light gold border
+    neutral: '#E5E7EB',      // Neutral border
   },
 };
 
