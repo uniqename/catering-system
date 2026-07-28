@@ -18,6 +18,7 @@ import InvoiceBuilder from '@/components/invoice-builder';
 import ClientProfile from '@/components/client-profile';
 import InvoiceList from '@/components/invoice-list';
 import InvoiceDetail from '@/components/invoice-detail';
+import OrderList from '@/components/order-list';
 
 type Tab = 'dashboard' | 'inquiries' | 'orders' | 'calendar' | 'clients' | 'menu' | 'invoices' | 'payments' | 'reports' | 'settings';
 
@@ -120,6 +121,10 @@ export default function CateringPage() {
     alert(`Proposal sent for inquiry ${inquiryId}`);
   };
 
+  const openInquiryBuilder = () => {
+    setActiveTab('inquiries');
+  };
+
   const navItems: Array<{ id: Tab; icon: any; label: string; badge?: number }> = [
     { id: 'dashboard', icon: Home, label: 'Dashboard' },
     { id: 'inquiries', icon: MessageSquare, label: 'Inquiries', badge: orders.filter(o => o.status === 'inquiry').length },
@@ -146,7 +151,11 @@ export default function CateringPage() {
       case 'inquiries':
         return <InquiriesForm onAdd={addOrder} />;
       case 'orders':
-        return <OrderManagement orders={orders} />;
+        return <OrderList
+          orders={orders}
+          onViewOrder={openInquiryDetail}
+          onCreateNew={openInquiryBuilder}
+        />;
       case 'calendar':
         return <CalendarView orders={orders} />;
       case 'clients':
