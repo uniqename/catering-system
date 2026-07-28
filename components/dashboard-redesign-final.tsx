@@ -36,7 +36,7 @@ const StatCard = ({
   bgColor: string;
   iconColor: string;
 }) => (
-  <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-4 flex items-start gap-3">
+  <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-6 flex items-start gap-3">
     <div style={{ backgroundColor: bgColor }} className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
       <div style={{ color: iconColor }} className="w-6 h-6">
         {icon}
@@ -300,7 +300,7 @@ export default function DashboardRedesignFinal({
         {/* Charts Row - Revenue (60%) + Menu+Tasks (20%+20%) ALL IN ONE ROW */}
         <div className="grid grid-cols-12 gap-4">
           {/* Revenue Overview - 60% on LEFT */}
-          <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-7 rounded-xl p-4">
+          <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-7 rounded-xl p-6">
             <div className="flex items-center justify-between mb-2">
               <h2 style={{ color: '#ffffff' }} className="text-sm font-bold">Revenue Overview</h2>
               <select style={{ borderColor: 'rgba(215, 168, 89, 0.1)', color: '#ffffff', backgroundColor: '#102418' }} className="text-xs border rounded px-1.5 py-0.5 focus:outline-none">
@@ -320,7 +320,7 @@ export default function DashboardRedesignFinal({
           {/* Menu + Tasks Column - RIGHT SIDE, 20%+20% HORIZONTAL */}
           <div className="col-span-5 grid grid-cols-2 gap-4">
             {/* Top Menu Items */}
-            <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-4">
+            <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-6">
               <h2 style={{ color: '#ffffff' }} className="text-sm font-bold mb-3">Top Menu Items</h2>
               <div className="flex justify-center mb-3">
                 <DonutChart />
@@ -337,7 +337,7 @@ export default function DashboardRedesignFinal({
             </div>
 
             {/* Today's Tasks */}
-            <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-4">
+            <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-6">
               <div className="flex items-center justify-between mb-2">
                 <h2 style={{ color: '#ffffff' }} className="text-sm font-bold">Today's Tasks</h2>
                 <button onClick={() => onNavigate('orders')} style={{ color: '#d7a859' }} className="text-xs font-semibold hover:opacity-80">
