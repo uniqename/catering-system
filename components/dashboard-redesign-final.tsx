@@ -297,10 +297,10 @@ export default function DashboardRedesignFinal({
           <StatCard label="TOTAL CLIENTS" value={totalClients} icon={<Users className="w-5 h-5" />} change="+5 new this month" bgColor="#c5bfaf" iconColor="#0a1911" />
         </div>
 
-        {/* Charts Row - Revenue (LEFT) + Menu+Tasks (RIGHT) ALL IN ONE ROW */}
+        {/* Charts Row - Revenue (60%) + Menu+Tasks (20%+20%) ALL IN ONE ROW */}
         <div className="grid grid-cols-12 gap-2">
-          {/* Revenue Overview - Full height on LEFT */}
-          <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-6 rounded-xl p-4">
+          {/* Revenue Overview - 60% on LEFT */}
+          <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-7 rounded-xl p-4">
             <div className="flex items-center justify-between mb-2">
               <h2 style={{ color: '#ffffff' }} className="text-sm font-bold">Revenue Overview</h2>
               <select style={{ borderColor: 'rgba(215, 168, 89, 0.1)', color: '#ffffff', backgroundColor: '#102418' }} className="text-xs border rounded px-1.5 py-0.5 focus:outline-none">
@@ -317,8 +317,8 @@ export default function DashboardRedesignFinal({
             </div>
           </div>
 
-          {/* Menu + Tasks Column - RIGHT SIDE, STACKED */}
-          <div className="col-span-6 space-y-2">
+          {/* Menu + Tasks Column - RIGHT SIDE, 20%+20% STACKED */}
+          <div className="col-span-5 space-y-2">
             {/* Top Menu Items */}
             <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-4">
               <h2 style={{ color: '#ffffff' }} className="text-sm font-bold mb-3">Top Menu Items</h2>
