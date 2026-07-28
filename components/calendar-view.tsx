@@ -9,12 +9,17 @@ interface Order {
   eventType: string;
   eventDate: string;
   guestCount: number;
-  status: 'inquiry' | 'quoted' | 'confirmed' | 'delivered';
+  budget?: string;
+  status: 'inquiry' | 'quoted' | 'confirmed' | 'delivered' | 'deposit_paid';
+  createdAt?: string;
+  phone?: string;
+  email?: string;
+  venue?: string;
 }
 
 const CardBorder = { boxShadow: '0 0 0 0.5px rgba(215, 168, 89, 0.08)' };
 
-export default function CalendarView({ orders = [] }: { orders?: Order[] }) {
+export default function CalendarView({ orders = [], onViewEvent }: { orders?: Order[], onViewEvent?: (event: Order) => void }) {
   const [currentDate, setCurrentDate] = useState(new Date('2026-07-27'));
   const [selectedEvent, setSelectedEvent] = useState<Order | null>(null);
 
@@ -232,8 +237,8 @@ export default function CalendarView({ orders = [] }: { orders?: Order[] }) {
                   </div>
 
                   <div style={{ borderTopColor: 'rgba(215, 168, 89, 0.1)' }} className="border-t pt-4">
-                    <p style={{ color: '#a8d5ca' }} className="text-xs text-center mb-3">Event ID: {selectedEvent.id}</p>
                     <button
+                      onClick={() => onViewEvent?.(selectedEvent)}
                       style={{ backgroundColor: '#d7a859', color: '#0a1911' }}
                       className="w-full py-2 font-bold rounded-lg transition hover:opacity-90 text-sm"
                     >

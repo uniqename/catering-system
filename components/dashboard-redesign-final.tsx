@@ -198,13 +198,15 @@ export default function DashboardRedesignFinal({
   onNavigate,
   onOpenInquiry,
   onOpenClient,
-  onCreateInvoice
+  onCreateInvoice,
+  onOpenAnalytics
 }: {
   orders: Order[];
   onNavigate: (tab: string) => void;
   onOpenInquiry?: (id: string) => void;
   onOpenClient?: (name: string) => void;
   onCreateInvoice?: () => void;
+  onOpenAnalytics?: () => void;
 }) {
   const [revenueMonth, setRevenueMonth] = useState(6); // July
   const [menuMonth, setMenuMonth] = useState(6);
@@ -413,6 +415,15 @@ export default function DashboardRedesignFinal({
                   <button onClick={() => setRevenueMonth(Math.min(11, revenueMonth + 1))} className="p-1 hover:bg-[#102418] rounded">
                     <ChevronRight className="w-4 h-4" style={{ color: '#d7a859' }} />
                   </button>
+                  {onOpenAnalytics && (
+                    <button
+                      onClick={onOpenAnalytics}
+                      style={{ backgroundColor: 'rgba(215, 168, 89, 0.1)', color: '#d7a859' }}
+                      className="px-2 py-1 rounded text-xs font-semibold hover:bg-[#102418] transition ml-2"
+                    >
+                      View Analytics →
+                    </button>
+                  )}
                 </div>
               </div>
               <div className="flex justify-center">

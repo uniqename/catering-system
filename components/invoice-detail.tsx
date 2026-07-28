@@ -56,6 +56,7 @@ export default function InvoiceDetail({
           <div className="flex gap-2">
             {invoice.status !== 'paid' && (
               <button
+                onClick={() => alert('Invoice #' + invoice.id + ' marked as paid')}
                 style={{ backgroundColor: '#d7a859', color: '#0a1911' }}
                 className="px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 hover:opacity-90 transition"
               >
@@ -63,12 +64,14 @@ export default function InvoiceDetail({
               </button>
             )}
             <button
+              onClick={() => alert('Downloading PDF for invoice #' + invoice.id)}
               style={{ backgroundColor: 'rgba(215, 168, 89, 0.1)', color: '#d7a859' }}
               className="px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 hover:bg-[#102418] transition"
             >
               <Download className="w-4 h-4" /> Download PDF
             </button>
             <button
+              onClick={() => alert('Sending invoice #' + invoice.id)}
               style={{ backgroundColor: 'rgba(215, 168, 89, 0.1)', color: '#d7a859' }}
               className="px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 hover:bg-[#102418] transition"
             >
