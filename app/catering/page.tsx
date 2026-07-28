@@ -2,15 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import { Bell, Search } from 'lucide-react';
-import OrdersList from '@/components/orders-list';
+import OrderManagement from '@/components/order-management';
 import InquiriesForm from '@/components/inquiries-form';
-import ClientManager from '@/components/client-manager';
+import EnhancedClientManager from '@/components/enhanced-client-manager';
 import ProfitDashboard from '@/components/profit-dashboard';
 import DashboardRedesignFinal from '@/components/dashboard-redesign-final';
 import CalendarView from '@/components/calendar-view';
 import MenuPackages from '@/components/menu-packages';
 import DynamicInvoiceSystem from '@/components/dynamic-invoice-system';
 import PaymentsTracker from '@/components/payments-tracker';
+import BusinessSettings from '@/components/business-settings';
 
 type Tab = 'dashboard' | 'inquiries' | 'orders' | 'calendar' | 'clients' | 'menu' | 'invoices' | 'payments' | 'reports' | 'settings';
 
@@ -88,11 +89,11 @@ export default function CateringPage() {
       case 'inquiries':
         return <InquiriesForm onAdd={addOrder} />;
       case 'orders':
-        return <OrdersList orders={orders} onUpdate={saveOrders} />;
+        return <OrderManagement orders={orders} />;
       case 'calendar':
         return <CalendarView orders={orders} />;
       case 'clients':
-        return <ClientManager orders={orders} />;
+        return <EnhancedClientManager orders={orders} />;
       case 'menu':
         return <MenuPackages />;
       case 'invoices':
@@ -102,7 +103,7 @@ export default function CateringPage() {
       case 'reports':
         return <ProfitDashboard orders={orders} />;
       case 'settings':
-        return <div style={{ color: '#D4A64A' }} className="p-8">Settings coming soon</div>;
+        return <BusinessSettings />;
       default:
         return <DashboardRedesignFinal orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
     }
