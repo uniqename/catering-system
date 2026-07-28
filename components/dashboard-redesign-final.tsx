@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Bell, Search, TrendingUp, CheckCircle2, Circle, MessageSquare, ClipboardList, DollarSign, Users, AlertCircle, Eye, Plus } from 'lucide-react';
+import { useState } from 'react';
+import { Bell, Search, TrendingUp, CheckCircle2, Circle, MessageSquare, ClipboardList, DollarSign, Users, AlertCircle, Plus } from 'lucide-react';
 
 interface Order {
   id: string;
@@ -34,7 +34,7 @@ const StatCard = ({
   bgColor: string;
   iconColor: string;
 }) => (
-  <div style={{ backgroundColor: '#0a1911', borderColor: '#d7a859' }} className="rounded-2xl p-6 border shadow-lg hover:shadow-xl transition flex items-start gap-4">
+  <div style={{ backgroundColor: '#0a1911', boxShadow: '0 0 0 1px rgba(215, 168, 89, 0.15)' }} className="rounded-2xl p-6 shadow-lg hover:shadow-xl transition flex items-start gap-4">
     <div style={{ backgroundColor: bgColor }} className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0">
       <div style={{ color: iconColor }} className="w-8 h-8">
         {icon}
@@ -51,6 +51,158 @@ const StatCard = ({
   </div>
 );
 
+// Revenue Chart Component with proper axes
+const RevenueChart = () => {
+  const data = [
+    { date: 'May 1', value: 2400 },
+    { date: 'May 7', value: 3200 },
+    { date: 'May 14', value: 2800 },
+    { date: 'May 21', value: 3450 },
+    { date: 'May 28', value: 4100 },
+    { date: 'May 31', value: 3800 },
+  ];
+
+  const maxValue = 5000;
+  const width = 450;
+  const height = 250;
+  const padding = { top: 20, right: 30, bottom: 40, left: 50 };
+  const chartWidth = width - padding.left - padding.right;
+  const chartHeight = height - padding.top - padding.bottom;
+
+  const points = data.map((d, i) => ({
+    x: padding.left + (i / (data.length - 1)) * chartWidth,
+    y: padding.top + chartHeight - (d.value / maxValue) * chartHeight,
+    value: d.value,
+    date: d.date,
+  }));
+
+  const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+
+  return (
+    <svg width={width} height={height} style={{ overflow: 'visible' }}>
+      {/* Y-axis gridlines and labels */}
+      {[0, 1, 2, 3, 4, 5].map((i) => (
+        <g key={`gridline-${i}`}>
+          <line
+            x1={padding.left}
+            y1={padding.top + (chartHeight / 5) * (5 - i)}
+            x2={width - padding.right}
+            y2={padding.top + (chartHeight / 5) * (5 - i)}
+            stroke="rgba(215, 168, 89, 0.1)"
+            strokeWidth="1"
+          />
+          <text
+            x={padding.left - 10}
+            y={padding.top + (chartHeight / 5) * (5 - i) + 4}
+            fontSize="12"
+            fill="#a8d5ca"
+            textAnchor="end"
+          >
+            ${i}k
+          </text>
+        </g>
+      ))}
+
+      {/* X-axis labels */}
+      {points.map((p, i) => (
+        <text
+          key={`label-${i}`}
+          x={p.x}
+          y={height - 10}
+          fontSize="11"
+          fill="#a8d5ca"
+          textAnchor="middle"
+        >
+          {p.date}
+        </text>
+      ))}
+
+      {/* Axes */}
+      <line x1={padding.left} y1={padding.top} x2={padding.left} y2={height - padding.bottom} stroke="#d7a859" strokeWidth="1.5" />
+      <line x1={padding.left} y1={height - padding.bottom} x2={width - padding.right} y2={height - padding.bottom} stroke="#d7a859" strokeWidth="1.5" />
+
+      {/* Line path */}
+      <path d={pathD} stroke="#d7a859" strokeWidth="2.5" fill="none" />
+
+      {/* Gradient fill under line */}
+      <defs>
+        <linearGradient id="revenueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#d7a859" stopOpacity="0.2" />
+          <stop offset="100%" stopColor="#d7a859" stopOpacity="0.02" />
+        </linearGradient>
+      </defs>
+      <path
+        d={`${pathD} L ${width - padding.right} ${height - padding.bottom} L ${padding.left} ${height - padding.bottom} Z`}
+        fill="url(#revenueGradient)"
+      />
+
+      {/* Data points (dots) */}
+      {points.map((p, i) => (
+        <circle key={`dot-${i}`} cx={p.x} cy={p.y} r="4" fill="#d7a859" stroke="#0a1911" strokeWidth="2" />
+      ))}
+
+      {/* Highlight today's point */}
+      <circle cx={points[3].x} cy={points[3].y} r="6" fill="none" stroke="#d7a859" strokeWidth="2" />
+    </svg>
+  );
+};
+
+// Donut Chart Component
+const DonutChart = () => {
+  const items = [
+    { name: 'Jollof Rice', pct: 35, color: '#d7a859' },
+    { name: 'Grilled Chicken', pct: 25, color: '#7a9e7e' },
+    { name: 'Beef Stew', pct: 20, color: '#b8945e' },
+    { name: 'Fried Rice', pct: 10, color: '#a89968' },
+    { name: 'Other', pct: 10, color: '#666666' },
+  ];
+
+  const size = 120;
+  const center = size / 2;
+  const radius = 45;
+  const innerRadius = 28;
+
+  let currentAngle = -Math.PI / 2;
+
+  const paths = items.map((item) => {
+    const sliceAngle = (item.pct / 100) * 2 * Math.PI;
+    const startAngle = currentAngle;
+    const endAngle = currentAngle + sliceAngle;
+
+    const x1 = center + radius * Math.cos(startAngle);
+    const y1 = center + radius * Math.sin(startAngle);
+    const x2 = center + radius * Math.cos(endAngle);
+    const y2 = center + radius * Math.sin(endAngle);
+
+    const ix1 = center + innerRadius * Math.cos(startAngle);
+    const iy1 = center + innerRadius * Math.sin(startAngle);
+    const ix2 = center + innerRadius * Math.cos(endAngle);
+    const iy2 = center + innerRadius * Math.sin(endAngle);
+
+    const largeArcFlag = sliceAngle > Math.PI ? 1 : 0;
+
+    const pathData = `
+      M ${ix1} ${iy1}
+      L ${x1} ${y1}
+      A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2}
+      L ${ix2} ${iy2}
+      A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${ix1} ${iy1}
+      Z
+    `;
+
+    currentAngle = endAngle;
+    return { item, pathData };
+  });
+
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      {paths.map((p, i) => (
+        <path key={i} d={p.pathData} fill={p.item.color} />
+      ))}
+    </svg>
+  );
+};
+
 export default function DashboardRedesignFinal({
   orders = [],
   onNavigate = () => {}
@@ -65,8 +217,7 @@ export default function DashboardRedesignFinal({
     { id: 4, text: 'Pay quarterly tax to city', subtitle: 'Due by end of month', completed: false },
   ]);
 
-  const [selectedMonth, setSelectedMonth] = useState('May');
-  const [notifications, setNotifications] = useState<any[]>([
+  const [notifications] = useState<any[]>([
     { id: 1, type: 'tax', message: 'Quarterly tax payment due', dueDate: '2026-08-31', priority: 'high' }
   ]);
 
@@ -98,6 +249,7 @@ export default function DashboardRedesignFinal({
     { name: 'Grilled Chicken', pct: 25, color: '#7a9e7e' },
     { name: 'Beef Stew', pct: 20, color: '#b8945e' },
     { name: 'Fried Rice', pct: 10, color: '#a89968' },
+    { name: 'Other', pct: 10, color: '#666666' },
   ];
 
   return (
@@ -169,70 +321,34 @@ export default function DashboardRedesignFinal({
           />
         </div>
 
-        {/* Charts Row */}
-        <div className="grid grid-cols-3 gap-6">
-          {/* Revenue Chart */}
-          <div style={{ backgroundColor: '#0a1911', borderColor: '#d7a859' }} className="col-span-2 rounded-2xl p-6 border shadow-lg">
+        {/* Charts and Tasks Row */}
+        <div className="grid grid-cols-12 gap-6">
+          {/* Revenue Overview - 50% */}
+          <div style={{ backgroundColor: '#0a1911', boxShadow: '0 0 0 1px rgba(215, 168, 89, 0.15)' }} className="col-span-6 rounded-2xl p-8 shadow-lg">
             <div className="flex items-center justify-between mb-6">
               <h2 style={{ color: '#d7a859' }} className="text-lg font-bold">Revenue Overview</h2>
-              <select style={{ borderColor: '#d7a859', color: '#d7a859', backgroundColor: '#102418' }} className="text-sm border rounded-lg px-3 py-1.5">
+              <select style={{ borderColor: 'rgba(215, 168, 89, 0.2)', color: '#d7a859', backgroundColor: '#102418' }} className="text-sm border rounded-lg px-3 py-1.5 focus:outline-none">
                 <option>This Month</option>
                 <option>Last Month</option>
                 <option>Year to Date</option>
               </select>
             </div>
 
-            {/* Line Chart with Gold Dots */}
-            <div className="h-64 flex items-end justify-between gap-2 mb-4 relative px-4">
-              <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
-                <defs>
-                  <linearGradient id="revenueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#d7a859" stopOpacity="0.3" />
-                    <stop offset="100%" stopColor="#d7a859" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-                <polyline points="0,180 30,140 60,160 90,110 120,80 150,130 180,60" fill="url(#revenueGradient)" stroke="none" />
-                <polyline points="0,180 30,140 60,160 90,110 120,80 150,130 180,60" fill="none" stroke="#d7a859" strokeWidth="2" />
-              </svg>
-              {[{ val: 40, label: 'May 1' }, { val: 52, label: 'May 7' }, { val: 48, label: 'May 14' }, { val: 65, label: 'May 21' }, { val: 72, label: 'May 28' }, { val: 58, label: 'May 31' }, { val: 75, label: 'Today' }].map((item, i) => (
-                <div key={i} className="flex-1 flex flex-col items-center relative z-10">
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#d7a859' }}></div>
-                </div>
-              ))}
+            <div className="flex justify-center mb-4">
+              <RevenueChart />
             </div>
 
-            {/* Today's Amount */}
-            <div style={{ borderTopColor: '#d7a859' }} className="border-t pt-4 text-center">
+            <div style={{ borderTopColor: 'rgba(215, 168, 89, 0.15)' }} className="border-t pt-4 text-center">
               <p style={{ color: '#a8d5ca' }} className="text-sm">May 21</p>
-              <p style={{ color: '#d7a859' }} className="text-2xl font-bold">$3,450</p>
+              <p style={{ color: '#d7a859' }} className="text-3xl font-bold">$3,450</p>
             </div>
           </div>
 
-          {/* Top Menu Items */}
-          <div style={{ backgroundColor: '#0a1911', borderColor: '#d7a859' }} className="rounded-2xl p-6 border shadow-lg">
+          {/* Top Menu Items - 25% */}
+          <div style={{ backgroundColor: '#0a1911', boxShadow: '0 0 0 1px rgba(215, 168, 89, 0.15)' }} className="col-span-3 rounded-2xl p-8 shadow-lg">
             <h2 style={{ color: '#d7a859' }} className="text-lg font-bold mb-6">Top Menu Items</h2>
-            <div className="flex items-center justify-center mb-6">
-              <div className="relative w-24 h-24">
-                <svg viewBox="0 0 100 100" className="transform -rotate-90">
-                  {menuItems.map((item, idx) => {
-                    const start = menuItems.slice(0, idx).reduce((sum, m) => sum + m.pct, 0);
-                    return (
-                      <circle
-                        key={idx}
-                        cx="50"
-                        cy="50"
-                        r="40"
-                        fill="none"
-                        stroke={item.color}
-                        strokeWidth="8"
-                        strokeDasharray={`${(item.pct / 100) * 251.33} 251.33`}
-                        strokeDashoffset={`${-(start / 100) * 251.33}`}
-                      />
-                    );
-                  })}
-                  <circle cx="50" cy="50" r="25" fill="#0a1911" />
-                </svg>
-              </div>
+            <div className="flex justify-center mb-6">
+              <DonutChart />
             </div>
 
             <div className="space-y-3">
@@ -245,12 +361,9 @@ export default function DashboardRedesignFinal({
               ))}
             </div>
           </div>
-        </div>
 
-        {/* Tasks and Upcoming */}
-        <div className="grid grid-cols-2 gap-6">
-          {/* Today's Tasks */}
-          <div style={{ backgroundColor: '#0a1911', borderColor: '#d7a859' }} className="rounded-2xl p-6 border shadow-lg">
+          {/* Today's Tasks - 25% */}
+          <div style={{ backgroundColor: '#0a1911', boxShadow: '0 0 0 1px rgba(215, 168, 89, 0.15)' }} className="col-span-3 rounded-2xl p-8 shadow-lg">
             <div className="flex items-center justify-between mb-4">
               <h2 style={{ color: '#d7a859' }} className="text-lg font-bold">Today's Tasks</h2>
               <button onClick={() => onNavigate('orders')} style={{ color: '#d7a859' }} className="text-sm font-semibold hover:opacity-80">
@@ -258,23 +371,23 @@ export default function DashboardRedesignFinal({
               </button>
             </div>
 
-            <div className="space-y-3">
-              {tasks.map((task) => (
+            <div className="space-y-2">
+              {tasks.slice(0, 4).map((task) => (
                 <button
                   key={task.id}
                   onClick={() => toggleTask(task.id)}
-                  style={{ backgroundColor: task.completed ? '#102418' : '#0a1911', borderColor: '#d7a859' }}
-                  className="w-full p-3 rounded-lg border transition text-left flex items-start gap-3"
+                  style={{ backgroundColor: task.completed ? '#102418' : '#0a1911' }}
+                  className="w-full p-3 rounded-lg transition text-left flex items-start gap-3 hover:bg-[#102418]"
                 >
-                  <div className="mt-1 flex-shrink-0">
+                  <div className="mt-0.5 flex-shrink-0">
                     {task.completed ? (
-                      <CheckCircle2 style={{ color: '#10B981' }} className="w-5 h-5" />
+                      <CheckCircle2 style={{ color: '#10B981' }} className="w-4 h-4" />
                     ) : (
-                      <Circle style={{ color: '#d7a859' }} className="w-5 h-5" />
+                      <Circle style={{ color: '#d7a859' }} className="w-4 h-4" />
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p style={{ color: task.completed ? '#d7a859' : '#d7a859' }} className={`text-sm font-medium ${task.completed ? 'line-through' : ''}`}>
+                    <p style={{ color: task.completed ? '#d7a859' : '#d7a859' }} className={`text-xs font-medium ${task.completed ? 'line-through' : ''}`}>
                       {task.text}
                     </p>
                     <p style={{ color: '#a8d5ca' }} className="text-xs">{task.subtitle}</p>
@@ -283,43 +396,40 @@ export default function DashboardRedesignFinal({
               ))}
             </div>
           </div>
+        </div>
 
-          {/* Upcoming Events */}
-          <div style={{ backgroundColor: '#0a1911', borderColor: '#d7a859' }} className="rounded-2xl p-6 border shadow-lg">
-            <div className="flex items-center justify-between mb-4">
-              <h2 style={{ color: '#d7a859' }} className="text-lg font-bold">Upcoming Events</h2>
-              <button onClick={() => onNavigate('calendar')} style={{ color: '#d7a859' }} className="text-sm font-semibold hover:opacity-80">
-                View Calendar
-              </button>
-            </div>
+        {/* Upcoming Events */}
+        <div style={{ backgroundColor: '#0a1911', boxShadow: '0 0 0 1px rgba(215, 168, 89, 0.15)' }} className="rounded-2xl p-8 shadow-lg">
+          <div className="flex items-center justify-between mb-4">
+            <h2 style={{ color: '#d7a859' }} className="text-lg font-bold">Upcoming Events</h2>
+            <button onClick={() => onNavigate('calendar')} style={{ color: '#d7a859' }} className="text-sm font-semibold hover:opacity-80">
+              View Calendar
+            </button>
+          </div>
 
-            <div className="space-y-3">
-              {upcomingEvents.map((event, idx) => (
-                <div key={idx} style={{ backgroundColor: '#102418', borderColor: '#d7a859' }} className="flex gap-3 p-3 rounded-lg hover:opacity-80 transition border">
-                  <div className="text-center min-w-fit">
-                    <p style={{ color: '#d7a859' }} className="text-xs font-bold">
-                      {new Date(event.eventDate).toLocaleDateString('en-US', { month: 'short' }).toUpperCase()}
-                    </p>
-                    <p style={{ color: '#d7a859' }} className="text-xl font-bold">
-                      {new Date(event.eventDate).getDate()}
-                    </p>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p style={{ color: '#d7a859' }} className="font-semibold capitalize text-sm">{event.eventType}</p>
-                    <p style={{ color: '#a8d5ca' }} className="text-xs truncate">{event.clientName} • {event.guestCount} guests</p>
-                  </div>
-                  <span style={{ backgroundColor: '#0a1911', color: '#d7a859', borderColor: '#d7a859' }} className="text-xs font-bold border px-2 py-1 rounded-full self-start flex-shrink-0">
-                    Upcoming
-                  </span>
+          <div className="grid grid-cols-3 gap-4">
+            {upcomingEvents.map((event, idx) => (
+              <div key={idx} style={{ backgroundColor: '#102418', boxShadow: '0 0 0 1px rgba(215, 168, 89, 0.15)' }} className="flex gap-3 p-4 rounded-lg hover:opacity-80 transition">
+                <div className="text-center min-w-fit">
+                  <p style={{ color: '#d7a859' }} className="text-xs font-bold">
+                    {new Date(event.eventDate).toLocaleDateString('en-US', { month: 'short' }).toUpperCase()}
+                  </p>
+                  <p style={{ color: '#d7a859' }} className="text-lg font-bold">
+                    {new Date(event.eventDate).getDate()}
+                  </p>
                 </div>
-              ))}
-            </div>
+                <div className="flex-1 min-w-0">
+                  <p style={{ color: '#d7a859' }} className="font-semibold capitalize text-sm">{event.eventType}</p>
+                  <p style={{ color: '#a8d5ca' }} className="text-xs truncate">{event.clientName} • {event.guestCount} guests</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Tax Notifications Alert */}
         {notifications.some(n => n.priority === 'high') && (
-          <div style={{ backgroundColor: '#102418', borderColor: '#d7a859' }} className="rounded-2xl p-6 border shadow-lg flex items-start gap-4">
+          <div style={{ backgroundColor: '#102418', boxShadow: '0 0 0 1px rgba(215, 168, 89, 0.15)' }} className="rounded-2xl p-6 shadow-lg flex items-start gap-4">
             <AlertCircle style={{ color: '#ef4444' }} className="w-6 h-6 flex-shrink-0 mt-1" />
             <div className="flex-1">
               <h3 style={{ color: '#ef4444' }} className="font-bold mb-2">Important: Tax Payment Reminder</h3>
