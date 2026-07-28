@@ -288,9 +288,9 @@ export default function DashboardRedesignFinal({
       </div>
 
       {/* Main Content */}
-      <div className="px-8 py-4 space-y-2">
+      <div className="px-8 py-6 space-y-4">
         {/* Metrics Cards - Tight spacing */}
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 gap-4">
           <StatCard label="NEW INQUIRIES" value={newInquiries} icon={<MessageSquare className="w-5 h-5" />} change="+2 from yesterday" bgColor="#a89968" iconColor="white" />
           <StatCard label="CONFIRMED ORDERS" value={confirmedOrders} icon={<ClipboardList className="w-5 h-5" />} change="+3 this week" bgColor="#a89968" iconColor="white" />
           <StatCard label="REVENUE (THIS MONTH)" value={`$${monthlyRevenue.toLocaleString()}`} icon={<DollarSign className="w-5 h-5" />} change="+18% from last month" bgColor="#d7a859" iconColor="#0a1911" />
@@ -298,7 +298,7 @@ export default function DashboardRedesignFinal({
         </div>
 
         {/* Charts Row - Revenue (60%) + Menu+Tasks (20%+20%) ALL IN ONE ROW */}
-        <div className="grid grid-cols-12 gap-2">
+        <div className="grid grid-cols-12 gap-4">
           {/* Revenue Overview - 60% on LEFT */}
           <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-7 rounded-xl p-4">
             <div className="flex items-center justify-between mb-2">
@@ -318,7 +318,7 @@ export default function DashboardRedesignFinal({
           </div>
 
           {/* Menu + Tasks Column - RIGHT SIDE, 20%+20% HORIZONTAL */}
-          <div className="col-span-5 grid grid-cols-2 gap-2">
+          <div className="col-span-5 grid grid-cols-2 gap-4">
             {/* Top Menu Items */}
             <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-4">
               <h2 style={{ color: '#ffffff' }} className="text-sm font-bold mb-3">Top Menu Items</h2>
