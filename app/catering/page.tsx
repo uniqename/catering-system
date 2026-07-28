@@ -112,32 +112,30 @@ export default function CateringPage() {
   if (!isMounted) return null;
 
   return (
-    <div style={{ backgroundColor: '#0B3D36', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: '#0a1911', minHeight: '100vh' }}>
       {/* Sidebar */}
-      <div style={{ backgroundColor: '#0B3D36', borderRightColor: '#1a5f54' }} className="fixed left-0 top-0 w-64 h-screen border-r text-white shadow-2xl flex flex-col z-40">
-        {/* Logo */}
-        <div style={{ borderBottomColor: '#1a5f54' }} className="p-6 border-b">
-          <div className="flex flex-col items-center text-center">
-            <img src="/garage-to-table-logo.png" alt="Garage to Table" className="w-40 h-40 mb-2 object-contain" />
-            <p style={{ color: '#d7a859' }} className="text-xs italic mt-2 text-center">Curated meals, flavored with love</p>
-          </div>
+      <div style={{ backgroundColor: '#0a1911', borderRightColor: '#102418' }} className="fixed left-0 top-0 w-56 h-screen border-r text-white shadow-2xl flex flex-col z-40">
+        {/* Logo Section - Large */}
+        <div style={{ borderBottomColor: '#102418' }} className="p-5 border-b flex flex-col items-center justify-center min-h-fit">
+          <img src="/garage-to-table-logo.png" alt="Garage to Table" className="w-32 h-32 object-contain mb-3" />
+          <p style={{ color: '#d7a859' }} className="text-xs italic text-center leading-tight">Curated meals, flavored with love</p>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+        <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
           {navItems.map((item) => (
             <button
               key={item.id}
               type="button"
               onClick={() => setActiveTab(item.id)}
               style={{
-                backgroundColor: activeTab === item.id ? '#1a5f54' : 'transparent',
-                color: activeTab === item.id ? '#D4A64A' : '#a8d5ca',
+                backgroundColor: activeTab === item.id ? '#102418' : 'transparent',
+                color: activeTab === item.id ? '#d7a859' : '#a8d5ca',
               }}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition relative"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition relative text-sm font-medium"
             >
-              <span className="text-lg">{item.icon}</span>
-              <span className="flex-1 text-left text-sm font-medium">{item.label}</span>
+              <span className="text-base">{item.icon}</span>
+              <span className="flex-1 text-left">{item.label}</span>
               {item.badge ? (
                 <span style={{ backgroundColor: '#ef4444' }} className="text-white text-xs font-bold px-2 py-1 rounded-full">
                   {item.badge}
@@ -147,47 +145,49 @@ export default function CateringPage() {
           ))}
         </nav>
 
-        {/* CTA */}
-        <div style={{ borderTopColor: '#1a5f54' }} className="p-4 border-t">
-          <div style={{ backgroundColor: '#1a5f54', borderColor: '#D4A64A' }} className="rounded-lg p-4 border-2">
-            <p style={{ color: '#D4A64A' }} className="font-semibold text-sm mb-2">Grow your business</p>
-            <p className="text-xs text-white mb-3">Setup inquiry form</p>
-            <button style={{ backgroundColor: '#D4A64A', color: '#0B3D36' }} className="w-full text-xs font-bold py-2 rounded-lg transition font-semibold hover:opacity-90">
+        {/* CTA Box */}
+        <div style={{ borderTopColor: '#102418' }} className="p-3 border-t">
+          <div style={{ backgroundColor: '#102418', borderColor: '#d7a859' }} className="rounded-xl p-4 border-2">
+            <p style={{ color: '#d7a859' }} className="font-bold text-sm mb-1">Grow your business</p>
+            <p className="text-xs text-white mb-3">Set up inquiry form in 2 minutes and get more bookings.</p>
+            <button style={{ backgroundColor: '#d7a859', color: '#0a1911' }} className="w-full text-xs font-bold py-2 rounded-lg transition hover:opacity-90">
               Get Started →
             </button>
           </div>
         </div>
 
-        {/* Profile */}
-        <div style={{ borderTopColor: '#1a5f54' }} className="p-4 border-t">
+        {/* Profile Section */}
+        <div style={{ borderTopColor: '#102418' }} className="p-3 border-t">
           <div className="flex items-center gap-3">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23D4A64A'/%3E%3Ctext x='50' y='60' font-size='60' font-weight='bold' text-anchor='middle' fill='%230B3D36'%3EA%3C/text%3E%3C/svg%3E" alt="A" className="w-10 h-10 rounded-full" />
+            <div style={{ backgroundColor: '#d7a859' }} className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
+              <span style={{ color: '#0a1911' }} className="text-lg font-bold">A</span>
+            </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold text-white truncate">Alexandra</p>
-              <p style={{ color: '#D4A64A' }} className="text-xs truncate">Business Owner</p>
+              <p style={{ color: '#d7a859' }} className="text-xs truncate">Business Owner</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="ml-64">
+      <div className="ml-56">
         {activeTab === 'dashboard' ? (
           renderContent()
         ) : (
           <>
             {/* Header */}
-            <div style={{ backgroundColor: '#0B3D36', borderBottomColor: '#D4A64A' }} className="border-b-2 sticky top-0 z-30">
+            <div style={{ backgroundColor: '#0a1911', borderBottomColor: '#d7a859' }} className="border-b-2 sticky top-0 z-30">
               <div className="px-8 py-4 flex items-center justify-between">
-                <h1 style={{ color: '#D4A64A' }} className="text-2xl font-bold">
+                <h1 style={{ color: '#d7a859' }} className="text-2xl font-bold">
                   {navItems.find(item => item.id === activeTab)?.label}
                 </h1>
               </div>
             </div>
 
             {/* Content */}
-            <div style={{ backgroundColor: '#0B3D36' }} className="px-8 py-8 min-h-[calc(100vh-73px)]">
-              <div style={{ backgroundColor: '#1a5f54', borderColor: '#2a8f7f' }} className="rounded-2xl border-2 p-8 shadow-sm min-h-96">
+            <div style={{ backgroundColor: '#0a1911' }} className="px-8 py-8 min-h-[calc(100vh-73px)]">
+              <div style={{ backgroundColor: '#102418', borderColor: '#d7a859' }} className="rounded-2xl border p-8 shadow-sm min-h-96">
                 {renderContent()}
               </div>
             </div>
