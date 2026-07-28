@@ -16,6 +16,8 @@ import BusinessSettings from '@/components/business-settings';
 import InquiryDetail from '@/components/inquiry-detail';
 import InvoiceBuilder from '@/components/invoice-builder';
 import ClientProfile from '@/components/client-profile';
+import InvoiceList from '@/components/invoice-list';
+import InvoiceDetail from '@/components/invoice-detail';
 
 type Tab = 'dashboard' | 'inquiries' | 'orders' | 'calendar' | 'clients' | 'menu' | 'invoices' | 'payments' | 'reports' | 'settings';
 
@@ -23,9 +25,10 @@ export default function CateringPage() {
   const [activeTab, setActiveTab] = useState<Tab>('dashboard');
   const [orders, setOrders] = useState<any[]>([]);
   const [isMounted, setIsMounted] = useState(false);
-  const [detailView, setDetailView] = useState<'inquiry' | 'invoice' | 'client' | null>(null);
+  const [detailView, setDetailView] = useState<'inquiry' | 'invoice' | 'invoiceDetail' | 'client' | null>(null);
   const [selectedInquiry, setSelectedInquiry] = useState<any>(null);
   const [selectedClient, setSelectedClient] = useState<string | null>(null);
+  const [selectedInvoice, setSelectedInvoice] = useState<any>(null);
 
   useEffect(() => {
     setIsMounted(true);
@@ -151,7 +154,16 @@ export default function CateringPage() {
       case 'menu':
         return <MenuPackages />;
       case 'invoices':
-        return <DynamicInvoiceSystem orders={orders} />;
+        return <InvoiceList
+          onCreateNew={openInvoiceBuilder}
+          onViewInvoice={(id) => {
+            const invoiceData = localStorage.getItem(`invoice_${id}`);
+            if (invoiceData) {
+              setSelectedInvoice(JSON.parse(invoiceData));
+              setDetailView('invoiceDetail');
+            }
+          }}
+        />;
       case 'payments':
         return <PaymentsTracker orders={orders} />;
       case 'reports':
@@ -261,6 +273,13 @@ export default function CateringPage() {
             orders={orders}
             onBack={closeDetailView}
             onViewInquiry={openInquiryDetail}
+          />
+        )}
+
+        {detailView === 'invoiceDetail' && selectedInvoice && (
+          <InvoiceDetail
+            invoice={selectedInvoice}
+            onBack={closeDetailView}
           />
         )}
 
