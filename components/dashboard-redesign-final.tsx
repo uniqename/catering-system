@@ -374,7 +374,7 @@ export default function DashboardRedesignFinal({
         {/* Recent Inquiries + Upcoming Events Row */}
         <div className="grid grid-cols-12 gap-4">
           {/* Recent Inquiries */}
-          <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-7 rounded-2xl p-6">
+          <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-9 rounded-2xl p-6">
             <div className="flex items-center justify-between mb-3">
               <h2 style={{ color: '#ffffff' }} className="text-base font-bold">Recent Inquiries</h2>
               <button onClick={() => onNavigate('inquiries')} style={{ color: '#d7a859' }} className="text-xs font-semibold hover:opacity-80">
@@ -413,7 +413,7 @@ export default function DashboardRedesignFinal({
           </div>
 
           {/* Upcoming Events */}
-          <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-5 rounded-2xl p-6">
+          <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-3 rounded-2xl p-6">
             <div className="flex items-center justify-between mb-3">
               <h2 style={{ color: '#ffffff' }} className="text-base font-bold">Upcoming Events</h2>
               <button onClick={() => onNavigate('calendar')} style={{ color: '#d7a859' }} className="text-xs font-semibold hover:opacity-80">
