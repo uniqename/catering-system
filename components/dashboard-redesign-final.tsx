@@ -43,21 +43,19 @@ const StatCard = ({
   bgColor: string;
   iconColor: string;
 }) => (
-  <div style={{ backgroundColor: '#102418' }} className="rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
-    <div className="flex items-start justify-between">
-      <div>
-        <p style={{ color: '#a8d5ca' }} className="text-xs font-semibold uppercase tracking-wide">{label}</p>
-        <p style={{ color: '#d7a859' }} className="text-3xl font-black mt-2">{value}</p>
-      </div>
-      <div style={{ backgroundColor: bgColor }} className="w-14 h-14 rounded-full flex items-center justify-center shadow-md">
-        <div style={{ color: iconColor }}>
-          {icon}
-        </div>
+  <div style={{ backgroundColor: '#0a1911', borderColor: '#d7a859' }} className="rounded-2xl p-6 border-2 shadow-lg hover:shadow-xl transition flex items-start gap-4">
+    <div style={{ backgroundColor: bgColor }} className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0">
+      <div style={{ color: iconColor }} className="w-8 h-8">
+        {icon}
       </div>
     </div>
-    <div className="mt-4 flex items-center gap-1">
-      <TrendingUp style={{ color: '#10B981' }} className="w-4 h-4" />
-      <p style={{ color: '#10B981' }} className="text-xs font-semibold">{change}</p>
+    <div className="flex-1">
+      <p style={{ color: '#ffffff' }} className="text-xs font-semibold uppercase tracking-wide">{label}</p>
+      <p style={{ color: '#ffffff' }} className="text-4xl font-black mt-2">{value}</p>
+      <div className="mt-3 flex items-center gap-1">
+        <TrendingUp style={{ color: '#10B981' }} className="w-4 h-4" />
+        <p style={{ color: '#10B981' }} className="text-xs font-semibold">{change}</p>
+      </div>
     </div>
   </div>
 );
@@ -163,7 +161,7 @@ export default function DashboardRedesignFinal({
             value={newInquiries}
             icon={<MessageSquare className="w-6 h-6" />}
             change="+2 from yesterday"
-            bgColor="#021711"
+            bgColor="#a89968"
             iconColor="white"
           />
           <StatCard
@@ -171,7 +169,7 @@ export default function DashboardRedesignFinal({
             value={confirmedOrders}
             icon={<ClipboardList className="w-6 h-6" />}
             change="+3 this week"
-            bgColor="#021711"
+            bgColor="#a89968"
             iconColor="white"
           />
           <StatCard
@@ -179,15 +177,15 @@ export default function DashboardRedesignFinal({
             value={`$${monthlyRevenue.toLocaleString()}`}
             icon={<DollarSign className="w-6 h-6" />}
             change="+18% from last month"
-            bgColor="#909986"
-            iconColor="white"
+            bgColor="#d7a859"
+            iconColor="#0a1911"
           />
           <StatCard
             label="TOTAL CLIENTS"
             value={totalClients}
             icon={<Users className="w-6 h-6" />}
             change="+5 new this month"
-            bgColor="#fbf5e6"
+            bgColor="#c5bfaf"
             iconColor="#0a1911"
           />
         </div>
