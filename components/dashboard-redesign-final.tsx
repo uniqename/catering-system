@@ -289,8 +289,8 @@ export default function DashboardRedesignFinal({
 
       {/* Main Content */}
       <div className="px-8 py-6 space-y-4">
-        {/* Metrics Cards - Tight spacing */}
-        <div className="grid grid-cols-4 gap-4">
+        {/* Metrics Cards - Visible spacing */}
+        <div className="grid grid-cols-4 gap-6">
           <StatCard label="NEW INQUIRIES" value={newInquiries} icon={<MessageSquare className="w-5 h-5" />} change="+2 from yesterday" bgColor="#a89968" iconColor="white" />
           <StatCard label="CONFIRMED ORDERS" value={confirmedOrders} icon={<ClipboardList className="w-5 h-5" />} change="+3 this week" bgColor="#a89968" iconColor="white" />
           <StatCard label="REVENUE (THIS MONTH)" value={`$${monthlyRevenue.toLocaleString()}`} icon={<DollarSign className="w-5 h-5" />} change="+18% from last month" bgColor="#d7a859" iconColor="#0a1911" />
