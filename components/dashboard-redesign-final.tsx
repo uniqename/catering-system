@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Bell, Search, TrendingUp, CheckCircle2, Circle, MessageSquare, ClipboardList, DollarSign, Users, AlertCircle, Plus, MessageCircle, ShoppingCart, UserPlus, FileText as FileIcon, Calendar, Share2, ChevronLeft, ChevronRight, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Bell, Search, TrendingUp, CheckCircle2, Circle, MessageSquare, ClipboardList, DollarSign, Users, AlertCircle, Plus, MessageCircle, ShoppingCart, UserPlus, FileText as FileIcon, Calendar, Share2, ChevronLeft, ChevronRight, AlertTriangle, CheckCircle, MoreVertical, Edit3, Eye } from 'lucide-react';
 
 interface Order {
   id: string;
@@ -196,6 +196,7 @@ const DonutChart = () => {
 export default function DashboardRedesignFinal({ orders, onNavigate }: { orders: Order[]; onNavigate: (tab: string) => void }) {
   const [revenueMonth, setRevenueMonth] = useState(6); // July
   const [menuMonth, setMenuMonth] = useState(6);
+  const [showNotifications, setShowNotifications] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([
     { id: 1, text: 'Follow-up with Amelia Johnson', subtitle: 'Wedding inquiry', completed: true },
     { id: 2, text: 'Send proposal to Michael Smith', subtitle: 'Corporate event', completed: false },
@@ -291,16 +292,68 @@ export default function DashboardRedesignFinal({ orders, onNavigate }: { orders:
             <p style={{ color: '#a8d5ca' }} className="text-xs mt-0.5">Here's what's happening with your catering business today.</p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 relative">
             <button onClick={() => onNavigate('inquiries')} title="Search inquiries" style={{ color: '#d7a859' }} className="p-1.5 hover:bg-[#102418] rounded-lg transition">
               <Search className="w-5 h-5" />
             </button>
-            <button title="Notifications" style={{ color: '#d7a859' }} className="relative p-1.5 hover:bg-[#102418] rounded-lg transition">
-              <Bell className="w-5 h-5" />
-              {orders.filter(o => o.status === 'inquiry').length > 0 && (
-                <span style={{ backgroundColor: '#ef4444' }} className="absolute top-0 right-0 w-2 h-2 rounded-full"></span>
+            <div className="relative">
+              <button
+                onClick={() => setShowNotifications(!showNotifications)}
+                title="Notifications"
+                style={{ color: '#d7a859' }}
+                className="relative p-1.5 hover:bg-[#102418] rounded-lg transition"
+              >
+                <Bell className="w-5 h-5" />
+                {orders.filter(o => o.status === 'inquiry').length > 0 && (
+                  <span style={{ backgroundColor: '#ef4444' }} className="absolute top-0 right-0 w-2 h-2 rounded-full"></span>
+                )}
+              </button>
+
+              {showNotifications && (
+                <div style={{ backgroundColor: '#0f2416', borderColor: 'rgba(215, 168, 89, 0.1)' }} className="absolute right-0 top-12 w-72 border rounded-xl shadow-lg z-50">
+                  <div className="p-4 border-b" style={{ borderBottomColor: 'rgba(215, 168, 89, 0.1)' }}>
+                    <p style={{ color: '#d7a859' }} className="font-bold text-sm">Notifications</p>
+                  </div>
+                  <div className="max-h-80 overflow-y-auto">
+                    {orders.filter(o => o.status === 'inquiry').length === 0 ? (
+                      <div className="p-4">
+                        <p style={{ color: '#a8d5ca' }} className="text-xs text-center">No new inquiries</p>
+                      </div>
+                    ) : (
+                      orders
+                        .filter(o => o.status === 'inquiry')
+                        .map(order => (
+                          <button
+                            key={order.id}
+                            onClick={() => {
+                              onNavigate('inquiries');
+                              setShowNotifications(false);
+                            }}
+                            style={{ backgroundColor: '#0a1911', borderBottomColor: 'rgba(215, 168, 89, 0.05)' }}
+                            className="w-full p-4 border-b hover:bg-[#102418] transition text-left"
+                          >
+                            <p style={{ color: '#d7a859' }} className="text-xs font-bold">{order.clientName}</p>
+                            <p style={{ color: '#a8d5ca' }} className="text-xs mt-1">{order.eventType} for {order.guestCount} guests</p>
+                            <p style={{ color: '#a8d5ca' }} className="text-xs opacity-70 mt-1">{new Date(order.eventDate).toLocaleDateString()}</p>
+                          </button>
+                        ))
+                    )}
+                  </div>
+                  <div className="p-3 border-t" style={{ borderTopColor: 'rgba(215, 168, 89, 0.1)' }}>
+                    <button
+                      onClick={() => {
+                        onNavigate('inquiries');
+                        setShowNotifications(false);
+                      }}
+                      style={{ color: '#d7a859' }}
+                      className="text-xs font-semibold hover:opacity-80 w-full text-center"
+                    >
+                      View All Inquiries →
+                    </button>
+                  </div>
+                </div>
               )}
-            </button>
+            </div>
             <button
               onClick={() => onNavigate('inquiries')}
               style={{ backgroundColor: '#d7a859', color: '#0a1911' }}
@@ -448,6 +501,7 @@ export default function DashboardRedesignFinal({ orders, onNavigate }: { orders:
                       <th style={{ color: '#ffffff' }} className="text-left py-1.5 px-1.5 font-semibold text-xs">Date</th>
                       <th style={{ color: '#ffffff' }} className="text-left py-1.5 px-1.5 font-semibold text-xs">Guests</th>
                       <th style={{ color: '#ffffff' }} className="text-left py-1.5 px-1.5 font-semibold text-xs">Status</th>
+                      <th style={{ color: '#ffffff' }} className="text-center py-1.5 px-1.5 font-semibold text-xs">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -461,6 +515,11 @@ export default function DashboardRedesignFinal({ orders, onNavigate }: { orders:
                           <span style={{ backgroundColor: getStatusColor(order.status), color: '#0a1911' }} className="px-1.5 py-0.5 rounded text-xs font-semibold inline-block">
                             {getStatusLabel(order.status)}
                           </span>
+                        </td>
+                        <td className="py-1.5 px-1.5 text-xs text-center">
+                          <button className="p-1 hover:bg-[#102418] rounded transition" title="More options">
+                            <MoreVertical style={{ color: '#d7a859' }} className="w-4 h-4" />
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -555,19 +614,22 @@ export default function DashboardRedesignFinal({ orders, onNavigate }: { orders:
             {/* Get More Inquiries */}
             <div style={{ backgroundColor: '#102418', ...CardBorder }} className="col-span-3 rounded-xl p-4">
               <h2 style={{ color: '#ffffff' }} className="text-sm font-bold mb-1">Get more inquiries</h2>
-              <p style={{ color: '#ffffff' }} className="text-xs mb-3">Share your inquiry form or QR code to get more bookings.</p>
-              <button onClick={handleShare} className="w-full flex items-center justify-between gap-2">
-                <div className="min-w-0">
-                  <p style={{ color: '#d7a859' }} className="text-xs font-semibold">Share your inquiry form</p>
-                  <p style={{ color: '#ffffff' }} className="text-xs opacity-70 mt-0.5">Scan to book your event</p>
-                </div>
-                <div style={{ backgroundColor: '#ffffff' }} className="w-14 h-14 rounded flex items-center justify-center p-1 flex-shrink-0">
-                  <div style={{ backgroundColor: '#0a1911' }} className="w-full h-full rounded flex items-center justify-center">
-                    <p style={{ color: '#ffffff' }} className="text-xs font-bold">QR</p>
-                  </div>
-                </div>
+              <p style={{ color: '#ffffff' }} className="text-xs mb-3">Share your QR code to let clients order online.</p>
+
+              <button
+                onClick={() => onNavigate('inquiries')}
+                className="w-full mb-3 p-2 rounded-lg hover:bg-[#0a1911] transition flex items-center justify-center"
+              >
+                <img
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(typeof window !== 'undefined' ? window.location.origin + '/catering/client-order' : 'https://catering-system.vercel.app/catering/client-order')}`}
+                  alt="QR Code"
+                  className="w-24 h-24 rounded"
+                />
               </button>
-              <button onClick={handleShare} style={{ backgroundColor: '#d7a859', color: '#0a1911' }} className="w-full mt-3 py-2 font-bold rounded-lg text-xs transition hover:opacity-90">
+
+              <p style={{ color: '#a8d5ca' }} className="text-xs text-center mb-3">Tap to test or share below</p>
+
+              <button onClick={handleShare} style={{ backgroundColor: '#d7a859', color: '#0a1911' }} className="w-full py-2 font-bold rounded-lg text-xs transition hover:opacity-90">
                 Share Now
               </button>
             </div>
