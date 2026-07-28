@@ -209,6 +209,7 @@ export default function DashboardRedesignFinal({
     { id: 1, text: 'Follow-up with Amelia Johnson', subtitle: 'Wedding inquiry', completed: true },
     { id: 2, text: 'Send proposal to Michael Smith', subtitle: 'Corporate event', completed: false },
     { id: 3, text: 'Review menu for June events', subtitle: 'This week', completed: false },
+    { id: 4, text: 'Check inventory', subtitle: 'Before weekend', completed: false },
   ]);
 
   const now = new Date();
@@ -288,17 +289,17 @@ export default function DashboardRedesignFinal({
 
       {/* Main Content */}
       <div className="px-8 py-4 space-y-2">
-        {/* Metrics Cards */}
-        <div className="grid grid-cols-4 gap-3">
+        {/* Metrics Cards - Tight spacing */}
+        <div className="grid grid-cols-4 gap-2">
           <StatCard label="NEW INQUIRIES" value={newInquiries} icon={<MessageSquare className="w-5 h-5" />} change="+2 from yesterday" bgColor="#a89968" iconColor="white" />
           <StatCard label="CONFIRMED ORDERS" value={confirmedOrders} icon={<ClipboardList className="w-5 h-5" />} change="+3 this week" bgColor="#a89968" iconColor="white" />
           <StatCard label="REVENUE (THIS MONTH)" value={`$${monthlyRevenue.toLocaleString()}`} icon={<DollarSign className="w-5 h-5" />} change="+18% from last month" bgColor="#d7a859" iconColor="#0a1911" />
           <StatCard label="TOTAL CLIENTS" value={totalClients} icon={<Users className="w-5 h-5" />} change="+5 new this month" bgColor="#c5bfaf" iconColor="#0a1911" />
         </div>
 
-        {/* Charts Row - Revenue, Menu, Tasks */}
-        <div className="grid grid-cols-12 gap-3">
-          {/* Revenue Overview */}
+        {/* Charts Row - Revenue (LEFT) + Menu+Tasks (RIGHT) ALL IN ONE ROW */}
+        <div className="grid grid-cols-12 gap-2">
+          {/* Revenue Overview - Full height on LEFT */}
           <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-6 rounded-xl p-4">
             <div className="flex items-center justify-between mb-2">
               <h2 style={{ color: '#ffffff' }} className="text-sm font-bold">Revenue Overview</h2>
@@ -316,7 +317,7 @@ export default function DashboardRedesignFinal({
             </div>
           </div>
 
-          {/* Menu + Tasks Column */}
+          {/* Menu + Tasks Column - RIGHT SIDE, STACKED */}
           <div className="col-span-6 space-y-2">
             {/* Top Menu Items */}
             <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-4">
@@ -344,7 +345,7 @@ export default function DashboardRedesignFinal({
                 </button>
               </div>
               <div className="space-y-0.5">
-                {tasks.slice(0, 3).map((task) => (
+                {tasks.slice(0, 4).map((task) => (
                   <button
                     key={task.id}
                     onClick={() => toggleTask(task.id)}
@@ -372,7 +373,7 @@ export default function DashboardRedesignFinal({
         </div>
 
         {/* Recent Inquiries + Upcoming Events Row */}
-        <div className="grid grid-cols-12 gap-3">
+        <div className="grid grid-cols-12 gap-2">
           {/* Recent Inquiries */}
           <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-9 rounded-xl p-4">
             <div className="flex items-center justify-between mb-2">
@@ -383,7 +384,7 @@ export default function DashboardRedesignFinal({
             </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full text-sm">
                 <thead>
                   <tr style={{ borderBottomColor: 'rgba(215, 168, 89, 0.1)' }} className="border-b">
                     <th style={{ color: '#ffffff' }} className="text-left py-1.5 px-1.5 font-semibold text-xs">Client</th>
@@ -445,49 +446,52 @@ export default function DashboardRedesignFinal({
           </div>
         </div>
 
-        {/* Quick Actions */}
-        <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-4">
-          <h2 style={{ color: '#ffffff' }} className="text-sm font-bold mb-3">Quick Actions</h2>
-          <div className="grid grid-cols-6 gap-2">
-            <button onClick={() => onNavigate('inquiries')} className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
-              <MessageCircle style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
-              <p style={{ color: '#ffffff' }} className="text-xs font-semibold">New Inquiry</p>
-            </button>
-            <button onClick={() => onNavigate('orders')} className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
-              <ShoppingCart style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
-              <p style={{ color: '#ffffff' }} className="text-xs font-semibold">Create Order</p>
-            </button>
-            <button onClick={() => onNavigate('clients')} className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
-              <UserPlus style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
-              <p style={{ color: '#ffffff' }} className="text-xs font-semibold">Add Client</p>
-            </button>
-            <button onClick={() => onNavigate('invoices')} className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
-              <FileIcon style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
-              <p style={{ color: '#ffffff' }} className="text-xs font-semibold">Create Invoice</p>
-            </button>
-            <button onClick={() => onNavigate('calendar')} className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
-              <Calendar style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
-              <p style={{ color: '#ffffff' }} className="text-xs font-semibold">View Calendar</p>
-            </button>
-            <button className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
-              <Share2 style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
-              <p style={{ color: '#ffffff' }} className="text-xs font-semibold">Share QR Code</p>
-            </button>
-          </div>
-        </div>
-
-        {/* Get More Inquiries */}
-        <div style={{ backgroundColor: '#102418', ...CardBorder }} className="rounded-xl p-4">
-          <h2 style={{ color: '#ffffff' }} className="text-sm font-bold mb-1">Get more inquiries</h2>
-          <p style={{ color: '#ffffff' }} className="text-xs mb-3">Share your inquiry form or QR code to get more bookings.</p>
-          <div className="flex items-center justify-between">
-            <div>
-              <p style={{ color: '#d7a859' }} className="text-xs font-semibold">Share your inquiry form</p>
-              <p style={{ color: '#ffffff' }} className="text-xs opacity-70 mt-0.5">Scan to get to your booking form</p>
+        {/* Quick Actions + Get More Inquiries Row */}
+        <div className="grid grid-cols-12 gap-2">
+          {/* Quick Actions */}
+          <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-9 rounded-xl p-4">
+            <h2 style={{ color: '#ffffff' }} className="text-sm font-bold mb-3">Quick Actions</h2>
+            <div className="grid grid-cols-6 gap-2">
+              <button onClick={() => onNavigate('inquiries')} className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
+                <MessageCircle style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
+                <p style={{ color: '#ffffff' }} className="text-xs font-semibold">New Inquiry</p>
+              </button>
+              <button onClick={() => onNavigate('orders')} className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
+                <ShoppingCart style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
+                <p style={{ color: '#ffffff' }} className="text-xs font-semibold">Create Order</p>
+              </button>
+              <button onClick={() => onNavigate('clients')} className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
+                <UserPlus style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
+                <p style={{ color: '#ffffff' }} className="text-xs font-semibold">Add Client</p>
+              </button>
+              <button onClick={() => onNavigate('invoices')} className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
+                <FileIcon style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
+                <p style={{ color: '#ffffff' }} className="text-xs font-semibold">Create Invoice</p>
+              </button>
+              <button onClick={() => onNavigate('calendar')} className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
+                <Calendar style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
+                <p style={{ color: '#ffffff' }} className="text-xs font-semibold">View Calendar</p>
+              </button>
+              <button className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
+                <Share2 style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
+                <p style={{ color: '#ffffff' }} className="text-xs font-semibold">Share QR Code</p>
+              </button>
             </div>
-            <div style={{ backgroundColor: '#ffffff' }} className="w-16 h-16 rounded flex items-center justify-center p-1">
-              <div className="bg-gradient-to-br from-gray-900 to-gray-800 w-full h-full rounded flex items-center justify-center">
-                <p style={{ color: '#ffffff' }} className="text-xs">QR</p>
+          </div>
+
+          {/* Get More Inquiries */}
+          <div style={{ backgroundColor: '#102418', ...CardBorder }} className="col-span-3 rounded-xl p-4">
+            <h2 style={{ color: '#ffffff' }} className="text-sm font-bold mb-1">Get more inquiries</h2>
+            <p style={{ color: '#ffffff' }} className="text-xs mb-3">Share your inquiry form or QR code to get more bookings.</p>
+            <div className="flex items-center justify-between gap-2">
+              <div className="min-w-0">
+                <p style={{ color: '#d7a859' }} className="text-xs font-semibold">Share your inquiry form</p>
+                <p style={{ color: '#ffffff' }} className="text-xs opacity-70 mt-0.5">Scan to get to your booking form</p>
+              </div>
+              <div style={{ backgroundColor: '#ffffff' }} className="w-14 h-14 rounded flex items-center justify-center p-1 flex-shrink-0">
+                <div className="bg-gradient-to-br from-gray-900 to-gray-800 w-full h-full rounded flex items-center justify-center">
+                  <p style={{ color: '#ffffff' }} className="text-xs">QR</p>
+                </div>
               </div>
             </div>
           </div>
