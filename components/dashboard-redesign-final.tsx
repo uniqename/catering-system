@@ -288,9 +288,9 @@ export default function DashboardRedesignFinal({
       </div>
 
       {/* Main Content */}
-      <div className="px-8 py-6 space-y-4">
+      <div className="px-8 py-6 space-y-6">
         {/* Metrics Container */}
-        <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-6">
+        <div style={{ backgroundColor: '#0f2416', ...CardBorder }} className="rounded-xl p-6">
           <div className="grid grid-cols-4 gap-6">
           <StatCard label="NEW INQUIRIES" value={newInquiries} icon={<MessageSquare className="w-5 h-5" />} change="+2 from yesterday" bgColor="#a89968" iconColor="white" />
           <StatCard label="CONFIRMED ORDERS" value={confirmedOrders} icon={<ClipboardList className="w-5 h-5" />} change="+3 this week" bgColor="#a89968" iconColor="white" />
@@ -300,7 +300,7 @@ export default function DashboardRedesignFinal({
         </div>
 
         {/* Charts Row - Revenue (60%) + Menu+Tasks (20%+20%) ALL IN ONE ROW */}
-        <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-6">
+        <div style={{ backgroundColor: '#0f2416', ...CardBorder }} className="rounded-xl p-6">
           <div className="grid grid-cols-12 gap-4">
           {/* Revenue Overview - 60% on LEFT */}
           <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-7 rounded-xl p-6">
@@ -377,7 +377,7 @@ export default function DashboardRedesignFinal({
         </div>
 
         {/* Recent Inquiries + Upcoming Events Container */}
-        <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-6">
+        <div style={{ backgroundColor: '#0f2416', ...CardBorder }} className="rounded-xl p-6">
           <div className="grid grid-cols-12 gap-4">
           {/* Recent Inquiries */}
           <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-9 rounded-xl p-4">
@@ -453,7 +453,7 @@ export default function DashboardRedesignFinal({
         </div>
 
         {/* Quick Actions + Get More Inquiries Container */}
-        <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-6">
+        <div style={{ backgroundColor: '#0f2416', ...CardBorder }} className="rounded-xl p-6">
           <div className="grid grid-cols-12 gap-4">
           {/* Quick Actions */}
           <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-9 rounded-xl p-4">
