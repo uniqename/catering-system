@@ -153,7 +153,7 @@ export default function CalendarView({ orders = [] }: { orders?: Order[] }) {
             </div>
 
             {/* Events List */}
-            <div className="mt-8 pt-6" style={{ borderTopColor: 'rgba(215, 168, 89, 0.1)' }} className="border-t">
+            <div style={{ borderTopColor: 'rgba(215, 168, 89, 0.1)' }} className="mt-8 pt-6 border-t">
               <h3 style={{ color: '#d7a859' }} className="font-bold mb-4">Upcoming Events</h3>
               <div className="space-y-3 max-h-96 overflow-y-auto">
                 {orders
