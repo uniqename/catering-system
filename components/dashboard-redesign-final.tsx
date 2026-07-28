@@ -19,7 +19,7 @@ interface Task {
   completed: boolean;
 }
 
-const CardBorder = { boxShadow: '0 0 0 1px rgba(215, 168, 89, 0.15)' };
+const CardBorder = { boxShadow: '0 0 0 0.5px rgba(215, 168, 89, 0.08)' };
 
 const StatCard = ({
   label,
@@ -36,16 +36,16 @@ const StatCard = ({
   bgColor: string;
   iconColor: string;
 }) => (
-  <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-2xl p-5 hover:shadow-xl transition flex items-start gap-3">
-    <div style={{ backgroundColor: bgColor }} className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0">
-      <div style={{ color: iconColor }} className="w-7 h-7">
+  <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-4 flex items-start gap-3">
+    <div style={{ backgroundColor: bgColor }} className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+      <div style={{ color: iconColor }} className="w-6 h-6">
         {icon}
       </div>
     </div>
     <div className="flex-1">
       <p style={{ color: '#ffffff' }} className="text-xs font-semibold uppercase tracking-wide">{label}</p>
-      <p style={{ color: '#ffffff' }} className="text-3xl font-black mt-1">{value}</p>
-      <div className="mt-2 flex items-center gap-1">
+      <p style={{ color: '#ffffff' }} className="text-2xl font-black mt-1">{value}</p>
+      <div className="mt-1.5 flex items-center gap-1">
         <TrendingUp style={{ color: '#10B981' }} className="w-3 h-3" />
         <p style={{ color: '#10B981' }} className="text-xs font-semibold">{change}</p>
       </div>
@@ -64,9 +64,9 @@ const RevenueChart = () => {
   ];
 
   const maxValue = 5000;
-  const width = 380;
-  const height = 200;
-  const padding = { top: 15, right: 20, bottom: 30, left: 40 };
+  const width = 340;
+  const height = 160;
+  const padding = { top: 12, right: 15, bottom: 25, left: 35 };
   const chartWidth = width - padding.left - padding.right;
   const chartHeight = height - padding.top - padding.bottom;
 
@@ -92,9 +92,9 @@ const RevenueChart = () => {
             strokeWidth="1"
           />
           <text
-            x={padding.left - 10}
+            x={padding.left - 8}
             y={padding.top + (chartHeight / 5) * (5 - i) + 3}
-            fontSize="11"
+            fontSize="10"
             fill="#ffffff"
             textAnchor="end"
             fontWeight="500"
@@ -108,8 +108,8 @@ const RevenueChart = () => {
         <text
           key={`label-${i}`}
           x={p.x}
-          y={height - 8}
-          fontSize="10"
+          y={height - 6}
+          fontSize="9"
           fill="#ffffff"
           textAnchor="middle"
           fontWeight="500"
@@ -135,10 +135,10 @@ const RevenueChart = () => {
       />
 
       {points.map((p, i) => (
-        <circle key={`dot-${i}`} cx={p.x} cy={p.y} r="3" fill="#d7a859" stroke="#0a1911" strokeWidth="2" />
+        <circle key={`dot-${i}`} cx={p.x} cy={p.y} r="2.5" fill="#d7a859" stroke="#0a1911" strokeWidth="1.5" />
       ))}
 
-      <circle cx={points[3].x} cy={points[3].y} r="5" fill="none" stroke="#d7a859" strokeWidth="2" />
+      <circle cx={points[3].x} cy={points[3].y} r="4" fill="none" stroke="#d7a859" strokeWidth="1.5" />
     </svg>
   );
 };
@@ -152,10 +152,10 @@ const DonutChart = () => {
     { name: 'Other', pct: 10, color: '#9a8873' },
   ];
 
-  const size = 140;
+  const size = 120;
   const center = size / 2;
-  const radius = 50;
-  const innerRadius = 32;
+  const radius = 43;
+  const innerRadius = 28;
 
   let currentAngle = -Math.PI / 2;
 
@@ -262,23 +262,23 @@ export default function DashboardRedesignFinal({
     <div style={{ backgroundColor: '#0a1911' }} className="min-h-screen">
       {/* Header */}
       <div style={{ backgroundColor: '#0a1911', borderBottomColor: 'rgba(215, 168, 89, 0.1)' }} className="sticky top-0 z-10 border-b">
-        <div className="px-8 py-4 flex items-center justify-between">
+        <div className="px-8 py-3 flex items-center justify-between">
           <div>
-            <h1 style={{ color: '#d7a859' }} className="text-3xl font-bold">Good morning, Alexandra! 👋</h1>
-            <p style={{ color: '#a8d5ca' }} className="text-xs mt-1">Here's what's happening with your catering business today.</p>
+            <h1 style={{ color: '#d7a859' }} className="text-2xl font-bold">Good morning, Alexandra! 👋</h1>
+            <p style={{ color: '#a8d5ca' }} className="text-xs mt-0.5">Here's what's happening with your catering business today.</p>
           </div>
 
-          <div className="flex items-center gap-3">
-            <button title="Search" style={{ color: '#d7a859' }} className="p-2 hover:bg-[#102418] rounded-lg transition">
+          <div className="flex items-center gap-2">
+            <button title="Search" style={{ color: '#d7a859' }} className="p-1.5 hover:bg-[#102418] rounded-lg transition">
               <Search className="w-5 h-5" />
             </button>
-            <button title="Notifications" style={{ color: '#d7a859' }} className="relative p-2 hover:bg-[#102418] rounded-lg transition">
+            <button title="Notifications" style={{ color: '#d7a859' }} className="relative p-1.5 hover:bg-[#102418] rounded-lg transition">
               <Bell className="w-5 h-5" />
             </button>
             <button
               onClick={() => onNavigate('inquiries')}
               style={{ backgroundColor: '#d7a859', color: '#0a1911' }}
-              className="px-3 py-1.5 font-bold rounded-lg transition hover:opacity-90 flex items-center gap-2 text-sm"
+              className="px-3 py-1 font-bold rounded-lg transition hover:opacity-90 flex items-center gap-1.5 text-xs"
             >
               <Plus className="w-4 h-4" /> New Inquiry
             </button>
@@ -287,22 +287,22 @@ export default function DashboardRedesignFinal({
       </div>
 
       {/* Main Content */}
-      <div className="px-8 py-6 space-y-4">
+      <div className="px-8 py-4 space-y-3">
         {/* Metrics Cards */}
-        <div className="grid grid-cols-4 gap-4">
-          <StatCard label="NEW INQUIRIES" value={newInquiries} icon={<MessageSquare className="w-6 h-6" />} change="+2 from yesterday" bgColor="#a89968" iconColor="white" />
-          <StatCard label="CONFIRMED ORDERS" value={confirmedOrders} icon={<ClipboardList className="w-6 h-6" />} change="+3 this week" bgColor="#a89968" iconColor="white" />
-          <StatCard label="REVENUE (THIS MONTH)" value={`$${monthlyRevenue.toLocaleString()}`} icon={<DollarSign className="w-6 h-6" />} change="+18% from last month" bgColor="#d7a859" iconColor="#0a1911" />
-          <StatCard label="TOTAL CLIENTS" value={totalClients} icon={<Users className="w-6 h-6" />} change="+5 new this month" bgColor="#c5bfaf" iconColor="#0a1911" />
+        <div className="grid grid-cols-4 gap-3">
+          <StatCard label="NEW INQUIRIES" value={newInquiries} icon={<MessageSquare className="w-5 h-5" />} change="+2 from yesterday" bgColor="#a89968" iconColor="white" />
+          <StatCard label="CONFIRMED ORDERS" value={confirmedOrders} icon={<ClipboardList className="w-5 h-5" />} change="+3 this week" bgColor="#a89968" iconColor="white" />
+          <StatCard label="REVENUE (THIS MONTH)" value={`$${monthlyRevenue.toLocaleString()}`} icon={<DollarSign className="w-5 h-5" />} change="+18% from last month" bgColor="#d7a859" iconColor="#0a1911" />
+          <StatCard label="TOTAL CLIENTS" value={totalClients} icon={<Users className="w-5 h-5" />} change="+5 new this month" bgColor="#c5bfaf" iconColor="#0a1911" />
         </div>
 
         {/* Charts Row - Revenue, Menu, Tasks */}
-        <div className="grid grid-cols-12 gap-4">
+        <div className="grid grid-cols-12 gap-3">
           {/* Revenue Overview */}
-          <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-6 rounded-2xl p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 style={{ color: '#ffffff' }} className="text-base font-bold">Revenue Overview</h2>
-              <select style={{ borderColor: 'rgba(215, 168, 89, 0.15)', color: '#ffffff', backgroundColor: '#102418' }} className="text-xs border rounded-lg px-2 py-1 focus:outline-none">
+          <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-6 rounded-xl p-4">
+            <div className="flex items-center justify-between mb-2">
+              <h2 style={{ color: '#ffffff' }} className="text-sm font-bold">Revenue Overview</h2>
+              <select style={{ borderColor: 'rgba(215, 168, 89, 0.1)', color: '#ffffff', backgroundColor: '#102418' }} className="text-xs border rounded px-1.5 py-0.5 focus:outline-none">
                 <option>This Month</option>
                 <option>Last Month</option>
               </select>
@@ -310,24 +310,24 @@ export default function DashboardRedesignFinal({
             <div className="flex justify-center">
               <RevenueChart />
             </div>
-            <div style={{ borderTopColor: 'rgba(215, 168, 89, 0.1)' }} className="border-t pt-3 text-center">
+            <div style={{ borderTopColor: 'rgba(215, 168, 89, 0.1)' }} className="border-t pt-2 text-center">
               <p style={{ color: '#ffffff' }} className="text-xs">May 21</p>
-              <p style={{ color: '#d7a859' }} className="text-2xl font-bold">$3,450</p>
+              <p style={{ color: '#d7a859' }} className="text-lg font-bold">$3,450</p>
             </div>
           </div>
 
           {/* Menu + Tasks Column */}
-          <div className="col-span-6 space-y-4">
+          <div className="col-span-6 space-y-3">
             {/* Top Menu Items */}
-            <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-2xl p-6">
-              <h2 style={{ color: '#ffffff' }} className="text-base font-bold mb-4">Top Menu Items</h2>
-              <div className="flex justify-center mb-4">
+            <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-4">
+              <h2 style={{ color: '#ffffff' }} className="text-sm font-bold mb-3">Top Menu Items</h2>
+              <div className="flex justify-center mb-3">
                 <DonutChart />
               </div>
-              <div className="space-y-2">
+              <div className="space-y-1">
                 {menuItems.map((item, i) => (
                   <div key={i} className="flex items-center gap-2">
-                    <div style={{ backgroundColor: item.color }} className="w-2 h-2 rounded-full"></div>
+                    <div style={{ backgroundColor: item.color }} className="w-1.5 h-1.5 rounded-full"></div>
                     <p style={{ color: '#ffffff' }} className="text-xs flex-1">{item.name}</p>
                     <p style={{ color: '#ffffff' }} className="text-xs font-semibold">{item.pct}%</p>
                   </div>
@@ -336,26 +336,26 @@ export default function DashboardRedesignFinal({
             </div>
 
             {/* Today's Tasks */}
-            <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-2xl p-6">
-              <div className="flex items-center justify-between mb-3">
-                <h2 style={{ color: '#ffffff' }} className="text-base font-bold">Today's Tasks</h2>
+            <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-4">
+              <div className="flex items-center justify-between mb-2">
+                <h2 style={{ color: '#ffffff' }} className="text-sm font-bold">Today's Tasks</h2>
                 <button onClick={() => onNavigate('orders')} style={{ color: '#d7a859' }} className="text-xs font-semibold hover:opacity-80">
                   View All
                 </button>
               </div>
-              <div className="space-y-1.5">
+              <div className="space-y-1">
                 {tasks.slice(0, 3).map((task) => (
                   <button
                     key={task.id}
                     onClick={() => toggleTask(task.id)}
                     style={{ backgroundColor: task.completed ? '#102418' : '#0a1911' }}
-                    className="w-full p-2 rounded-lg transition text-left flex items-start gap-2 hover:bg-[#102418]"
+                    className="w-full p-1.5 rounded transition text-left flex items-start gap-1.5 hover:bg-[#102418]"
                   >
                     <div className="mt-0.5 flex-shrink-0">
                       {task.completed ? (
-                        <CheckCircle2 style={{ color: '#10B981' }} className="w-3.5 h-3.5" />
+                        <CheckCircle2 style={{ color: '#10B981' }} className="w-3 h-3" />
                       ) : (
-                        <Circle style={{ color: '#d7a859' }} className="w-3.5 h-3.5" />
+                        <Circle style={{ color: '#d7a859' }} className="w-3 h-3" />
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -372,11 +372,11 @@ export default function DashboardRedesignFinal({
         </div>
 
         {/* Recent Inquiries + Upcoming Events Row */}
-        <div className="grid grid-cols-12 gap-4">
+        <div className="grid grid-cols-12 gap-3">
           {/* Recent Inquiries */}
-          <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-9 rounded-2xl p-6">
-            <div className="flex items-center justify-between mb-3">
-              <h2 style={{ color: '#ffffff' }} className="text-base font-bold">Recent Inquiries</h2>
+          <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-9 rounded-xl p-4">
+            <div className="flex items-center justify-between mb-2">
+              <h2 style={{ color: '#ffffff' }} className="text-sm font-bold">Recent Inquiries</h2>
               <button onClick={() => onNavigate('inquiries')} style={{ color: '#d7a859' }} className="text-xs font-semibold hover:opacity-80">
                 View All
               </button>
@@ -386,22 +386,22 @@ export default function DashboardRedesignFinal({
               <table className="w-full">
                 <thead>
                   <tr style={{ borderBottomColor: 'rgba(215, 168, 89, 0.1)' }} className="border-b">
-                    <th style={{ color: '#ffffff' }} className="text-left py-2 px-2 font-semibold text-xs">Client</th>
-                    <th style={{ color: '#ffffff' }} className="text-left py-2 px-2 font-semibold text-xs">Event Type</th>
-                    <th style={{ color: '#ffffff' }} className="text-left py-2 px-2 font-semibold text-xs">Date</th>
-                    <th style={{ color: '#ffffff' }} className="text-left py-2 px-2 font-semibold text-xs">Guests</th>
-                    <th style={{ color: '#ffffff' }} className="text-left py-2 px-2 font-semibold text-xs">Status</th>
+                    <th style={{ color: '#ffffff' }} className="text-left py-1.5 px-1.5 font-semibold text-xs">Client</th>
+                    <th style={{ color: '#ffffff' }} className="text-left py-1.5 px-1.5 font-semibold text-xs">Event Type</th>
+                    <th style={{ color: '#ffffff' }} className="text-left py-1.5 px-1.5 font-semibold text-xs">Date</th>
+                    <th style={{ color: '#ffffff' }} className="text-left py-1.5 px-1.5 font-semibold text-xs">Guests</th>
+                    <th style={{ color: '#ffffff' }} className="text-left py-1.5 px-1.5 font-semibold text-xs">Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   {recentInquiries.map((order) => (
                     <tr key={order.id} style={{ borderBottomColor: 'rgba(215, 168, 89, 0.05)' }} className="border-b hover:bg-[#102418] transition">
-                      <td style={{ color: '#ffffff' }} className="py-2 px-2 text-xs">{order.clientName}</td>
-                      <td style={{ color: '#ffffff' }} className="py-2 px-2 text-xs capitalize">{order.eventType}</td>
-                      <td style={{ color: '#ffffff' }} className="py-2 px-2 text-xs">{new Date(order.eventDate).toLocaleDateString()}</td>
-                      <td style={{ color: '#ffffff' }} className="py-2 px-2 text-xs">{order.guestCount}</td>
-                      <td className="py-2 px-2 text-xs">
-                        <span style={{ backgroundColor: getStatusColor(order.status), color: '#0a1911' }} className="px-2 py-0.5 rounded-full text-xs font-semibold">
+                      <td style={{ color: '#ffffff' }} className="py-1.5 px-1.5 text-xs">{order.clientName}</td>
+                      <td style={{ color: '#ffffff' }} className="py-1.5 px-1.5 text-xs capitalize">{order.eventType}</td>
+                      <td style={{ color: '#ffffff' }} className="py-1.5 px-1.5 text-xs">{new Date(order.eventDate).toLocaleDateString()}</td>
+                      <td style={{ color: '#ffffff' }} className="py-1.5 px-1.5 text-xs">{order.guestCount}</td>
+                      <td className="py-1.5 px-1.5 text-xs">
+                        <span style={{ backgroundColor: getStatusColor(order.status), color: '#0a1911' }} className="px-1.5 py-0.5 rounded text-xs font-semibold inline-block">
                           {getStatusLabel(order.status)}
                         </span>
                       </td>
@@ -413,29 +413,29 @@ export default function DashboardRedesignFinal({
           </div>
 
           {/* Upcoming Events */}
-          <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-3 rounded-2xl p-6">
-            <div className="flex items-center justify-between mb-3">
-              <h2 style={{ color: '#ffffff' }} className="text-base font-bold">Upcoming Events</h2>
+          <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-3 rounded-xl p-4">
+            <div className="flex items-center justify-between mb-2">
+              <h2 style={{ color: '#ffffff' }} className="text-sm font-bold">Upcoming Events</h2>
               <button onClick={() => onNavigate('calendar')} style={{ color: '#d7a859' }} className="text-xs font-semibold hover:opacity-80">
                 View Calendar
               </button>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               {upcomingEvents.map((event, idx) => (
-                <div key={idx} style={{ backgroundColor: '#102418', ...CardBorder }} className="flex gap-2 p-3 rounded-lg hover:opacity-80 transition">
+                <div key={idx} style={{ backgroundColor: '#102418', ...CardBorder }} className="flex gap-1.5 p-2 rounded hover:opacity-80 transition">
                   <div className="text-center min-w-fit">
                     <p style={{ color: '#d7a859' }} className="text-xs font-bold">
                       {new Date(event.eventDate).toLocaleDateString('en-US', { month: 'short' }).toUpperCase()}
                     </p>
-                    <p style={{ color: '#d7a859' }} className="text-sm font-bold">
+                    <p style={{ color: '#d7a859' }} className="text-xs font-bold">
                       {new Date(event.eventDate).getDate()}
                     </p>
                   </div>
                   <div className="flex-1 min-w-0">
                     <p style={{ color: '#ffffff' }} className="font-semibold capitalize text-xs">{event.eventType}</p>
-                    <p style={{ color: '#ffffff' }} className="text-xs opacity-70 truncate">{event.clientName} • {event.guestCount} guests</p>
-                    <span style={{ backgroundColor: '#d7a859', color: '#0a1911' }} className="inline-block text-xs font-semibold px-2 py-0.5 rounded mt-1">
+                    <p style={{ color: '#ffffff' }} className="text-xs opacity-70 truncate">{event.clientName}</p>
+                    <span style={{ backgroundColor: '#d7a859', color: '#0a1911' }} className="inline-block text-xs font-semibold px-1.5 py-0.5 rounded mt-0.5">
                       Upcoming
                     </span>
                   </div>
@@ -446,46 +446,46 @@ export default function DashboardRedesignFinal({
         </div>
 
         {/* Quick Actions */}
-        <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-2xl p-6">
-          <h2 style={{ color: '#ffffff' }} className="text-base font-bold mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-6 gap-3">
-            <button onClick={() => onNavigate('inquiries')} className="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-[#102418] transition text-center">
-              <MessageCircle style={{ color: '#d7a859' }} className="w-7 h-7 mb-2" />
+        <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-4">
+          <h2 style={{ color: '#ffffff' }} className="text-sm font-bold mb-3">Quick Actions</h2>
+          <div className="grid grid-cols-6 gap-2">
+            <button onClick={() => onNavigate('inquiries')} className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
+              <MessageCircle style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
               <p style={{ color: '#ffffff' }} className="text-xs font-semibold">New Inquiry</p>
             </button>
-            <button onClick={() => onNavigate('orders')} className="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-[#102418] transition text-center">
-              <ShoppingCart style={{ color: '#d7a859' }} className="w-7 h-7 mb-2" />
+            <button onClick={() => onNavigate('orders')} className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
+              <ShoppingCart style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
               <p style={{ color: '#ffffff' }} className="text-xs font-semibold">Create Order</p>
             </button>
-            <button onClick={() => onNavigate('clients')} className="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-[#102418] transition text-center">
-              <UserPlus style={{ color: '#d7a859' }} className="w-7 h-7 mb-2" />
+            <button onClick={() => onNavigate('clients')} className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
+              <UserPlus style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
               <p style={{ color: '#ffffff' }} className="text-xs font-semibold">Add Client</p>
             </button>
-            <button onClick={() => onNavigate('invoices')} className="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-[#102418] transition text-center">
-              <FileIcon style={{ color: '#d7a859' }} className="w-7 h-7 mb-2" />
+            <button onClick={() => onNavigate('invoices')} className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
+              <FileIcon style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
               <p style={{ color: '#ffffff' }} className="text-xs font-semibold">Create Invoice</p>
             </button>
-            <button onClick={() => onNavigate('calendar')} className="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-[#102418] transition text-center">
-              <Calendar style={{ color: '#d7a859' }} className="w-7 h-7 mb-2" />
+            <button onClick={() => onNavigate('calendar')} className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
+              <Calendar style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
               <p style={{ color: '#ffffff' }} className="text-xs font-semibold">View Calendar</p>
             </button>
-            <button className="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-[#102418] transition text-center">
-              <Share2 style={{ color: '#d7a859' }} className="w-7 h-7 mb-2" />
+            <button className="flex flex-col items-center justify-center p-2 rounded hover:bg-[#102418] transition text-center">
+              <Share2 style={{ color: '#d7a859' }} className="w-6 h-6 mb-1" />
               <p style={{ color: '#ffffff' }} className="text-xs font-semibold">Share QR Code</p>
             </button>
           </div>
         </div>
 
         {/* Get More Inquiries */}
-        <div style={{ backgroundColor: '#102418', ...CardBorder }} className="rounded-2xl p-6">
-          <h2 style={{ color: '#ffffff' }} className="text-base font-bold mb-2">Get more inquiries</h2>
-          <p style={{ color: '#ffffff' }} className="text-xs mb-4">Share your inquiry form or QR code to get more bookings.</p>
+        <div style={{ backgroundColor: '#102418', ...CardBorder }} className="rounded-xl p-4">
+          <h2 style={{ color: '#ffffff' }} className="text-sm font-bold mb-1">Get more inquiries</h2>
+          <p style={{ color: '#ffffff' }} className="text-xs mb-3">Share your inquiry form or QR code to get more bookings.</p>
           <div className="flex items-center justify-between">
             <div>
               <p style={{ color: '#d7a859' }} className="text-xs font-semibold">Share your inquiry form</p>
-              <p style={{ color: '#ffffff' }} className="text-xs opacity-70 mt-1">Scan to get to your booking form</p>
+              <p style={{ color: '#ffffff' }} className="text-xs opacity-70 mt-0.5">Scan to get to your booking form</p>
             </div>
-            <div style={{ backgroundColor: '#ffffff' }} className="w-20 h-20 rounded-lg flex items-center justify-center p-1">
+            <div style={{ backgroundColor: '#ffffff' }} className="w-16 h-16 rounded flex items-center justify-center p-1">
               <div className="bg-gradient-to-br from-gray-900 to-gray-800 w-full h-full rounded flex items-center justify-center">
                 <p style={{ color: '#ffffff' }} className="text-xs">QR</p>
               </div>
