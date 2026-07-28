@@ -193,7 +193,19 @@ const DonutChart = () => {
   );
 };
 
-export default function DashboardRedesignFinal({ orders, onNavigate }: { orders: Order[]; onNavigate: (tab: string) => void }) {
+export default function DashboardRedesignFinal({
+  orders,
+  onNavigate,
+  onOpenInquiry,
+  onOpenClient,
+  onCreateInvoice
+}: {
+  orders: Order[];
+  onNavigate: (tab: string) => void;
+  onOpenInquiry?: (id: string) => void;
+  onOpenClient?: (name: string) => void;
+  onCreateInvoice?: () => void;
+}) {
   const [revenueMonth, setRevenueMonth] = useState(6); // July
   const [menuMonth, setMenuMonth] = useState(6);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -517,7 +529,11 @@ export default function DashboardRedesignFinal({ orders, onNavigate }: { orders:
                           </span>
                         </td>
                         <td className="py-1.5 px-1.5 text-xs text-center">
-                          <button className="p-1 hover:bg-[#102418] rounded transition" title="More options">
+                          <button
+                            onClick={() => onOpenInquiry?.(order.id)}
+                            className="p-1 hover:bg-[#102418] rounded transition"
+                            title="View inquiry details"
+                          >
                             <MoreVertical style={{ color: '#d7a859' }} className="w-4 h-4" />
                           </button>
                         </td>

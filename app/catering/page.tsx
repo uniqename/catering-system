@@ -13,6 +13,9 @@ import MenuPackages from '@/components/menu-packages';
 import DynamicInvoiceSystem from '@/components/dynamic-invoice-system';
 import PaymentsTracker from '@/components/payments-tracker';
 import BusinessSettings from '@/components/business-settings';
+import InquiryDetail from '@/components/inquiry-detail';
+import InvoiceBuilder from '@/components/invoice-builder';
+import ClientProfile from '@/components/client-profile';
 
 type Tab = 'dashboard' | 'inquiries' | 'orders' | 'calendar' | 'clients' | 'menu' | 'invoices' | 'payments' | 'reports' | 'settings';
 
@@ -20,6 +23,9 @@ export default function CateringPage() {
   const [activeTab, setActiveTab] = useState<Tab>('dashboard');
   const [orders, setOrders] = useState<any[]>([]);
   const [isMounted, setIsMounted] = useState(false);
+  const [detailView, setDetailView] = useState<'inquiry' | 'invoice' | 'client' | null>(null);
+  const [selectedInquiry, setSelectedInquiry] = useState<any>(null);
+  const [selectedClient, setSelectedClient] = useState<string | null>(null);
 
   useEffect(() => {
     setIsMounted(true);
@@ -70,6 +76,47 @@ export default function CateringPage() {
     setActiveTab('orders');
   };
 
+  const openInquiryDetail = (orderId: string) => {
+    const inquiry = orders.find(o => o.id === orderId);
+    if (inquiry) {
+      setSelectedInquiry(inquiry);
+      setDetailView('inquiry');
+    }
+  };
+
+  const closeDetailView = () => {
+    setDetailView(null);
+    setSelectedInquiry(null);
+    setSelectedClient(null);
+  };
+
+  const updateInquiry = (inquiry: any) => {
+    saveOrders(orders.map(o => (o.id === inquiry.id ? inquiry : o)));
+  };
+
+  const deleteInquiry = (id: string) => {
+    saveOrders(orders.filter(o => o.id !== id));
+  };
+
+  const openInvoiceBuilder = () => {
+    setDetailView('invoice');
+  };
+
+  const saveInvoice = (invoice: any) => {
+    localStorage.setItem(`invoice_${invoice.id}`, JSON.stringify(invoice));
+    closeDetailView();
+    setActiveTab('invoices');
+  };
+
+  const openClientProfile = (clientName: string) => {
+    setSelectedClient(clientName);
+    setDetailView('client');
+  };
+
+  const sendProposal = (inquiryId: string) => {
+    alert(`Proposal sent for inquiry ${inquiryId}`);
+  };
+
   const navItems: Array<{ id: Tab; icon: any; label: string; badge?: number }> = [
     { id: 'dashboard', icon: Home, label: 'Dashboard' },
     { id: 'inquiries', icon: MessageSquare, label: 'Inquiries', badge: orders.filter(o => o.status === 'inquiry').length },
@@ -86,7 +133,13 @@ export default function CateringPage() {
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':
-        return <DashboardRedesignFinal orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
+        return <DashboardRedesignFinal
+          orders={orders}
+          onNavigate={(tab: string) => setActiveTab(tab as Tab)}
+          onOpenInquiry={openInquiryDetail}
+          onOpenClient={openClientProfile}
+          onCreateInvoice={openInvoiceBuilder}
+        />;
       case 'inquiries':
         return <InquiriesForm onAdd={addOrder} />;
       case 'orders':
@@ -106,7 +159,13 @@ export default function CateringPage() {
       case 'settings':
         return <BusinessSettings />;
       default:
-        return <DashboardRedesignFinal orders={orders} onNavigate={(tab: string) => setActiveTab(tab as Tab)} />;
+        return <DashboardRedesignFinal
+          orders={orders}
+          onNavigate={(tab: string) => setActiveTab(tab as Tab)}
+          onOpenInquiry={openInquiryDetail}
+          onOpenClient={openClientProfile}
+          onCreateInvoice={openInvoiceBuilder}
+        />;
     }
   };
 
@@ -176,25 +235,59 @@ export default function CateringPage() {
 
       {/* Main Content */}
       <div className="ml-56">
-        {activeTab === 'dashboard' ? (
-          renderContent()
-        ) : (
-          <>
-            {/* Header */}
-            <div style={{ backgroundColor: '#0a1911', borderBottomColor: '#d7a859' }} className="border-b-2 sticky top-0 z-30">
-              <div className="px-8 py-4 flex items-center justify-between">
-                <h1 style={{ color: '#d7a859' }} className="text-2xl font-bold">
-                  {navItems.find(item => item.id === activeTab)?.label}
-                </h1>
-              </div>
-            </div>
+        {/* Detail Views */}
+        {detailView === 'inquiry' && selectedInquiry && (
+          <InquiryDetail
+            inquiry={selectedInquiry}
+            onBack={closeDetailView}
+            onUpdate={updateInquiry}
+            onDelete={deleteInquiry}
+            onSendProposal={sendProposal}
+            onCreateInvoice={openInvoiceBuilder}
+          />
+        )}
 
-            {/* Content */}
-            <div style={{ backgroundColor: '#0a1911' }} className="px-8 py-8 min-h-[calc(100vh-73px)]">
-              <div style={{ backgroundColor: '#102418', borderColor: '#d7a859' }} className="rounded-2xl border p-8 shadow-sm min-h-96">
-                {renderContent()}
-              </div>
-            </div>
+        {detailView === 'invoice' && (
+          <InvoiceBuilder
+            orders={orders}
+            onBack={closeDetailView}
+            onSaveInvoice={saveInvoice}
+          />
+        )}
+
+        {detailView === 'client' && selectedClient && (
+          <ClientProfile
+            clientName={selectedClient}
+            orders={orders}
+            onBack={closeDetailView}
+            onViewInquiry={openInquiryDetail}
+          />
+        )}
+
+        {/* Main Tab Views */}
+        {detailView === null && (
+          <>
+            {activeTab === 'dashboard' ? (
+              renderContent()
+            ) : (
+              <>
+                {/* Header */}
+                <div style={{ backgroundColor: '#0a1911', borderBottomColor: '#d7a859' }} className="border-b-2 sticky top-0 z-30">
+                  <div className="px-8 py-4 flex items-center justify-between">
+                    <h1 style={{ color: '#d7a859' }} className="text-2xl font-bold">
+                      {navItems.find(item => item.id === activeTab)?.label}
+                    </h1>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div style={{ backgroundColor: '#0a1911' }} className="px-8 py-8 min-h-[calc(100vh-73px)]">
+                  <div style={{ backgroundColor: '#102418', borderColor: '#d7a859' }} className="rounded-2xl border p-8 shadow-sm min-h-96">
+                    {renderContent()}
+                  </div>
+                </div>
+              </>
+            )}
           </>
         )}
       </div>
