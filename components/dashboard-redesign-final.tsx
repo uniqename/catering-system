@@ -270,10 +270,10 @@ export default function DashboardRedesignFinal({
           </div>
 
           <div className="flex items-center gap-2">
-            <button title="Search" style={{ color: '#d7a859' }} className="p-1.5 hover:bg-[#102418] rounded-lg transition">
+            <button onClick={() => onNavigate('inquiries')} title="Search inquiries" style={{ color: '#d7a859' }} className="p-1.5 hover:bg-[#102418] rounded-lg transition">
               <Search className="w-5 h-5" />
             </button>
-            <button title="Notifications" style={{ color: '#d7a859' }} className="relative p-1.5 hover:bg-[#102418] rounded-lg transition">
+            <button onClick={() => {}} title="Notifications" style={{ color: '#d7a859' }} className="relative p-1.5 hover:bg-[#102418] rounded-lg transition">
               <Bell className="w-5 h-5" />
             </button>
             <button
