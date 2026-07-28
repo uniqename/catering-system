@@ -13,6 +13,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: "Catering Business System",
   description: "Mobile-first catering app with voice dictation",
