@@ -317,8 +317,8 @@ export default function DashboardRedesignFinal({
             </div>
           </div>
 
-          {/* Menu + Tasks Column - RIGHT SIDE, 20%+20% STACKED */}
-          <div className="col-span-5 space-y-2">
+          {/* Menu + Tasks Column - RIGHT SIDE, 20%+20% HORIZONTAL */}
+          <div className="col-span-5 grid grid-cols-2 gap-2">
             {/* Top Menu Items */}
             <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-4">
               <h2 style={{ color: '#ffffff' }} className="text-sm font-bold mb-3">Top Menu Items</h2>
