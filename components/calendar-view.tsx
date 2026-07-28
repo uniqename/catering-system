@@ -1,215 +1,254 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Users } from 'lucide-react';
 
 interface Order {
   id: string;
   clientName: string;
+  eventType: string;
   eventDate: string;
   guestCount: number;
-  eventType: string;
-  status: string;
+  status: 'inquiry' | 'quoted' | 'confirmed' | 'delivered';
 }
 
-export default function CalendarView({ orders = [] }: { orders?: Order[] }) {
-  const [currentDate, setCurrentDate] = useState(new Date(2026, 6, 27)); // July 2026
-  const [view, setView] = useState<'month' | 'week'>('month');
+const CardBorder = { boxShadow: '0 0 0 0.5px rgba(215, 168, 89, 0.08)' };
 
-  const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
-  const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
-  const monthName = currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+export default function CalendarView({ orders = [] }: { orders?: Order[] }) {
+  const [currentDate, setCurrentDate] = useState(new Date('2026-07-27'));
+  const [selectedEvent, setSelectedEvent] = useState<Order | null>(null);
+
+  const currentMonth = currentDate.getMonth();
+  const currentYear = currentDate.getFullYear();
+
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+  const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+
+  const calendarDays = useMemo(() => {
+    const days = [];
+    for (let i = 0; i < firstDayOfMonth; i++) {
+      days.push(null);
+    }
+    for (let i = 1; i <= daysInMonth; i++) {
+      days.push(i);
+    }
+    return days;
+  }, [currentMonth, currentYear, daysInMonth, firstDayOfMonth]);
 
   const eventsByDate = useMemo(() => {
-    const map = new Map<string, Order[]>();
+    const map: { [key: string]: Order[] } = {};
     orders.forEach(order => {
-      const dateKey = order.eventDate;
-      if (!map.has(dateKey)) map.set(dateKey, []);
-      map.get(dateKey)?.push(order);
+      const date = new Date(order.eventDate);
+      if (date.getMonth() === currentMonth && date.getFullYear() === currentYear) {
+        const dateKey = date.getDate().toString();
+        if (!map[dateKey]) map[dateKey] = [];
+        map[dateKey].push(order);
+      }
     });
     return map;
-  }, [orders]);
+  }, [orders, currentMonth, currentYear]);
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'inquiry': return '#3B82F6'; // blue
-      case 'quoted': return '#F59E0B'; // amber
-      case 'confirmed': return '#10B981'; // green
-      case 'delivered': return '#8B5CF6'; // purple
-      default: return '#6B7280'; // gray
-    }
-  };
-
-  const prevMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
+  const previousMonth = () => {
+    setCurrentDate(new Date(currentYear, currentMonth - 1, 1));
   };
 
   const nextMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
+    setCurrentDate(new Date(currentYear, currentMonth + 1, 1));
   };
 
-  const today = new Date().toISOString().split('T')[0];
-  const upcomingEvents = orders
-    .filter(o => o.eventDate >= today)
-    .sort((a, b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime())
-    .slice(0, 7);
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-  if (view === 'week') {
-    return (
-      <div style={{ backgroundColor: '#0B3D36' }} className="p-8 min-h-screen">
-        <div className="max-w-6xl">
-          <div className="flex items-center justify-between mb-8">
-            <h1 style={{ color: '#D4A64A' }} className="text-3xl font-bold">Upcoming Events</h1>
-            <button
-              onClick={() => setView('month')}
-              style={{ color: '#D4A64A' }}
-              className="font-semibold hover:opacity-80"
-            >
-              ← Month View
-            </button>
-          </div>
+  const getStatusColor = (status: string) => {
+    const colors: { [key: string]: string } = {
+      inquiry: '#10B981',
+      quoted: '#f59e0b',
+      confirmed: '#10B981',
+      delivered: '#10B981'
+    };
+    return colors[status] || '#10B981';
+  };
 
-          <div className="space-y-4">
-            {upcomingEvents.length === 0 ? (
-              <div style={{ backgroundColor: '#1a5f54' }} className="rounded-lg p-12 text-center">
-                <p style={{ color: '#a8d5ca' }}>No upcoming events</p>
-              </div>
-            ) : (
-              upcomingEvents.map(event => (
-                <div key={event.id} style={{ backgroundColor: '#1a5f54' }} className="rounded-lg p-6">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-4 mb-3">
-                        <div style={{ backgroundColor: '#0B3D36' }} className="text-center px-4 py-3 rounded-lg">
-                          <p style={{ color: '#D4A64A' }} className="text-2xl font-bold">{new Date(event.eventDate).getDate()}</p>
-                          <p style={{ color: '#a8d5ca' }} className="text-xs uppercase">{new Date(event.eventDate).toLocaleDateString('en-US', { month: 'short' })}</p>
-                        </div>
-                        <div>
-                          <h3 style={{ color: '#D4A64A' }} className="text-xl font-bold capitalize">{event.eventType}</h3>
-                          <p style={{ color: '#a8d5ca' }} className="text-sm">{event.clientName}</p>
-                          <p style={{ color: '#a8d5ca' }} className="text-sm">{event.guestCount} guests</p>
-                        </div>
-                      </div>
-                    </div>
-                    <span style={{ backgroundColor: getStatusColor(event.status), color: 'white' }} className="px-4 py-2 rounded-full text-sm font-semibold capitalize">
-                      {event.status}
-                    </span>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Month View
-  const calendarDays: (number | null)[] = [
-    ...Array.from({ length: firstDayOfMonth }, () => null),
-    ...Array.from({ length: daysInMonth }, (_, i) => i + 1)
-  ];
-
-  const weeks = [];
-  for (let i = 0; i < calendarDays.length; i += 7) {
-    weeks.push(calendarDays.slice(i, i + 7));
-  }
+  const getStatusLabel = (status: string) => {
+    return status.charAt(0).toUpperCase() + status.slice(1);
+  };
 
   return (
-    <div style={{ backgroundColor: '#0B3D36' }} className="p-8 min-h-screen">
-      <div className="max-w-6xl">
-        <div className="flex items-center justify-between mb-8">
-          <h1 style={{ color: '#D4A64A' }} className="text-3xl font-bold">{monthName}</h1>
-          <button
-            onClick={() => setView('week')}
-            style={{ color: '#D4A64A' }}
-            className="font-semibold hover:opacity-80"
-          >
-            Week View →
-          </button>
+    <div style={{ backgroundColor: '#0a1911', minHeight: '100vh' }} className="p-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-8">
+          <h2 style={{ color: '#d7a859' }} className="text-3xl font-bold mb-2">Event Calendar</h2>
+          <p style={{ color: '#a8d5ca' }} className="text-sm">View all upcoming events and manage your schedule</p>
         </div>
 
-        {/* Month Navigation */}
-        <div className="flex items-center justify-between mb-8">
-          <button onClick={prevMonth} style={{ color: '#D4A64A' }} className="p-2 hover:bg-[#1a5f54] rounded-lg">
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          <h2 style={{ color: '#D4A64A' }} className="text-2xl font-bold">{monthName}</h2>
-          <button onClick={nextMonth} style={{ color: '#D4A64A' }} className="p-2 hover:bg-[#1a5f54] rounded-lg">
-            <ChevronRight className="w-6 h-6" />
-          </button>
-        </div>
-
-        {/* Calendar Grid */}
-        <div style={{ backgroundColor: '#1a5f54' }} className="rounded-lg overflow-hidden">
-          {/* Weekday Headers */}
-          <div style={{ borderBottomColor: '#D4A64A' }} className="grid grid-cols-7 gap-0 border-b-2">
-            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-              <div key={day} style={{ backgroundColor: '#0B3D36', color: '#D4A64A' }} className="p-4 text-center font-bold">
-                {day}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Calendar */}
+          <div style={{ backgroundColor: '#0f2416', ...CardBorder }} className="rounded-xl p-6 lg:col-span-2">
+            {/* Month Header */}
+            <div className="flex items-center justify-between mb-6">
+              <h3 style={{ color: '#d7a859' }} className="text-2xl font-bold">
+                {monthNames[currentMonth]} {currentYear}
+              </h3>
+              <div className="flex gap-2">
+                <button onClick={previousMonth} className="p-2 hover:bg-[#102418] rounded-lg transition">
+                  <ChevronLeft style={{ color: '#d7a859' }} className="w-5 h-5" />
+                </button>
+                <button onClick={nextMonth} className="p-2 hover:bg-[#102418] rounded-lg transition">
+                  <ChevronRight style={{ color: '#d7a859' }} className="w-5 h-5" />
+                </button>
               </div>
-            ))}
-          </div>
+            </div>
 
-          {/* Calendar Days */}
-          {weeks.map((week, weekIdx) => (
-            <div key={weekIdx} className="grid grid-cols-7 gap-0">
-              {week.map((day, dayIdx) => {
-                const dateStr = day ? `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}` : '';
-                const dayEvents = dateStr ? eventsByDate.get(dateStr) || [] : [];
-                const isToday = dateStr === today;
+            {/* Day Labels */}
+            <div className="grid grid-cols-7 gap-1 mb-2">
+              {dayNames.map(day => (
+                <div key={day} style={{ color: '#d7a859' }} className="text-center text-sm font-bold py-2">
+                  {day}
+                </div>
+              ))}
+            </div>
+
+            {/* Calendar Grid */}
+            <div className="grid grid-cols-7 gap-1">
+              {calendarDays.map((day, idx) => {
+                const dayEvents = day ? eventsByDate[day.toString()] || [] : [];
+                const isToday = day === 27 && currentMonth === 6 && currentYear === 2026;
 
                 return (
-                  <div
-                    key={`${weekIdx}-${dayIdx}`}
+                  <button
+                    key={idx}
+                    onClick={() => day && dayEvents.length > 0 && setSelectedEvent(dayEvents[0])}
                     style={{
-                      backgroundColor: isToday ? '#0B3D36' : 'transparent',
-                      borderColor: '#0B3D36',
+                      backgroundColor: isToday ? 'rgba(215, 168, 89, 0.2)' : (dayEvents.length > 0 ? '#102418' : '#0a1911'),
+                      borderColor: isToday ? '#d7a859' : (dayEvents.length > 0 ? '#d7a859' : 'rgba(215, 168, 89, 0.05)')
                     }}
-                    className="min-h-24 p-3 border aspect-square flex flex-col"
+                    className="aspect-square border rounded-lg p-2 text-left flex flex-col justify-between hover:bg-[#102418] transition"
                   >
-                    {day && (
+                    {day ? (
                       <>
-                        <p
-                          style={{ color: isToday ? '#D4A64A' : '#a8d5ca' }}
-                          className={`text-sm font-bold mb-2 ${isToday ? 'bg-[#D4A64A] text-[#0B3D36] px-2 py-1 rounded w-fit' : ''}`}
-                        >
+                        <span style={{ color: '#ffffff' }} className="text-sm font-bold">
                           {day}
-                        </p>
-                        <div className="space-y-1 flex-1 overflow-y-auto">
-                          {dayEvents.slice(0, 2).map(event => (
-                            <div key={event.id} style={{ backgroundColor: getStatusColor(event.status) }} className="text-xs rounded px-2 py-1 text-white font-semibold truncate">
-                              {event.clientName}
-                            </div>
-                          ))}
-                          {dayEvents.length > 2 && (
-                            <p style={{ color: '#D4A64A' }} className="text-xs font-semibold">+{dayEvents.length - 2} more</p>
-                          )}
-                        </div>
+                        </span>
+                        {dayEvents.length > 0 && (
+                          <div className="flex gap-0.5">
+                            {dayEvents.slice(0, 2).map((e, i) => (
+                              <div
+                                key={i}
+                                style={{ backgroundColor: getStatusColor(e.status) }}
+                                className="w-1.5 h-1.5 rounded-full"
+                              ></div>
+                            ))}
+                            {dayEvents.length > 2 && (
+                              <span style={{ color: '#d7a859' }} className="text-xs">
+                                +{dayEvents.length - 2}
+                              </span>
+                            )}
+                          </div>
+                        )}
                       </>
-                    )}
-                  </div>
+                    ) : null}
+                  </button>
                 );
               })}
             </div>
-          ))}
-        </div>
 
-        {/* Upcoming Events Sidebar */}
-        <div className="mt-8">
-          <h2 style={{ color: '#D4A64A' }} className="text-xl font-bold mb-4">Next 7 Days</h2>
-          <div className="space-y-3">
-            {upcomingEvents.slice(0, 5).map(event => (
-              <div key={event.id} style={{ backgroundColor: '#1a5f54' }} className="rounded-lg p-4 flex items-center justify-between">
-                <div>
-                  <p style={{ color: '#D4A64A' }} className="font-bold">{event.clientName}</p>
-                  <p style={{ color: '#a8d5ca' }} className="text-sm">{new Date(event.eventDate).toLocaleDateString()} • {event.guestCount} guests</p>
-                </div>
-                <span style={{ backgroundColor: getStatusColor(event.status), color: 'white' }} className="px-3 py-1 rounded-full text-xs font-semibold capitalize">
-                  {event.status}
-                </span>
+            {/* Events List */}
+            <div className="mt-8 pt-6" style={{ borderTopColor: 'rgba(215, 168, 89, 0.1)' }} className="border-t">
+              <h3 style={{ color: '#d7a859' }} className="font-bold mb-4">Upcoming Events</h3>
+              <div className="space-y-3 max-h-96 overflow-y-auto">
+                {orders
+                  .filter(o => {
+                    const date = new Date(o.eventDate);
+                    return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
+                  })
+                  .sort((a, b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime())
+                  .map(event => (
+                    <button
+                      key={event.id}
+                      onClick={() => setSelectedEvent(event)}
+                      style={{ backgroundColor: '#0a1911' }}
+                      className="w-full p-3 rounded-lg hover:bg-[#102418] transition text-left border border-transparent hover:border-[#d7a859]"
+                    >
+                      <p style={{ color: '#d7a859' }} className="text-sm font-bold">
+                        {new Date(event.eventDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      </p>
+                      <p style={{ color: '#ffffff' }} className="text-sm font-semibold capitalize">
+                        {event.eventType}
+                      </p>
+                      <p style={{ color: '#a8d5ca' }} className="text-xs">
+                        {event.clientName}
+                      </p>
+                    </button>
+                  ))}
               </div>
-            ))}
+            </div>
+          </div>
+
+          {/* Event Details Sidebar */}
+          <div>
+            {selectedEvent ? (
+              <div style={{ backgroundColor: '#0f2416', ...CardBorder }} className="rounded-xl p-6 sticky top-8">
+                <h3 style={{ color: '#d7a859' }} className="text-lg font-bold mb-4">Event Details</h3>
+
+                <div className="space-y-4">
+                  <div>
+                    <p style={{ color: '#a8d5ca' }} className="text-xs uppercase tracking-wide mb-1">Client</p>
+                    <p style={{ color: '#ffffff' }} className="text-sm font-semibold">
+                      {selectedEvent.clientName}
+                    </p>
+                  </div>
+
+                  <div>
+                    <p style={{ color: '#a8d5ca' }} className="text-xs uppercase tracking-wide mb-1">Event Type</p>
+                    <p style={{ color: '#ffffff' }} className="text-sm font-semibold capitalize">
+                      {selectedEvent.eventType}
+                    </p>
+                  </div>
+
+                  <div>
+                    <p style={{ color: '#a8d5ca' }} className="text-xs uppercase tracking-wide mb-1">Date</p>
+                    <p style={{ color: '#d7a859' }} className="text-sm font-bold">
+                      {new Date(selectedEvent.eventDate).toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}
+                    </p>
+                  </div>
+
+                  <div>
+                    <p style={{ color: '#a8d5ca' }} className="text-xs uppercase tracking-wide mb-1 flex items-center gap-2">
+                      <Users className="w-4 h-4" /> Guests
+                    </p>
+                    <p style={{ color: '#ffffff' }} className="text-sm font-semibold">
+                      {selectedEvent.guestCount} guests
+                    </p>
+                  </div>
+
+                  <div>
+                    <p style={{ color: '#a8d5ca' }} className="text-xs uppercase tracking-wide mb-2">Status</p>
+                    <span
+                      style={{ backgroundColor: getStatusColor(selectedEvent.status), color: '#0a1911' }}
+                      className="text-xs font-bold px-3 py-1 rounded inline-block"
+                    >
+                      {getStatusLabel(selectedEvent.status)}
+                    </span>
+                  </div>
+
+                  <div style={{ borderTopColor: 'rgba(215, 168, 89, 0.1)' }} className="border-t pt-4">
+                    <p style={{ color: '#a8d5ca' }} className="text-xs text-center mb-3">Event ID: {selectedEvent.id}</p>
+                    <button
+                      style={{ backgroundColor: '#d7a859', color: '#0a1911' }}
+                      className="w-full py-2 font-bold rounded-lg transition hover:opacity-90 text-sm"
+                    >
+                      View Full Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div style={{ backgroundColor: '#0f2416', ...CardBorder }} className="rounded-xl p-6 text-center sticky top-8">
+                <p style={{ color: '#a8d5ca' }} className="text-sm">
+                  Select an event from the calendar to view details
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

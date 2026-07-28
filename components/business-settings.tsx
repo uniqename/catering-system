@@ -87,7 +87,7 @@ export default function BusinessSettings() {
         )}
 
         {/* Tab Navigation */}
-        <div className="flex gap-4 mb-8 border-b-2" style={{ borderBottomColor: '#d7a859' }}>
+        <div className="flex gap-4 mb-8 border-b" style={{ borderBottomColor: 'rgba(215, 168, 89, 0.2)' }}>
           {(['business', 'operations', 'financial'] as const).map(t => (
             <button
               key={t}
@@ -105,7 +105,7 @@ export default function BusinessSettings() {
 
         {/* Business Info Tab */}
         {tab === 'business' && (
-          <div style={{ backgroundColor: '#102418' }} className="rounded-lg p-8 space-y-6">
+          <div style={{ backgroundColor: '#0f2416', borderColor: 'rgba(215, 168, 89, 0.08)' }} className="rounded-lg border p-8 space-y-6">
             <h2 style={{ color: '#d7a859' }} className="text-xl font-bold mb-6">Business Information</h2>
 
             <div className="grid grid-cols-2 gap-6">
@@ -115,8 +115,8 @@ export default function BusinessSettings() {
                   type="text"
                   value={settings.businessName}
                   onChange={(e) => updateSetting('businessName', e.target.value)}
-                  style={{ backgroundColor: '#0a1911', borderColor: '#d7a859', color: 'white' }}
-                  className="w-full px-4 py-2 border-2 rounded-lg"
+                  style={{ backgroundColor: '#0a1911', borderColor: 'rgba(215, 168, 89, 0.2)', color: 'white' }}
+                  className="w-full px-4 py-2 border rounded-lg focus:border-[#d7a859] focus:outline-none transition"
                 />
               </div>
 
@@ -126,8 +126,8 @@ export default function BusinessSettings() {
                   type="text"
                   value={settings.ownerName}
                   onChange={(e) => updateSetting('ownerName', e.target.value)}
-                  style={{ backgroundColor: '#0a1911', borderColor: '#d7a859', color: 'white' }}
-                  className="w-full px-4 py-2 border-2 rounded-lg"
+                  style={{ backgroundColor: '#0a1911', borderColor: 'rgba(215, 168, 89, 0.2)', color: 'white' }}
+                  className="w-full px-4 py-2 border rounded-lg focus:border-[#d7a859] focus:outline-none transition"
                 />
               </div>
 
@@ -139,8 +139,8 @@ export default function BusinessSettings() {
                   type="email"
                   value={settings.email}
                   onChange={(e) => updateSetting('email', e.target.value)}
-                  style={{ backgroundColor: '#0a1911', borderColor: '#d7a859', color: 'white' }}
-                  className="w-full px-4 py-2 border-2 rounded-lg"
+                  style={{ backgroundColor: '#0a1911', borderColor: 'rgba(215, 168, 89, 0.2)', color: 'white' }}
+                  className="w-full px-4 py-2 border rounded-lg focus:border-[#d7a859] focus:outline-none transition"
                 />
               </div>
 
@@ -152,8 +152,8 @@ export default function BusinessSettings() {
                   type="tel"
                   value={settings.phone}
                   onChange={(e) => updateSetting('phone', e.target.value)}
-                  style={{ backgroundColor: '#0a1911', borderColor: '#d7a859', color: 'white' }}
-                  className="w-full px-4 py-2 border-2 rounded-lg"
+                  style={{ backgroundColor: '#0a1911', borderColor: 'rgba(215, 168, 89, 0.2)', color: 'white' }}
+                  className="w-full px-4 py-2 border rounded-lg focus:border-[#d7a859] focus:outline-none transition"
                 />
               </div>
 
@@ -165,8 +165,8 @@ export default function BusinessSettings() {
                   type="url"
                   value={settings.website}
                   onChange={(e) => updateSetting('website', e.target.value)}
-                  style={{ backgroundColor: '#0a1911', borderColor: '#d7a859', color: 'white' }}
-                  className="w-full px-4 py-2 border-2 rounded-lg"
+                  style={{ backgroundColor: '#0a1911', borderColor: 'rgba(215, 168, 89, 0.2)', color: 'white' }}
+                  className="w-full px-4 py-2 border rounded-lg focus:border-[#d7a859] focus:outline-none transition"
                 />
               </div>
 
@@ -175,8 +175,8 @@ export default function BusinessSettings() {
                 <select
                   value={settings.timezone}
                   onChange={(e) => updateSetting('timezone', e.target.value)}
-                  style={{ backgroundColor: '#0a1911', borderColor: '#d7a859', color: 'white' }}
-                  className="w-full px-4 py-2 border-2 rounded-lg"
+                  style={{ backgroundColor: '#0a1911', borderColor: 'rgba(215, 168, 89, 0.2)', color: 'white' }}
+                  className="w-full px-4 py-2 border rounded-lg focus:border-[#d7a859] focus:outline-none transition"
                 >
                   <option value="America/Chicago">Central Time</option>
                   <option value="America/New_York">Eastern Time</option>
@@ -230,7 +230,7 @@ export default function BusinessSettings() {
 
         {/* Operations Tab */}
         {tab === 'operations' && (
-          <div style={{ backgroundColor: '#102418' }} className="rounded-lg p-8 space-y-6">
+          <div style={{ backgroundColor: '#0f2416', borderColor: 'rgba(215, 168, 89, 0.08)' }} className="rounded-lg border p-8 space-y-6">
             <h2 style={{ color: '#d7a859' }} className="text-xl font-bold mb-6">Operations & Policies</h2>
 
             <div className="grid grid-cols-2 gap-6">
@@ -240,8 +240,8 @@ export default function BusinessSettings() {
                   type="time"
                   value={settings.businessHoursStart}
                   onChange={(e) => updateSetting('businessHoursStart', e.target.value)}
-                  style={{ backgroundColor: '#0a1911', borderColor: '#d7a859', color: 'white' }}
-                  className="w-full px-4 py-2 border-2 rounded-lg"
+                  style={{ backgroundColor: '#0a1911', borderColor: 'rgba(215, 168, 89, 0.2)', color: 'white' }}
+                  className="w-full px-4 py-2 border rounded-lg focus:border-[#d7a859] focus:outline-none transition"
                 />
               </div>
 
@@ -251,8 +251,8 @@ export default function BusinessSettings() {
                   type="time"
                   value={settings.businessHoursEnd}
                   onChange={(e) => updateSetting('businessHoursEnd', e.target.value)}
-                  style={{ backgroundColor: '#0a1911', borderColor: '#d7a859', color: 'white' }}
-                  className="w-full px-4 py-2 border-2 rounded-lg"
+                  style={{ backgroundColor: '#0a1911', borderColor: 'rgba(215, 168, 89, 0.2)', color: 'white' }}
+                  className="w-full px-4 py-2 border rounded-lg focus:border-[#d7a859] focus:outline-none transition"
                 />
               </div>
 
@@ -262,8 +262,8 @@ export default function BusinessSettings() {
                   type="number"
                   value={settings.minEventSize}
                   onChange={(e) => updateSetting('minEventSize', parseInt(e.target.value))}
-                  style={{ backgroundColor: '#0a1911', borderColor: '#d7a859', color: 'white' }}
-                  className="w-full px-4 py-2 border-2 rounded-lg"
+                  style={{ backgroundColor: '#0a1911', borderColor: 'rgba(215, 168, 89, 0.2)', color: 'white' }}
+                  className="w-full px-4 py-2 border rounded-lg focus:border-[#d7a859] focus:outline-none transition"
                 />
               </div>
 
@@ -273,8 +273,8 @@ export default function BusinessSettings() {
                   type="number"
                   value={settings.maxEventSize}
                   onChange={(e) => updateSetting('maxEventSize', parseInt(e.target.value))}
-                  style={{ backgroundColor: '#0a1911', borderColor: '#d7a859', color: 'white' }}
-                  className="w-full px-4 py-2 border-2 rounded-lg"
+                  style={{ backgroundColor: '#0a1911', borderColor: 'rgba(215, 168, 89, 0.2)', color: 'white' }}
+                  className="w-full px-4 py-2 border rounded-lg focus:border-[#d7a859] focus:outline-none transition"
                 />
               </div>
 
@@ -284,8 +284,8 @@ export default function BusinessSettings() {
                   type="number"
                   value={settings.defaultEventBuffer}
                   onChange={(e) => updateSetting('defaultEventBuffer', parseInt(e.target.value))}
-                  style={{ backgroundColor: '#0a1911', borderColor: '#d7a859', color: 'white' }}
-                  className="w-full px-4 py-2 border-2 rounded-lg"
+                  style={{ backgroundColor: '#0a1911', borderColor: 'rgba(215, 168, 89, 0.2)', color: 'white' }}
+                  className="w-full px-4 py-2 border rounded-lg focus:border-[#d7a859] focus:outline-none transition"
                 />
               </div>
 
@@ -297,8 +297,8 @@ export default function BusinessSettings() {
                   onChange={(e) => updateSetting('depositeRequired', parseInt(e.target.value))}
                   min="0"
                   max="100"
-                  style={{ backgroundColor: '#0a1911', borderColor: '#d7a859', color: 'white' }}
-                  className="w-full px-4 py-2 border-2 rounded-lg"
+                  style={{ backgroundColor: '#0a1911', borderColor: 'rgba(215, 168, 89, 0.2)', color: 'white' }}
+                  className="w-full px-4 py-2 border rounded-lg focus:border-[#d7a859] focus:outline-none transition"
                 />
               </div>
             </div>
@@ -307,7 +307,7 @@ export default function BusinessSettings() {
 
         {/* Financial Tab */}
         {tab === 'financial' && (
-          <div style={{ backgroundColor: '#102418' }} className="rounded-lg p-8 space-y-6">
+          <div style={{ backgroundColor: '#0f2416', borderColor: 'rgba(215, 168, 89, 0.08)' }} className="rounded-lg border p-8 space-y-6">
             <h2 style={{ color: '#d7a859' }} className="text-xl font-bold mb-6">Financial Settings</h2>
 
             <div className="grid grid-cols-2 gap-6">
@@ -320,8 +320,8 @@ export default function BusinessSettings() {
                   min="0"
                   max="100"
                   step="0.1"
-                  style={{ backgroundColor: '#0a1911', borderColor: '#d7a859', color: 'white' }}
-                  className="w-full px-4 py-2 border-2 rounded-lg"
+                  style={{ backgroundColor: '#0a1911', borderColor: 'rgba(215, 168, 89, 0.2)', color: 'white' }}
+                  className="w-full px-4 py-2 border rounded-lg focus:border-[#d7a859] focus:outline-none transition"
                 />
               </div>
 
@@ -330,8 +330,8 @@ export default function BusinessSettings() {
                 <select
                   value={settings.currency}
                   onChange={(e) => updateSetting('currency', e.target.value)}
-                  style={{ backgroundColor: '#0a1911', borderColor: '#d7a859', color: 'white' }}
-                  className="w-full px-4 py-2 border-2 rounded-lg"
+                  style={{ backgroundColor: '#0a1911', borderColor: 'rgba(215, 168, 89, 0.2)', color: 'white' }}
+                  className="w-full px-4 py-2 border rounded-lg focus:border-[#d7a859] focus:outline-none transition"
                 >
                   <option value="USD">USD ($)</option>
                   <option value="EUR">EUR (€)</option>
@@ -341,7 +341,7 @@ export default function BusinessSettings() {
               </div>
             </div>
 
-            <div style={{ backgroundColor: '#0a1911', borderLeftColor: '#d7a859' }} className="border-l-4 rounded p-4">
+            <div style={{ backgroundColor: '#0a1911', borderLeftColor: 'rgba(215, 168, 89, 0.3)' }} className="border-l-4 rounded p-4">
               <p style={{ color: '#d7a859' }} className="font-bold mb-2">Summary</p>
               <ul style={{ color: '#a8d5ca' }} className="text-sm space-y-1">
                 <li>Tax Rate: {settings.taxRate}%</li>
