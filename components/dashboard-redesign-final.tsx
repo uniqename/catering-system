@@ -614,22 +614,26 @@ export default function DashboardRedesignFinal({ orders, onNavigate }: { orders:
             {/* Get More Inquiries */}
             <div style={{ backgroundColor: '#102418', ...CardBorder }} className="col-span-3 rounded-xl p-4">
               <h2 style={{ color: '#ffffff' }} className="text-sm font-bold mb-1">Get more inquiries</h2>
-              <p style={{ color: '#ffffff' }} className="text-xs mb-3">Share your QR code to let clients order online.</p>
+              <p style={{ color: '#ffffff' }} className="text-xs mb-2">Share your QR code to let clients order online.</p>
 
-              <button
-                onClick={() => onNavigate('inquiries')}
-                className="w-full mb-3 p-2 rounded-lg hover:bg-[#0a1911] transition flex items-center justify-center"
-              >
-                <img
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(typeof window !== 'undefined' ? window.location.origin + '/catering/client-order' : 'https://catering-system.vercel.app/catering/client-order')}`}
-                  alt="QR Code"
-                  className="w-24 h-24 rounded"
-                />
-              </button>
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <p style={{ color: '#d7a859' }} className="text-xs font-semibold">Share inquiry form</p>
+                  <p style={{ color: '#ffffff' }} className="text-xs opacity-70 mt-0.5">Scan to order online</p>
+                </div>
+                <button
+                  onClick={() => onNavigate('inquiries')}
+                  className="flex-shrink-0 p-2 rounded-lg hover:bg-[#0a1911] transition"
+                >
+                  <img
+                    src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(typeof window !== 'undefined' ? window.location.origin + '/catering/client-order' : 'https://catering-system.vercel.app/catering/client-order')}`}
+                    alt="QR Code"
+                    className="w-16 h-16 rounded"
+                  />
+                </button>
+              </div>
 
-              <p style={{ color: '#a8d5ca' }} className="text-xs text-center mb-3">Tap to test or share below</p>
-
-              <button onClick={handleShare} style={{ backgroundColor: '#d7a859', color: '#0a1911' }} className="w-full py-2 font-bold rounded-lg text-xs transition hover:opacity-90">
+              <button onClick={handleShare} style={{ backgroundColor: '#d7a859', color: '#0a1911' }} className="w-full py-2 font-bold rounded-lg text-xs transition hover:opacity-90 mt-3">
                 Share Now
               </button>
             </div>
