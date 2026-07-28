@@ -210,7 +210,7 @@ export default function DashboardRedesignFinal({
   onNavigate = () => {}
 }: {
   orders?: Order[];
-  onNavigate?: (tab: string) => void
+  onNavigate?: (tab: string) => void;
 }) {
   const [tasks, setTasks] = useState<Task[]>([
     { id: 1, text: 'Follow-up with Amelia Johnson', subtitle: 'Wedding inquiry', completed: true },
