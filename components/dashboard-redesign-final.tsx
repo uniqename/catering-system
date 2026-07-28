@@ -289,16 +289,19 @@ export default function DashboardRedesignFinal({
 
       {/* Main Content */}
       <div className="px-8 py-6 space-y-4">
-        {/* Metrics Cards - Visible spacing */}
-        <div className="grid grid-cols-4 gap-6">
+        {/* Metrics Container */}
+        <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-6">
+          <div className="grid grid-cols-4 gap-6">
           <StatCard label="NEW INQUIRIES" value={newInquiries} icon={<MessageSquare className="w-5 h-5" />} change="+2 from yesterday" bgColor="#a89968" iconColor="white" />
           <StatCard label="CONFIRMED ORDERS" value={confirmedOrders} icon={<ClipboardList className="w-5 h-5" />} change="+3 this week" bgColor="#a89968" iconColor="white" />
           <StatCard label="REVENUE (THIS MONTH)" value={`$${monthlyRevenue.toLocaleString()}`} icon={<DollarSign className="w-5 h-5" />} change="+18% from last month" bgColor="#d7a859" iconColor="#0a1911" />
           <StatCard label="TOTAL CLIENTS" value={totalClients} icon={<Users className="w-5 h-5" />} change="+5 new this month" bgColor="#c5bfaf" iconColor="#0a1911" />
+          </div>
         </div>
 
         {/* Charts Row - Revenue (60%) + Menu+Tasks (20%+20%) ALL IN ONE ROW */}
-        <div className="grid grid-cols-12 gap-4">
+        <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-6">
+          <div className="grid grid-cols-12 gap-4">
           {/* Revenue Overview - 60% on LEFT */}
           <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-7 rounded-xl p-6">
             <div className="flex items-center justify-between mb-2">
@@ -370,10 +373,12 @@ export default function DashboardRedesignFinal({
               </div>
             </div>
           </div>
+          </div>
         </div>
 
-        {/* Recent Inquiries + Upcoming Events Row */}
-        <div className="grid grid-cols-12 gap-2">
+        {/* Recent Inquiries + Upcoming Events Container */}
+        <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-6">
+          <div className="grid grid-cols-12 gap-4">
           {/* Recent Inquiries */}
           <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-9 rounded-xl p-4">
             <div className="flex items-center justify-between mb-2">
@@ -444,10 +449,12 @@ export default function DashboardRedesignFinal({
               ))}
             </div>
           </div>
+          </div>
         </div>
 
-        {/* Quick Actions + Get More Inquiries Row */}
-        <div className="grid grid-cols-12 gap-2">
+        {/* Quick Actions + Get More Inquiries Container */}
+        <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-6">
+          <div className="grid grid-cols-12 gap-4">
           {/* Quick Actions */}
           <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="col-span-9 rounded-xl p-4">
             <h2 style={{ color: '#ffffff' }} className="text-sm font-bold mb-3">Quick Actions</h2>
@@ -495,6 +502,7 @@ export default function DashboardRedesignFinal({
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
