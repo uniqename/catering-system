@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Bell, Search } from 'lucide-react';
+import { Bell, Search, Home, MessageSquare, ClipboardList, Calendar, Users, UtensilsCrossed, FileText, DollarSign, BarChart3, Settings, Leaf } from 'lucide-react';
 import OrderManagement from '@/components/order-management';
 import InquiriesForm from '@/components/inquiries-form';
 import EnhancedClientManager from '@/components/enhanced-client-manager';
@@ -69,17 +69,17 @@ export default function CateringPage() {
     setActiveTab('orders');
   };
 
-  const navItems: Array<{ id: Tab; icon: string; label: string; badge?: number }> = [
-    { id: 'dashboard', icon: '🏠', label: 'Dashboard' },
-    { id: 'inquiries', icon: '💬', label: 'Inquiries', badge: orders.filter(o => o.status === 'inquiry').length },
-    { id: 'orders', icon: '📋', label: 'Orders' },
-    { id: 'calendar', icon: '📅', label: 'Calendar' },
-    { id: 'clients', icon: '👥', label: 'Clients' },
-    { id: 'menu', icon: '🍽️', label: 'Menu & Packages' },
-    { id: 'invoices', icon: '📄', label: 'Invoices' },
-    { id: 'payments', icon: '💳', label: 'Payments' },
-    { id: 'reports', icon: '📊', label: 'Reports' },
-    { id: 'settings', icon: '⚙️', label: 'Settings' },
+  const navItems: Array<{ id: Tab; icon: any; label: string; badge?: number }> = [
+    { id: 'dashboard', icon: Home, label: 'Dashboard' },
+    { id: 'inquiries', icon: MessageSquare, label: 'Inquiries', badge: orders.filter(o => o.status === 'inquiry').length },
+    { id: 'orders', icon: ClipboardList, label: 'Orders' },
+    { id: 'calendar', icon: Calendar, label: 'Calendar' },
+    { id: 'clients', icon: Users, label: 'Clients' },
+    { id: 'menu', icon: UtensilsCrossed, label: 'Menu & Packages' },
+    { id: 'invoices', icon: FileText, label: 'Invoices' },
+    { id: 'payments', icon: DollarSign, label: 'Payments' },
+    { id: 'reports', icon: BarChart3, label: 'Reports' },
+    { id: 'settings', icon: Settings, label: 'Settings' },
   ];
 
   const renderContent = () => {
@@ -116,38 +116,41 @@ export default function CateringPage() {
       {/* Sidebar */}
       <div style={{ backgroundColor: '#0a1911', borderRightColor: '#102418' }} className="fixed left-0 top-0 w-56 h-screen border-r text-white shadow-2xl flex flex-col z-40">
         {/* Logo Section - Large */}
-        <div style={{ borderBottomColor: '#102418' }} className="p-5 border-b flex flex-col items-center justify-center min-h-fit">
-          <img src="/garage-to-table-logo.png" alt="Garage to Table" className="w-32 h-32 object-contain mb-3" />
-          <p style={{ color: '#d7a859' }} className="text-xs italic text-center leading-tight">Curated meals, flavored with love</p>
+        <div style={{ borderBottomColor: '#102418' }} className="p-4 border-b flex flex-col items-center justify-center">
+          <img src="/garage-to-table-logo.png" alt="Garage to Table" className="w-40 h-40 object-contain" />
         </div>
 
         {/* Navigation */}
         <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => setActiveTab(item.id)}
-              style={{
-                backgroundColor: activeTab === item.id ? '#102418' : 'transparent',
-                color: activeTab === item.id ? '#d7a859' : '#a8d5ca',
-              }}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition relative text-sm font-medium"
-            >
-              <span className="text-base">{item.icon}</span>
-              <span className="flex-1 text-left">{item.label}</span>
-              {item.badge ? (
-                <span style={{ backgroundColor: '#ef4444' }} className="text-white text-xs font-bold px-2 py-1 rounded-full">
-                  {item.badge}
-                </span>
-              ) : null}
-            </button>
-          ))}
+          {navItems.map((item) => {
+            const isActive = activeTab === item.id;
+            const IconComponent = item.icon;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setActiveTab(item.id)}
+                style={{
+                  color: isActive ? '#d7a859' : '#ffffff',
+                }}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition relative text-sm ${isActive ? 'font-bold' : 'font-normal'}`}
+              >
+                <IconComponent className="w-5 h-5 flex-shrink-0" strokeWidth={isActive ? 2.5 : 1.5} />
+                <span className="flex-1 text-left">{item.label}</span>
+                {item.badge ? (
+                  <span style={{ backgroundColor: '#ef4444' }} className="text-white text-xs font-bold px-2 py-1 rounded-full">
+                    {item.badge}
+                  </span>
+                ) : null}
+              </button>
+            );
+          })}
         </nav>
 
         {/* CTA Box */}
         <div style={{ borderTopColor: '#102418' }} className="p-3 border-t">
-          <div style={{ backgroundColor: '#102418', borderColor: '#d7a859' }} className="rounded-xl p-4 border-2">
+          <div style={{ backgroundColor: '#102418', borderColor: '#d7a859' }} className="rounded-xl p-4 border-2 relative overflow-hidden">
+            <Leaf style={{ color: '#d7a859', opacity: 0.2 }} className="absolute right-2 bottom-1 w-16 h-16" />
             <p style={{ color: '#d7a859' }} className="font-bold text-sm mb-1">Grow your business</p>
             <p className="text-xs text-white mb-3">Set up inquiry form in 2 minutes and get more bookings.</p>
             <button style={{ backgroundColor: '#d7a859', color: '#0a1911' }} className="w-full text-xs font-bold py-2 rounded-lg transition hover:opacity-90">
