@@ -115,15 +115,11 @@ export default function CateringPage() {
     <div style={{ backgroundColor: '#0B3D36', minHeight: '100vh' }}>
       {/* Sidebar */}
       <div style={{ backgroundColor: '#0B3D36', borderRightColor: '#1a5f54' }} className="fixed left-0 top-0 w-64 h-screen border-r text-white shadow-2xl flex flex-col z-40">
-        {/* Logo - Elegant GT */}
+        {/* Logo */}
         <div style={{ borderBottomColor: '#1a5f54' }} className="p-6 border-b">
           <div className="flex flex-col items-center text-center">
-            <div style={{ color: '#D4A64A' }} className="text-4xl font-serif font-bold mb-1">
-              G T
-            </div>
-            <p className="font-serif text-sm font-bold text-white">GARAGE to TABLE</p>
-            <p style={{ color: '#D4A64A' }} className="text-xs mt-1">CATERING</p>
-            <p style={{ color: '#D4A64A' }} className="text-xs italic mt-2">Curated meals, flavored with love</p>
+            <img src="/garage-to-table-logo.png" alt="Garage to Table" className="w-40 h-40 mb-2 object-contain" />
+            <p style={{ color: '#d7a859' }} className="text-xs italic mt-2 text-center">Curated meals, flavored with love</p>
           </div>
         </div>
 
