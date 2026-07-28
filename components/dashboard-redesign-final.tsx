@@ -34,7 +34,7 @@ const StatCard = ({
   bgColor: string;
   iconColor: string;
 }) => (
-  <div style={{ backgroundColor: '#0a1911', boxShadow: '0 0 0 1px rgba(215, 168, 89, 0.15)' }} className="rounded-2xl p-6 shadow-lg hover:shadow-xl transition flex items-start gap-4">
+  <div style={{ backgroundColor: '#0a1911', boxShadow: '0 0 0 0.5px rgba(215, 168, 89, 0.06)' }} className="rounded-2xl p-6 hover:shadow-xl transition flex items-start gap-4">
     <div style={{ backgroundColor: bgColor }} className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0">
       <div style={{ color: iconColor }} className="w-8 h-8">
         {icon}
@@ -51,7 +51,7 @@ const StatCard = ({
   </div>
 );
 
-// Revenue Chart Component with proper axes
+// Revenue Chart Component with proper axes and white labels
 const RevenueChart = () => {
   const data = [
     { date: 'May 1', value: 2400 },
@@ -80,7 +80,7 @@ const RevenueChart = () => {
 
   return (
     <svg width={width} height={height} style={{ overflow: 'visible' }}>
-      {/* Y-axis gridlines and labels */}
+      {/* Y-axis gridlines and white labels */}
       {[0, 1, 2, 3, 4, 5].map((i) => (
         <g key={`gridline-${i}`}>
           <line
@@ -88,30 +88,32 @@ const RevenueChart = () => {
             y1={padding.top + (chartHeight / 5) * (5 - i)}
             x2={width - padding.right}
             y2={padding.top + (chartHeight / 5) * (5 - i)}
-            stroke="rgba(215, 168, 89, 0.1)"
+            stroke="rgba(215, 168, 89, 0.08)"
             strokeWidth="1"
           />
           <text
             x={padding.left - 10}
             y={padding.top + (chartHeight / 5) * (5 - i) + 4}
             fontSize="12"
-            fill="#a8d5ca"
+            fill="#ffffff"
             textAnchor="end"
+            fontWeight="500"
           >
             ${i}k
           </text>
         </g>
       ))}
 
-      {/* X-axis labels */}
+      {/* X-axis labels in white */}
       {points.map((p, i) => (
         <text
           key={`label-${i}`}
           x={p.x}
           y={height - 10}
           fontSize="11"
-          fill="#a8d5ca"
+          fill="#ffffff"
           textAnchor="middle"
+          fontWeight="500"
         >
           {p.date}
         </text>
@@ -147,20 +149,20 @@ const RevenueChart = () => {
   );
 };
 
-// Donut Chart Component
+// Donut Chart Component - bigger with better colors
 const DonutChart = () => {
   const items = [
     { name: 'Jollof Rice', pct: 35, color: '#d7a859' },
-    { name: 'Grilled Chicken', pct: 25, color: '#7a9e7e' },
+    { name: 'Grilled Chicken', pct: 25, color: '#8fc9a0' },
     { name: 'Beef Stew', pct: 20, color: '#b8945e' },
     { name: 'Fried Rice', pct: 10, color: '#a89968' },
-    { name: 'Other', pct: 10, color: '#666666' },
+    { name: 'Other', pct: 10, color: '#9a8873' },
   ];
 
-  const size = 120;
+  const size = 180;
   const center = size / 2;
-  const radius = 45;
-  const innerRadius = 28;
+  const radius = 65;
+  const innerRadius = 40;
 
   let currentAngle = -Math.PI / 2;
 
@@ -246,10 +248,10 @@ export default function DashboardRedesignFinal({
 
   const menuItems = [
     { name: 'Jollof Rice', pct: 35, color: '#d7a859' },
-    { name: 'Grilled Chicken', pct: 25, color: '#7a9e7e' },
+    { name: 'Grilled Chicken', pct: 25, color: '#8fc9a0' },
     { name: 'Beef Stew', pct: 20, color: '#b8945e' },
     { name: 'Fried Rice', pct: 10, color: '#a89968' },
-    { name: 'Other', pct: 10, color: '#666666' },
+    { name: 'Other', pct: 10, color: '#9a8873' },
   ];
 
   return (
@@ -321,13 +323,13 @@ export default function DashboardRedesignFinal({
           />
         </div>
 
-        {/* Charts and Tasks Row */}
+        {/* Charts and Tasks Row - All in one section */}
         <div className="grid grid-cols-12 gap-6">
-          {/* Revenue Overview - 50% */}
-          <div style={{ backgroundColor: '#0a1911', boxShadow: '0 0 0 1px rgba(215, 168, 89, 0.15)' }} className="col-span-6 rounded-2xl p-8 shadow-lg">
+          {/* Revenue Overview - 55% */}
+          <div style={{ backgroundColor: '#0a1911', boxShadow: '0 0 0 0.5px rgba(215, 168, 89, 0.06)' }} className="col-span-7 rounded-2xl p-8">
             <div className="flex items-center justify-between mb-6">
-              <h2 style={{ color: '#d7a859' }} className="text-lg font-bold">Revenue Overview</h2>
-              <select style={{ borderColor: 'rgba(215, 168, 89, 0.2)', color: '#d7a859', backgroundColor: '#102418' }} className="text-sm border rounded-lg px-3 py-1.5 focus:outline-none">
+              <h2 style={{ color: '#ffffff' }} className="text-lg font-bold">Revenue Overview</h2>
+              <select style={{ borderColor: 'rgba(215, 168, 89, 0.1)', color: '#ffffff', backgroundColor: '#102418' }} className="text-sm border rounded-lg px-3 py-1.5 focus:outline-none">
                 <option>This Month</option>
                 <option>Last Month</option>
                 <option>Year to Date</option>
@@ -338,16 +340,16 @@ export default function DashboardRedesignFinal({
               <RevenueChart />
             </div>
 
-            <div style={{ borderTopColor: 'rgba(215, 168, 89, 0.15)' }} className="border-t pt-4 text-center">
-              <p style={{ color: '#a8d5ca' }} className="text-sm">May 21</p>
+            <div style={{ borderTopColor: 'rgba(215, 168, 89, 0.1)' }} className="border-t pt-4 text-center">
+              <p style={{ color: '#ffffff' }} className="text-sm">May 21</p>
               <p style={{ color: '#d7a859' }} className="text-3xl font-bold">$3,450</p>
             </div>
           </div>
 
-          {/* Top Menu Items - 25% */}
-          <div style={{ backgroundColor: '#0a1911', boxShadow: '0 0 0 1px rgba(215, 168, 89, 0.15)' }} className="col-span-3 rounded-2xl p-8 shadow-lg">
-            <h2 style={{ color: '#d7a859' }} className="text-lg font-bold mb-6">Top Menu Items</h2>
-            <div className="flex justify-center mb-6">
+          {/* Top Menu Items - 22% */}
+          <div style={{ backgroundColor: '#0a1911', boxShadow: '0 0 0 0.5px rgba(215, 168, 89, 0.06)' }} className="col-span-3 rounded-2xl p-8">
+            <h2 style={{ color: '#ffffff' }} className="text-lg font-bold mb-6">Top Menu Items</h2>
+            <div className="flex justify-center mb-8">
               <DonutChart />
             </div>
 
@@ -355,17 +357,17 @@ export default function DashboardRedesignFinal({
               {menuItems.map((item, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <div style={{ backgroundColor: item.color }} className="w-2 h-2 rounded-full"></div>
-                  <p style={{ color: '#a8d5ca' }} className="text-xs flex-1">{item.name}</p>
-                  <p style={{ color: '#d7a859' }} className="text-xs font-semibold">{item.pct}%</p>
+                  <p style={{ color: '#ffffff' }} className="text-xs flex-1">{item.name}</p>
+                  <p style={{ color: '#ffffff' }} className="text-xs font-semibold">{item.pct}%</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Today's Tasks - 25% */}
-          <div style={{ backgroundColor: '#0a1911', boxShadow: '0 0 0 1px rgba(215, 168, 89, 0.15)' }} className="col-span-3 rounded-2xl p-8 shadow-lg">
+          {/* Today's Tasks - 23% */}
+          <div style={{ backgroundColor: '#0a1911', boxShadow: '0 0 0 0.5px rgba(215, 168, 89, 0.06)' }} className="col-span-2 rounded-2xl p-8">
             <div className="flex items-center justify-between mb-4">
-              <h2 style={{ color: '#d7a859' }} className="text-lg font-bold">Today's Tasks</h2>
+              <h2 style={{ color: '#ffffff' }} className="text-lg font-bold">Today's Tasks</h2>
               <button onClick={() => onNavigate('orders')} style={{ color: '#d7a859' }} className="text-sm font-semibold hover:opacity-80">
                 View All
               </button>
@@ -377,7 +379,7 @@ export default function DashboardRedesignFinal({
                   key={task.id}
                   onClick={() => toggleTask(task.id)}
                   style={{ backgroundColor: task.completed ? '#102418' : '#0a1911' }}
-                  className="w-full p-3 rounded-lg transition text-left flex items-start gap-3 hover:bg-[#102418]"
+                  className="w-full p-2 rounded-lg transition text-left flex items-start gap-2 hover:bg-[#102418]"
                 >
                   <div className="mt-0.5 flex-shrink-0">
                     {task.completed ? (
@@ -387,10 +389,10 @@ export default function DashboardRedesignFinal({
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p style={{ color: task.completed ? '#d7a859' : '#d7a859' }} className={`text-xs font-medium ${task.completed ? 'line-through' : ''}`}>
+                    <p style={{ color: '#ffffff' }} className={`text-xs font-medium ${task.completed ? 'line-through' : ''}`}>
                       {task.text}
                     </p>
-                    <p style={{ color: '#a8d5ca' }} className="text-xs">{task.subtitle}</p>
+                    <p style={{ color: '#ffffff' }} className="text-xs opacity-70">{task.subtitle}</p>
                   </div>
                 </button>
               ))}
@@ -399,9 +401,9 @@ export default function DashboardRedesignFinal({
         </div>
 
         {/* Upcoming Events */}
-        <div style={{ backgroundColor: '#0a1911', boxShadow: '0 0 0 1px rgba(215, 168, 89, 0.15)' }} className="rounded-2xl p-8 shadow-lg">
+        <div style={{ backgroundColor: '#0a1911', boxShadow: '0 0 0 0.5px rgba(215, 168, 89, 0.06)' }} className="rounded-2xl p-8">
           <div className="flex items-center justify-between mb-4">
-            <h2 style={{ color: '#d7a859' }} className="text-lg font-bold">Upcoming Events</h2>
+            <h2 style={{ color: '#ffffff' }} className="text-lg font-bold">Upcoming Events</h2>
             <button onClick={() => onNavigate('calendar')} style={{ color: '#d7a859' }} className="text-sm font-semibold hover:opacity-80">
               View Calendar
             </button>
@@ -409,7 +411,7 @@ export default function DashboardRedesignFinal({
 
           <div className="grid grid-cols-3 gap-4">
             {upcomingEvents.map((event, idx) => (
-              <div key={idx} style={{ backgroundColor: '#102418', boxShadow: '0 0 0 1px rgba(215, 168, 89, 0.15)' }} className="flex gap-3 p-4 rounded-lg hover:opacity-80 transition">
+              <div key={idx} style={{ backgroundColor: '#102418', boxShadow: '0 0 0 0.5px rgba(215, 168, 89, 0.06)' }} className="flex gap-3 p-4 rounded-lg hover:opacity-80 transition">
                 <div className="text-center min-w-fit">
                   <p style={{ color: '#d7a859' }} className="text-xs font-bold">
                     {new Date(event.eventDate).toLocaleDateString('en-US', { month: 'short' }).toUpperCase()}
@@ -419,8 +421,8 @@ export default function DashboardRedesignFinal({
                   </p>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p style={{ color: '#d7a859' }} className="font-semibold capitalize text-sm">{event.eventType}</p>
-                  <p style={{ color: '#a8d5ca' }} className="text-xs truncate">{event.clientName} • {event.guestCount} guests</p>
+                  <p style={{ color: '#ffffff' }} className="font-semibold capitalize text-sm">{event.eventType}</p>
+                  <p style={{ color: '#ffffff' }} className="text-xs opacity-70 truncate">{event.clientName} • {event.guestCount} guests</p>
                 </div>
               </div>
             ))}
@@ -429,11 +431,11 @@ export default function DashboardRedesignFinal({
 
         {/* Tax Notifications Alert */}
         {notifications.some(n => n.priority === 'high') && (
-          <div style={{ backgroundColor: '#102418', boxShadow: '0 0 0 1px rgba(215, 168, 89, 0.15)' }} className="rounded-2xl p-6 shadow-lg flex items-start gap-4">
+          <div style={{ backgroundColor: '#102418', boxShadow: '0 0 0 0.5px rgba(215, 168, 89, 0.06)' }} className="rounded-2xl p-6 flex items-start gap-4">
             <AlertCircle style={{ color: '#ef4444' }} className="w-6 h-6 flex-shrink-0 mt-1" />
             <div className="flex-1">
               <h3 style={{ color: '#ef4444' }} className="font-bold mb-2">Important: Tax Payment Reminder</h3>
-              <p style={{ color: '#a8d5ca' }} className="text-sm mb-3">Quarterly tax payment to the city is due by August 31, 2026</p>
+              <p style={{ color: '#ffffff' }} className="text-sm mb-3">Quarterly tax payment to the city is due by August 31, 2026</p>
               <button style={{ backgroundColor: '#d7a859', color: '#0a1911' }} className="px-4 py-2 rounded-lg font-semibold text-sm hover:opacity-90">
                 Mark as Paid
               </button>
