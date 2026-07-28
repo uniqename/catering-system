@@ -248,8 +248,8 @@ export default function DashboardRedesignFinal({
     const colors: { [key: string]: string } = {
       inquiry: '#10B981',
       quoted: '#f59e0b',
-      confirmed: '#6366f1',
-      delivered: '#8b5cf6'
+      confirmed: '#10B981',
+      delivered: '#10B981'
     };
     return colors[status] || '#10B981';
   };
@@ -264,7 +264,7 @@ export default function DashboardRedesignFinal({
       <div style={{ backgroundColor: '#0a1911', borderBottomColor: 'rgba(215, 168, 89, 0.1)' }} className="sticky top-0 z-10 border-b">
         <div className="px-8 py-3 flex items-center justify-between">
           <div>
-            <h1 style={{ color: '#d7a859' }} className="text-2xl font-bold">TEST DEPLOYMENT - Good morning, Alexandra! 👋</h1>
+            <h1 style={{ color: '#d7a859' }} className="text-2xl font-bold">Good morning, Alexandra! 👋</h1>
             <p style={{ color: '#a8d5ca' }} className="text-xs mt-0.5">Here's what's happening with your catering business today.</p>
           </div>
 
@@ -287,7 +287,7 @@ export default function DashboardRedesignFinal({
       </div>
 
       {/* Main Content */}
-      <div className="px-8 py-4 space-y-3">
+      <div className="px-8 py-4 space-y-2">
         {/* Metrics Cards */}
         <div className="grid grid-cols-4 gap-3">
           <StatCard label="NEW INQUIRIES" value={newInquiries} icon={<MessageSquare className="w-5 h-5" />} change="+2 from yesterday" bgColor="#a89968" iconColor="white" />
@@ -317,7 +317,7 @@ export default function DashboardRedesignFinal({
           </div>
 
           {/* Menu + Tasks Column */}
-          <div className="col-span-6 space-y-3">
+          <div className="col-span-6 space-y-2">
             {/* Top Menu Items */}
             <div style={{ backgroundColor: '#0a1911', ...CardBorder }} className="rounded-xl p-4">
               <h2 style={{ color: '#ffffff' }} className="text-sm font-bold mb-3">Top Menu Items</h2>
@@ -343,7 +343,7 @@ export default function DashboardRedesignFinal({
                   View All
                 </button>
               </div>
-              <div className="space-y-1">
+              <div className="space-y-0.5">
                 {tasks.slice(0, 3).map((task) => (
                   <button
                     key={task.id}
@@ -421,7 +421,7 @@ export default function DashboardRedesignFinal({
               </button>
             </div>
 
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               {upcomingEvents.map((event, idx) => (
                 <div key={idx} style={{ backgroundColor: '#102418', ...CardBorder }} className="flex gap-1.5 p-2 rounded hover:opacity-80 transition">
                   <div className="text-center min-w-fit">
