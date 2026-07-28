@@ -1,5 +1,6 @@
 'use client';
 
+// v2 - Cache buster
 import { useState, useEffect } from 'react';
 import { Bell, Search, Home, MessageSquare, ClipboardList, Calendar, Users, UtensilsCrossed, FileText, DollarSign, BarChart3, Settings, Leaf } from 'lucide-react';
 import OrderManagement from '@/components/order-management';
