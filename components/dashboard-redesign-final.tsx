@@ -261,7 +261,7 @@ export default function DashboardRedesignFinal({
   return (
     <div style={{ backgroundColor: '#0a1911' }} className="min-h-screen">
       {/* Header */}
-      <div style={{ backgroundColor: '#0a1911' }} className="sticky top-0 z-10 border-b" style={{ borderBottomColor: 'rgba(215, 168, 89, 0.1)' }}>
+      <div style={{ backgroundColor: '#0a1911', borderBottomColor: 'rgba(215, 168, 89, 0.1)' }} className="sticky top-0 z-10 border-b">
         <div className="px-8 py-4 flex items-center justify-between">
           <div>
             <h1 style={{ color: '#d7a859' }} className="text-3xl font-bold">Good morning, Alexandra! 👋</h1>
